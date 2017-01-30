@@ -20,6 +20,8 @@
 		5F4F4FC61E3F1FD300B1C6FD /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FC51E3F1FD300B1C6FD /* AddressModel.swift */; };
 		5FA8ECBB1E3DB2AA00A86BA6 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA8ECBA1E3DB2AA00A86BA6 /* BaseTableViewController.swift */; };
 		5FA8ECBD1E3DB2DF00A86BA6 /* QuotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA8ECBC1E3DB2DF00A86BA6 /* QuotesTableViewController.swift */; };
+		F1B930551E3FE0FC0013D013 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B930541E3FE0FC0013D013 /* LogInViewController.swift */; };
+		F1B930571E3FE4140013D013 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B930561E3FE4140013D013 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		5F4F4FC51E3F1FD300B1C6FD /* AddressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		5FA8ECBA1E3DB2AA00A86BA6 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		5FA8ECBC1E3DB2DF00A86BA6 /* QuotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotesTableViewController.swift; sourceTree = "<group>"; };
+		F1B930541E3FE0FC0013D013 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		F1B930561E3FE4140013D013 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 				5F3030411E3869180018BE74 /* Assets.xcassets */,
 				5F3030431E3869180018BE74 /* LaunchScreen.storyboard */,
 				5F3030461E3869180018BE74 /* Info.plist */,
+				F1B930541E3FE0FC0013D013 /* LogInViewController.swift */,
+				F1B930561E3FE4140013D013 /* Constants.swift */,
 			);
 			path = LanscaperQuote;
 			sourceTree = "<group>";
@@ -179,6 +185,7 @@
 			files = (
 				5FA8ECBB1E3DB2AA00A86BA6 /* BaseTableViewController.swift in Sources */,
 				5F30303D1E3869180018BE74 /* ViewController.swift in Sources */,
+				F1B930551E3FE0FC0013D013 /* LogInViewController.swift in Sources */,
 				5F4F4FC21E3F1E1C00B1C6FD /* UserModel.swift in Sources */,
 				5F4F4FC01E3F1CB100B1C6FD /* LineItemModel.swift in Sources */,
 				5F4F4FC61E3F1FD300B1C6FD /* AddressModel.swift in Sources */,
@@ -187,6 +194,7 @@
 				5F4F4FBE1E3F1BB200B1C6FD /* ClientModel.swift in Sources */,
 				5F4F4FC41E3F1F0800B1C6FD /* MyCompanyModel.swift in Sources */,
 				5F30303B1E3869180018BE74 /* AppDelegate.swift in Sources */,
+				F1B930571E3FE4140013D013 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
