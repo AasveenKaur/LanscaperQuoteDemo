@@ -16,7 +16,7 @@ class MyCompanyModel: NSObject {
     var email: String = ""
     var phoneOne: String = ""
     var phoneTwo: String = ""
-    var address:AddressModel = AddressModel()
+    var myCompanyAddress:AddressModel = AddressModel()
     var fax:String = ""
     var website:String = ""
     var businessNumber = ""
