@@ -14,14 +14,18 @@ protocol RectangleViewControllerDelegate {
 
 class RectangleViewController: UIViewController {
    
+    @IBOutlet weak var result: UILabel!
     @IBOutlet weak var bedDepth: UITextField!
     @IBOutlet weak var bedLength: UITextField!
     
     @IBOutlet weak var bedWidth: UITextField!
     var delegate: RectangleViewControllerDelegate?
     @IBAction func calculateButtonPressed(_ sender: Any) {
-        delegate?.controller(controller: self, didCalculateMulchQuantity: 10, forBag: 100)
-        
+        var volume = ((Float(bedDepth.text!)!/12)*Float(bedLength.text!)!*Float(bedWidth.text!)!)/27
+        volume = round(100*volume)/100
+        delegate?.controller(controller: self, didCalculateMulchQuantity: volume, forBag: 100)
+        result.text = "You will need approximately \(volume) cubic yards of soil"
+        result.isHidden = false
     }
     
     override func viewDidLoad() {

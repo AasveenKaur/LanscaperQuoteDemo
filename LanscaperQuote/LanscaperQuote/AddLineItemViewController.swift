@@ -30,6 +30,10 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     
     
    
+    @IBAction func DoneButtonPressed(_ sender: Any) {
+        
+        self.navigationController?.popToRootViewController(animated: true)
+    }
     
     @IBAction func TriangleButtonPressed(_ sender: UIButton) {
         //containerViewController?.swapFromViewControllers()
@@ -38,6 +42,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
             prevSHapeButton?.backgroundColor = UIColor.green
           
             prevSHapeButton = sender
+           
             prevSHapeButton?.isSelected = true
         }
           }
@@ -145,10 +150,13 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     //MARK:-CALCULATION DELEGATES
     func controller(controller: RectangleViewController, didCalculateMulchQuantity mulch: Float, forBag bagVolume: Float) {
         print("hundal-->\(mulch)")
+        quantityValue.text = "\(mulch)"
     }
     
     func controller(controller: CircleViewController, didCalculateArea area:Float){
          print("kaur-->\(area)")
+        quantityValue.text = "\(area)"
+
     }
 
 }

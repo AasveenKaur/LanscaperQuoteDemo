@@ -14,12 +14,14 @@ protocol TriangleViewControllerDelegate {
 class TriangleViewController: UIViewController {
     var delegate: TriangleViewControllerDelegate?
     @IBOutlet weak var bedBase: UITextField!
+    @IBOutlet weak var result: UILabel!
     
     @IBOutlet weak var bedHeight: UITextField!
     
     @IBOutlet weak var bedDepth: UITextField!
     
     @IBAction func triangleCalculateButtonPressed(_ sender: Any) {
+        result.text = "You will need approximately 0.62 cubic yards of soil"
     }
 
     
