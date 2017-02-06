@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuotesTableViewController: BaseTableViewController {
+class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerDelegate {
  var Quotelist = [QuotesModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,32 +18,65 @@ class QuotesTableViewController: BaseTableViewController {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        loadQuotes()
+       Quotelist = DataProvider.sharedInstance.FetchQuotes() 
     }
     
-    func loadQuotes()  {
-        if let filePath = pathForItems(), FileManager.default.fileExists(atPath: filePath) {
-            if let archivedItems = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [QuotesModel] {
-                Quotelist = archivedItems
-            }
-        }
+   
+    
+    
+    // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
     }
     
-    private func pathForItems() -> String? {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return Quotelist.count
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         
-        if let documents = paths.first, let documentsURL = NSURL(string: documents) {
-            return documentsURL.appendingPathComponent("quote.plist")?.path
-        }
+        let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+        let ob = self.Quotelist[indexPath.row]  
+        cell.textLabel?.text = ob.estimateNumber
         
-        return nil
+        return cell
     }
     
-    private func saveItems() {
-        if let filePath = pathForItems() {
-            NSKeyedArchiver.archiveRootObject(Quotelist, toFile: filePath)
+    func controller(controller: AddQuoteViewController, didSaveItemWithEstimaeNumber estimaeNumber: String, andTotal totalValue: Float)  { // Create Item
+      self.tableView.beginUpdates()
+      
+        let quote = QuotesModel(quoteID: estimaeNumber, estimateNumber: estimaeNumber, totalAmount: totalValue)
+       
+        // Add Item to Items
+        Quotelist.append(quote)
+        
+        // Add Row to Table View
+        //tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: (Quotelist.count - 1), inSection: 0)], withRowAnimation: .None)
+        tableView.insertRows(at: [NSIndexPath.init(row: Quotelist.count-1, section: 0) as IndexPath], with: .left)
+        //tableView.reloadData()
+        self.tableView.endUpdates()
+        // Save Items
+        DataProvider.sharedInstance.saveQuotes(quote: Quotelist)
+        
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "segueToAddQuoteVC"){
+        let destination = segue.destination as! UINavigationController;
+        let vc =   destination.topViewController as! AddQuoteViewController
+            vc.delegate = self
+           
+        print(vc)
         }
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

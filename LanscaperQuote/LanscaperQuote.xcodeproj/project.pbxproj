@@ -12,12 +12,26 @@
 		5F3030401E3869180018BE74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F30303E1E3869180018BE74 /* Main.storyboard */; };
 		5F3030421E3869180018BE74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3030411E3869180018BE74 /* Assets.xcassets */; };
 		5F3030451E3869180018BE74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F3030431E3869180018BE74 /* LaunchScreen.storyboard */; };
+		5F36BD971E445E7C00B2233B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BD961E445E7C00B2233B /* BaseViewController.swift */; };
+		5F36BD991E445E9D00B2233B /* AddClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BD981E445E9D00B2233B /* AddClientViewController.swift */; };
+		5F36BD9B1E44653000B2233B /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BD9A1E44653000B2233B /* AddNoteViewController.swift */; };
+		5F36BD9D1E4677C900B2233B /* AddLineItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BD9C1E4677C900B2233B /* AddLineItemViewController.swift */; };
+		5F36BD9F1E46D60F00B2233B /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BD9E1E46D60F00B2233B /* ContainerViewController.swift */; };
+		5F36BDA41E46DC0700B2233B /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDA31E46DC0700B2233B /* ThemeManager.swift */; };
+		5F36BDA71E46FC7200B2233B /* RectangleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDA61E46FC7200B2233B /* RectangleViewController.swift */; };
+		5F36BDA91E46FCBC00B2233B /* CircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDA81E46FCBC00B2233B /* CircleViewController.swift */; };
+		5F36BDAB1E47020B00B2233B /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDAA1E47020B00B2233B /* EmptySegue.swift */; };
+		5F36BDAD1E4707EF00B2233B /* TriangleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDAC1E4707EF00B2233B /* TriangleViewController.swift */; };
+		5F36BDAF1E485C2400B2233B /* LineItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDAE1E485C2400B2233B /* LineItemTableViewController.swift */; };
 		5F4F4FBC1E3F15B100B1C6FD /* QuotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FBB1E3F15B100B1C6FD /* QuotesModel.swift */; };
 		5F4F4FBE1E3F1BB200B1C6FD /* ClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FBD1E3F1BB200B1C6FD /* ClientModel.swift */; };
 		5F4F4FC01E3F1CB100B1C6FD /* LineItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FBF1E3F1CB100B1C6FD /* LineItemModel.swift */; };
 		5F4F4FC21E3F1E1C00B1C6FD /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FC11E3F1E1C00B1C6FD /* UserModel.swift */; };
 		5F4F4FC41E3F1F0800B1C6FD /* MyCompanyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FC31E3F1F0800B1C6FD /* MyCompanyModel.swift */; };
 		5F4F4FC61E3F1FD300B1C6FD /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FC51E3F1FD300B1C6FD /* AddressModel.swift */; };
+		5F4F4FCF1E3FE19A00B1C6FD /* AddQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FCE1E3FE19A00B1C6FD /* AddQuoteViewController.swift */; };
+		5F4F4FD21E4004D300B1C6FD /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FD11E4004D300B1C6FD /* DataProvider.swift */; };
+		5F4F4FD41E40B2D400B1C6FD /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FD31E40B2D400B1C6FD /* DataManager.swift */; };
 		5FA8ECBB1E3DB2AA00A86BA6 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA8ECBA1E3DB2AA00A86BA6 /* BaseTableViewController.swift */; };
 		5FA8ECBD1E3DB2DF00A86BA6 /* QuotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA8ECBC1E3DB2DF00A86BA6 /* QuotesTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -30,12 +44,26 @@
 		5F3030411E3869180018BE74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F3030441E3869180018BE74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F3030461E3869180018BE74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F36BD961E445E7C00B2233B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		5F36BD981E445E9D00B2233B /* AddClientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClientViewController.swift; sourceTree = "<group>"; };
+		5F36BD9A1E44653000B2233B /* AddNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
+		5F36BD9C1E4677C900B2233B /* AddLineItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLineItemViewController.swift; sourceTree = "<group>"; };
+		5F36BD9E1E46D60F00B2233B /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		5F36BDA31E46DC0700B2233B /* ThemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		5F36BDA61E46FC7200B2233B /* RectangleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleViewController.swift; sourceTree = "<group>"; };
+		5F36BDA81E46FCBC00B2233B /* CircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleViewController.swift; sourceTree = "<group>"; };
+		5F36BDAA1E47020B00B2233B /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
+		5F36BDAC1E4707EF00B2233B /* TriangleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleViewController.swift; sourceTree = "<group>"; };
+		5F36BDAE1E485C2400B2233B /* LineItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineItemTableViewController.swift; sourceTree = "<group>"; };
 		5F4F4FBB1E3F15B100B1C6FD /* QuotesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotesModel.swift; sourceTree = "<group>"; };
 		5F4F4FBD1E3F1BB200B1C6FD /* ClientModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientModel.swift; sourceTree = "<group>"; };
 		5F4F4FBF1E3F1CB100B1C6FD /* LineItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineItemModel.swift; sourceTree = "<group>"; };
 		5F4F4FC11E3F1E1C00B1C6FD /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5F4F4FC31E3F1F0800B1C6FD /* MyCompanyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCompanyModel.swift; sourceTree = "<group>"; };
 		5F4F4FC51E3F1FD300B1C6FD /* AddressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
+		5F4F4FCE1E3FE19A00B1C6FD /* AddQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuoteViewController.swift; sourceTree = "<group>"; };
+		5F4F4FD11E4004D300B1C6FD /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		5F4F4FD31E40B2D400B1C6FD /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		5FA8ECBA1E3DB2AA00A86BA6 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		5FA8ECBC1E3DB2DF00A86BA6 /* QuotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +98,9 @@
 		5F3030391E3869180018BE74 /* LanscaperQuote */ = {
 			isa = PBXGroup;
 			children = (
+				5F36BDA01E46D66C00B2233B /* Helpers */,
+				5F36BD951E445E5C00B2233B /* View Controllers */,
+				5F4F4FD01E40049500B1C6FD /* Data Helper Classes */,
 				5F4F4FBA1E3F158A00B1C6FD /* Model Classes */,
 				5FA8ECB91E3DB27100A86BA6 /* TableViewControllers */,
 				5F30303A1E3869180018BE74 /* AppDelegate.swift */,
@@ -80,6 +111,38 @@
 				5F3030461E3869180018BE74 /* Info.plist */,
 			);
 			path = LanscaperQuote;
+			sourceTree = "<group>";
+		};
+		5F36BD951E445E5C00B2233B /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5F36BDA51E46FC2F00B2233B /* Shape Calculator VC */,
+				5F36BD961E445E7C00B2233B /* BaseViewController.swift */,
+				5F36BD981E445E9D00B2233B /* AddClientViewController.swift */,
+				5F36BD9A1E44653000B2233B /* AddNoteViewController.swift */,
+				5F36BD9C1E4677C900B2233B /* AddLineItemViewController.swift */,
+				5F36BD9E1E46D60F00B2233B /* ContainerViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		5F36BDA01E46D66C00B2233B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5F36BDA31E46DC0700B2233B /* ThemeManager.swift */,
+				5F36BDAA1E47020B00B2233B /* EmptySegue.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		5F36BDA51E46FC2F00B2233B /* Shape Calculator VC */ = {
+			isa = PBXGroup;
+			children = (
+				5F36BDA61E46FC7200B2233B /* RectangleViewController.swift */,
+				5F36BDA81E46FCBC00B2233B /* CircleViewController.swift */,
+				5F36BDAC1E4707EF00B2233B /* TriangleViewController.swift */,
+			);
+			name = "Shape Calculator VC";
 			sourceTree = "<group>";
 		};
 		5F4F4FBA1E3F158A00B1C6FD /* Model Classes */ = {
@@ -95,11 +158,22 @@
 			name = "Model Classes";
 			sourceTree = "<group>";
 		};
+		5F4F4FD01E40049500B1C6FD /* Data Helper Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5F4F4FD11E4004D300B1C6FD /* DataProvider.swift */,
+				5F4F4FD31E40B2D400B1C6FD /* DataManager.swift */,
+			);
+			name = "Data Helper Classes";
+			sourceTree = "<group>";
+		};
 		5FA8ECB91E3DB27100A86BA6 /* TableViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				5FA8ECBA1E3DB2AA00A86BA6 /* BaseTableViewController.swift */,
 				5FA8ECBC1E3DB2DF00A86BA6 /* QuotesTableViewController.swift */,
+				5F4F4FCE1E3FE19A00B1C6FD /* AddQuoteViewController.swift */,
+				5F36BDAE1E485C2400B2233B /* LineItemTableViewController.swift */,
 			);
 			name = TableViewControllers;
 			sourceTree = "<group>";
@@ -179,14 +253,28 @@
 			files = (
 				5FA8ECBB1E3DB2AA00A86BA6 /* BaseTableViewController.swift in Sources */,
 				5F30303D1E3869180018BE74 /* ViewController.swift in Sources */,
+				5F36BDAB1E47020B00B2233B /* EmptySegue.swift in Sources */,
 				5F4F4FC21E3F1E1C00B1C6FD /* UserModel.swift in Sources */,
 				5F4F4FC01E3F1CB100B1C6FD /* LineItemModel.swift in Sources */,
+				5F36BD9B1E44653000B2233B /* AddNoteViewController.swift in Sources */,
 				5F4F4FC61E3F1FD300B1C6FD /* AddressModel.swift in Sources */,
+				5F36BD971E445E7C00B2233B /* BaseViewController.swift in Sources */,
 				5F4F4FBC1E3F15B100B1C6FD /* QuotesModel.swift in Sources */,
+				5F4F4FD21E4004D300B1C6FD /* DataProvider.swift in Sources */,
+				5F36BD991E445E9D00B2233B /* AddClientViewController.swift in Sources */,
 				5FA8ECBD1E3DB2DF00A86BA6 /* QuotesTableViewController.swift in Sources */,
 				5F4F4FBE1E3F1BB200B1C6FD /* ClientModel.swift in Sources */,
+				5F36BDAD1E4707EF00B2233B /* TriangleViewController.swift in Sources */,
+				5F36BDAF1E485C2400B2233B /* LineItemTableViewController.swift in Sources */,
 				5F4F4FC41E3F1F0800B1C6FD /* MyCompanyModel.swift in Sources */,
 				5F30303B1E3869180018BE74 /* AppDelegate.swift in Sources */,
+				5F36BDA91E46FCBC00B2233B /* CircleViewController.swift in Sources */,
+				5F4F4FD41E40B2D400B1C6FD /* DataManager.swift in Sources */,
+				5F36BDA41E46DC0700B2233B /* ThemeManager.swift in Sources */,
+				5F36BDA71E46FC7200B2233B /* RectangleViewController.swift in Sources */,
+				5F36BD9D1E4677C900B2233B /* AddLineItemViewController.swift in Sources */,
+				5F36BD9F1E46D60F00B2233B /* ContainerViewController.swift in Sources */,
+				5F4F4FCF1E3FE19A00B1C6FD /* AddQuoteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
