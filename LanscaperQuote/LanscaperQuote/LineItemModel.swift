@@ -48,9 +48,9 @@ class LineItemModel: NSObject , NSCoding{
           lineItemID = aDecoder.decodeObject(forKey:"lineItemID") as! String
           name = aDecoder.decodeObject(forKey:"name") as! String
           lineItemdescription = aDecoder.decodeObject(forKey:"lineItemdescription") as! String
-          quantity = aDecoder.decodeObject(forKey:"quantity") as! Float
-          price = aDecoder.decodeObject(forKey:"price") as! Float
-          tax = aDecoder.decodeObject(forKey:"tax") as! Float
+          quantity = aDecoder.decodeFloat(forKey:"quantity")
+          price = aDecoder.decodeFloat(forKey:"price") 
+          tax = aDecoder.decodeFloat(forKey:"tax") 
     
     }
 }

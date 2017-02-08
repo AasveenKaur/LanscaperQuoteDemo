@@ -27,6 +27,8 @@
 		5F36BDB51E4A6E3700B2233B /* LineItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDB41E4A6E3700B2233B /* LineItemTableViewCell.swift */; };
 		5F36BDB71E4A6E4A00B2233B /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDB61E4A6E4A00B2233B /* NotesTableViewCell.swift */; };
 		5F36BDBB1E4A7E4D00B2233B /* SubTotalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDBA1E4A7E4D00B2233B /* SubTotalTableViewCell.swift */; };
+		5F36BDBD1E4BD40100B2233B /* ClientModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDBC1E4BD40100B2233B /* ClientModalViewController.swift */; };
+		5F36BDBF1E4BDC9F00B2233B /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDBE1E4BDC9F00B2233B /* QuoteTableViewCell.swift */; };
 		5F4F4FBC1E3F15B100B1C6FD /* QuotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FBB1E3F15B100B1C6FD /* QuotesModel.swift */; };
 		5F4F4FBE1E3F1BB200B1C6FD /* ClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FBD1E3F1BB200B1C6FD /* ClientModel.swift */; };
 		5F4F4FC01E3F1CB100B1C6FD /* LineItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FBF1E3F1CB100B1C6FD /* LineItemModel.swift */; };
@@ -63,6 +65,8 @@
 		5F36BDB41E4A6E3700B2233B /* LineItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineItemTableViewCell.swift; sourceTree = "<group>"; };
 		5F36BDB61E4A6E4A00B2233B /* NotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
 		5F36BDBA1E4A7E4D00B2233B /* SubTotalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubTotalTableViewCell.swift; sourceTree = "<group>"; };
+		5F36BDBC1E4BD40100B2233B /* ClientModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientModalViewController.swift; sourceTree = "<group>"; };
+		5F36BDBE1E4BDC9F00B2233B /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
 		5F4F4FBB1E3F15B100B1C6FD /* QuotesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotesModel.swift; sourceTree = "<group>"; };
 		5F4F4FBD1E3F1BB200B1C6FD /* ClientModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientModel.swift; sourceTree = "<group>"; };
 		5F4F4FBF1E3F1CB100B1C6FD /* LineItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineItemModel.swift; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 				5F36BD9A1E44653000B2233B /* AddNoteViewController.swift */,
 				5F36BD9C1E4677C900B2233B /* AddLineItemViewController.swift */,
 				5F4F4FCE1E3FE19A00B1C6FD /* AddQuoteViewController.swift */,
+				5F36BDBC1E4BD40100B2233B /* ClientModalViewController.swift */,
 			);
 			name = "Add Entity Controllers";
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 				5F36BDB41E4A6E3700B2233B /* LineItemTableViewCell.swift */,
 				5F36BDB61E4A6E4A00B2233B /* NotesTableViewCell.swift */,
 				5F36BDBA1E4A7E4D00B2233B /* SubTotalTableViewCell.swift */,
+				5F36BDBE1E4BDC9F00B2233B /* QuoteTableViewCell.swift */,
 			);
 			name = "Custom cells";
 			sourceTree = "<group>";
@@ -293,6 +299,8 @@
 				5F4F4FD21E4004D300B1C6FD /* DataProvider.swift in Sources */,
 				5F36BD991E445E9D00B2233B /* AddClientViewController.swift in Sources */,
 				5FA8ECBD1E3DB2DF00A86BA6 /* QuotesTableViewController.swift in Sources */,
+				5F36BDBF1E4BDC9F00B2233B /* QuoteTableViewCell.swift in Sources */,
+				5F36BDBD1E4BD40100B2233B /* ClientModalViewController.swift in Sources */,
 				5F4F4FBE1E3F1BB200B1C6FD /* ClientModel.swift in Sources */,
 				5F36BDAD1E4707EF00B2233B /* TriangleViewController.swift in Sources */,
 				5F36BDAF1E485C2400B2233B /* LineItemTableViewController.swift in Sources */,

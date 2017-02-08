@@ -14,6 +14,9 @@ class BaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         list = ["quote1","quote2","quotw3","quote4","quote3"]
+        self.tableView.backgroundView = UIImageView.init(image:UIImage(named:"background" ))
+        self.tableView.separatorStyle = .none
+            
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -30,25 +33,16 @@ class BaseTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 4
+        return 0
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-     var cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-     
-     cell.textLabel?.text = self.list?.object(at:indexPath.row ) as! String?
-     
-     return cell
-    }
- 
+    
 
     /*
     // Override to support conditional editing of the table view.

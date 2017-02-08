@@ -34,8 +34,26 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     
    
     @IBAction func rateValueChanged(_ sender: UITextField) {
+        if let rateText = sender.text, let quantityText = quantityValue.text{
+        if let rate = Float(rateText), let quantity = Float(quantityText){
+            totalValue.text = "$\(rate*quantity)"
+        }
+        }
+        else{
+            totalValue.text = "$0.0"
+        }
+        
+    }
     
-    totalValue.text = "\(Float(sender.text!)!*Float(quantityValue.text!)!)"
+    @IBAction func taxValueChanged(_ sender: UITextField) {
+        if let rateText = rateValue.text, let quantityText = quantityValue.text, let taxText = sender.text{
+            if let rate = Float(rateText), let quantity = Float(quantityText), let tax = Float(taxText){
+                totalValue.text = "$\(rate*quantity*((tax+100)/100))"
+            }
+        }else{
+            totalValue.text = "$0.0"
+        }
+
     }
     
    
@@ -43,6 +61,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         delegate?.controller(controller: self, didSaveLineItemWithName: itemNameField.text!, itemDescription: itemDescriptionField.text, itemQuantity: Float(quantityValue.text!)!, itemPrice: Float(rateValue.text!)!, itemTax: Float(taxValue.text!)!)
         self.navigationController?.popToRootViewController(animated: true)
     }
+    
     
     @IBAction func TriangleButtonPressed(_ sender: UIButton) {
         //containerViewController?.swapFromViewControllers()

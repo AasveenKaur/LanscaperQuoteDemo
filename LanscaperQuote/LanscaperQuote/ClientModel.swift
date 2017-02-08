@@ -18,7 +18,7 @@ class ClientModel: NSObject {
     var notes:String? = ""
 
     init(clientID: String = "" ,name: String = "", email: String = "",phoneOne: String = "",phoneTwo: String = "",address:AddressModel = AddressModel(),notes:String = "") {
-        self.clientID = clientID
+        self.clientID = NSUUID().uuidString
         self.name = name
         self.email = email
         self.phoneTwo = phoneTwo

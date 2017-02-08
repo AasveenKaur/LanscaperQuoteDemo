@@ -12,7 +12,8 @@ class LineItemTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.tableView.backgroundView = UIImageView.init(image:UIImage(named:"background" ))
+        self.tableView.separatorStyle = .none
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

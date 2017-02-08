@@ -8,23 +8,23 @@
 
 import UIKit
 protocol AddQuoteViewControllerDelegate {
-    func controller(controller: AddQuoteViewController, didSaveItemWithEstimaeNumber estimaeNumber: String, andTotal totalValue: Float)
+    
+func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName client: ClientModel, lineItemsList lineItems: [LineItemModel], totalCost total:Float, additonalInformation notes:String)
+    
+   
 }
-class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDelegate {
+class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDelegate ,ClientModalViewControllerDelegate{
     
     var delegate: AddQuoteViewControllerDelegate?
     var LineItems:Array = [LineItemModel]()
     var client:Array  = [ClientModel]()
     var note:Array = ["NOTES"]
     
-    //    @IBOutlet weak var discountTextField: UITextField!
-    //
-    //
-    //    @IBOutlet weak var subTotalValue: UILabel!
-    //
-    //    @IBOutlet weak var taxValue: UILabel!
-    //    @IBOutlet weak var totalValue: UILabel!
-    //    @IBOutlet weak var noteSummary: UILabel!
+    var discountValue:Float = 0.0
+    var subTotalValue: Float = 0.0
+    var  taxValue:  Float = 0.0
+    var totalValue:Float = 0.0
+    //    @IBOutlet weak var noteSummary: UILabel!l
     //    @IBOutlet weak var clientSignatureNeeded: UISwitch!
     //
     //    @IBOutlet weak var estimaeNumber: UITextField!
@@ -33,11 +33,14 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     //    @IBOutlet weak var poNumberValue: UITextField!
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        //  if let estimaeNumber = estimaeNumber.text, let totalValue = totalValue.text, let total = Float(totalValue) {
+        
+        
+      let demoClient = ClientModel(name: "JAZZ")
         // Notify Delegate
+        delegate?.controller(controller: self, didSaveQuoteWithClientName: client[0], lineItemsList: LineItems, totalCost: totalValue, additonalInformation: note[0])
         
-        delegate?.controller(controller: self, didSaveItemWithEstimaeNumber: "5", andTotal: 10.0)
-        
+    
+    
         // Dismiss View Controller
         dismiss(animated: true) {
             
@@ -54,6 +57,8 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundView = UIImageView.init(image:UIImage(named:"background" ))
+        self.tableView.separatorStyle = .none
         //LineItems.append(LineItemModel())
         //client.append(ClientModel())
         // Do any additional setup after loading the view.
@@ -107,7 +112,7 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
             }
             else{
                 let cell:ClientTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "ClientTableViewCellID")! as! ClientTableViewCell
-                cell.customer.text = "jazz"
+                cell.customer.text = client[0].name
                 return cell
             }
             
@@ -145,12 +150,19 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if(section == 1){
             let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "SectionHeaderTableViewCellID")!
-            let col3 = UIColor(red: 0.36, green: 0.63, blue: 0.61, alpha: 1.0)
+            let col3 = UIColor(red: 0.04, green: 0.16, blue: 0.35, alpha: 1.0)
             
            cell.contentView.backgroundColor = col3
             return cell.contentView
         }
         return nil
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "SegueToAddClientModalVC"){
+        let vc = segue.destination as! ClientModalViewController
+        vc.delegate = self
+        }
     }
     
     
@@ -162,7 +174,29 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         tableView.insertRows(at: [NSIndexPath.init(row: LineItems.count-1, section: 1) as IndexPath], with: .left)
         
         tableView.endUpdates()
+        subTotalValue += quantity*rate
+        taxValue = tax
+        totalValue = (((tax+100)/100)*subTotalValue)
+        // I wanted to update this cell specifically
+        let indexPathForSubTotalTableViewCell = IndexPath(row: LineItems.count+1 , section: 1)
+        let SubTotalCell = tableView.cellForRow(at: indexPathForSubTotalTableViewCell) as! SubTotalTableViewCell
+        SubTotalCell.subTotalValue.text = "$\(self.subTotalValue)"
+        SubTotalCell.taxValue.text = "\(self.taxValue)%"
+        SubTotalCell.totalValue.text = "$\(self.totalValue)"
+    }
+    
+    func controller(controller: ClientModalViewController, didSaveClientWithName name: String, phoneNumber phoneNo: String, emailAddress email: String) {
+        tableView.beginUpdates()
+        self.client.append(ClientModel(name: name, email: email, phoneOne: phoneNo))
+        // I wanted to update this cell specifically
+        let ClientCell = IndexPath(row: client.count-1, section: 0)
+        tableView.reloadRows(at: [ClientCell], with: .none)
+        tableView.endUpdates()
+    }
+    
+    @IBAction func prepareForUnwind(segue:UIStoryboardSegue){
         
     }
+    
     
 }

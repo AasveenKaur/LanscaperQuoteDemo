@@ -40,9 +40,14 @@ class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerD
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         
-        let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        let ob = self.Quotelist[indexPath.row]  
-        cell.textLabel?.text = ob.estimateNumber
+       
+        let cell:QuoteTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "QuoteTableViewCellID")! as! QuoteTableViewCell
+        let ob = self.Quotelist[indexPath.row]
+        cell.quoteNumber.text = "#\(ob.estimateNumber)"
+        cell.clientName.text = ob.client.name
+        cell.quoteTotal.text = "$\(ob.totalAmount!)"
+        
+        
         
         return cell
     }
@@ -65,14 +70,27 @@ class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerD
         
     }
     
+    func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName client: ClientModel, lineItemsList lineItems: [LineItemModel], totalCost total: Float, additonalInformation notes: String) {
+         self.tableView.beginUpdates()
+        let quote =  QuotesModel( estimateNumber: "\(Quotelist.count+1)", client: client, LineItems: lineItems, totalAmount: total, notes: notes)
+        Quotelist.append(quote)
+        // Add Row to Table View
+        tableView.insertRows(at: [NSIndexPath.init(row: Quotelist.count-1, section: 0) as IndexPath], with: .left)
+        
+        self.tableView.endUpdates()
+        // Save Items
+        DataProvider.sharedInstance.saveQuotes(quote: Quotelist)
+       
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "segueToAddQuoteVC"){
-        //let destination = segue.destination as! UINavigationController;
-       // let vc =   destination.topViewController as! AddQuoteViewController
-         //   vc.delegate = self
+        let destination = segue.destination as! UINavigationController;
+        let vc =   destination.topViewController as! AddQuoteViewController
+        vc.delegate = self
            
-       // print(vc)
+      
         }
     }
     
