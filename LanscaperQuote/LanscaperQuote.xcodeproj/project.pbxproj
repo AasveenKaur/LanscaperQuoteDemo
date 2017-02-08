@@ -23,6 +23,10 @@
 		5F36BDAB1E47020B00B2233B /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDAA1E47020B00B2233B /* EmptySegue.swift */; };
 		5F36BDAD1E4707EF00B2233B /* TriangleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDAC1E4707EF00B2233B /* TriangleViewController.swift */; };
 		5F36BDAF1E485C2400B2233B /* LineItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDAE1E485C2400B2233B /* LineItemTableViewController.swift */; };
+		5F36BDB31E4A6E2400B2233B /* ClientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDB21E4A6E2400B2233B /* ClientTableViewCell.swift */; };
+		5F36BDB51E4A6E3700B2233B /* LineItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDB41E4A6E3700B2233B /* LineItemTableViewCell.swift */; };
+		5F36BDB71E4A6E4A00B2233B /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDB61E4A6E4A00B2233B /* NotesTableViewCell.swift */; };
+		5F36BDBB1E4A7E4D00B2233B /* SubTotalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F36BDBA1E4A7E4D00B2233B /* SubTotalTableViewCell.swift */; };
 		5F4F4FBC1E3F15B100B1C6FD /* QuotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FBB1E3F15B100B1C6FD /* QuotesModel.swift */; };
 		5F4F4FBE1E3F1BB200B1C6FD /* ClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FBD1E3F1BB200B1C6FD /* ClientModel.swift */; };
 		5F4F4FC01E3F1CB100B1C6FD /* LineItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FBF1E3F1CB100B1C6FD /* LineItemModel.swift */; };
@@ -55,6 +59,10 @@
 		5F36BDAA1E47020B00B2233B /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
 		5F36BDAC1E4707EF00B2233B /* TriangleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleViewController.swift; sourceTree = "<group>"; };
 		5F36BDAE1E485C2400B2233B /* LineItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineItemTableViewController.swift; sourceTree = "<group>"; };
+		5F36BDB21E4A6E2400B2233B /* ClientTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewCell.swift; sourceTree = "<group>"; };
+		5F36BDB41E4A6E3700B2233B /* LineItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineItemTableViewCell.swift; sourceTree = "<group>"; };
+		5F36BDB61E4A6E4A00B2233B /* NotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
+		5F36BDBA1E4A7E4D00B2233B /* SubTotalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubTotalTableViewCell.swift; sourceTree = "<group>"; };
 		5F4F4FBB1E3F15B100B1C6FD /* QuotesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotesModel.swift; sourceTree = "<group>"; };
 		5F4F4FBD1E3F1BB200B1C6FD /* ClientModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientModel.swift; sourceTree = "<group>"; };
 		5F4F4FBF1E3F1CB100B1C6FD /* LineItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineItemModel.swift; sourceTree = "<group>"; };
@@ -98,6 +106,8 @@
 		5F3030391E3869180018BE74 /* LanscaperQuote */ = {
 			isa = PBXGroup;
 			children = (
+				5F36BDB11E4A679100B2233B /* Custom cells */,
+				5F36BDB01E493DEB00B2233B /* Add Entity Controllers */,
 				5F36BDA01E46D66C00B2233B /* Helpers */,
 				5F36BD951E445E5C00B2233B /* View Controllers */,
 				5F4F4FD01E40049500B1C6FD /* Data Helper Classes */,
@@ -118,9 +128,6 @@
 			children = (
 				5F36BDA51E46FC2F00B2233B /* Shape Calculator VC */,
 				5F36BD961E445E7C00B2233B /* BaseViewController.swift */,
-				5F36BD981E445E9D00B2233B /* AddClientViewController.swift */,
-				5F36BD9A1E44653000B2233B /* AddNoteViewController.swift */,
-				5F36BD9C1E4677C900B2233B /* AddLineItemViewController.swift */,
 				5F36BD9E1E46D60F00B2233B /* ContainerViewController.swift */,
 			);
 			name = "View Controllers";
@@ -143,6 +150,28 @@
 				5F36BDAC1E4707EF00B2233B /* TriangleViewController.swift */,
 			);
 			name = "Shape Calculator VC";
+			sourceTree = "<group>";
+		};
+		5F36BDB01E493DEB00B2233B /* Add Entity Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5F36BD981E445E9D00B2233B /* AddClientViewController.swift */,
+				5F36BD9A1E44653000B2233B /* AddNoteViewController.swift */,
+				5F36BD9C1E4677C900B2233B /* AddLineItemViewController.swift */,
+				5F4F4FCE1E3FE19A00B1C6FD /* AddQuoteViewController.swift */,
+			);
+			name = "Add Entity Controllers";
+			sourceTree = "<group>";
+		};
+		5F36BDB11E4A679100B2233B /* Custom cells */ = {
+			isa = PBXGroup;
+			children = (
+				5F36BDB21E4A6E2400B2233B /* ClientTableViewCell.swift */,
+				5F36BDB41E4A6E3700B2233B /* LineItemTableViewCell.swift */,
+				5F36BDB61E4A6E4A00B2233B /* NotesTableViewCell.swift */,
+				5F36BDBA1E4A7E4D00B2233B /* SubTotalTableViewCell.swift */,
+			);
+			name = "Custom cells";
 			sourceTree = "<group>";
 		};
 		5F4F4FBA1E3F158A00B1C6FD /* Model Classes */ = {
@@ -172,7 +201,6 @@
 			children = (
 				5FA8ECBA1E3DB2AA00A86BA6 /* BaseTableViewController.swift */,
 				5FA8ECBC1E3DB2DF00A86BA6 /* QuotesTableViewController.swift */,
-				5F4F4FCE1E3FE19A00B1C6FD /* AddQuoteViewController.swift */,
 				5F36BDAE1E485C2400B2233B /* LineItemTableViewController.swift */,
 			);
 			name = TableViewControllers;
@@ -251,12 +279,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F36BDBB1E4A7E4D00B2233B /* SubTotalTableViewCell.swift in Sources */,
 				5FA8ECBB1E3DB2AA00A86BA6 /* BaseTableViewController.swift in Sources */,
 				5F30303D1E3869180018BE74 /* ViewController.swift in Sources */,
 				5F36BDAB1E47020B00B2233B /* EmptySegue.swift in Sources */,
 				5F4F4FC21E3F1E1C00B1C6FD /* UserModel.swift in Sources */,
 				5F4F4FC01E3F1CB100B1C6FD /* LineItemModel.swift in Sources */,
 				5F36BD9B1E44653000B2233B /* AddNoteViewController.swift in Sources */,
+				5F36BDB51E4A6E3700B2233B /* LineItemTableViewCell.swift in Sources */,
 				5F4F4FC61E3F1FD300B1C6FD /* AddressModel.swift in Sources */,
 				5F36BD971E445E7C00B2233B /* BaseViewController.swift in Sources */,
 				5F4F4FBC1E3F15B100B1C6FD /* QuotesModel.swift in Sources */,
@@ -267,6 +297,7 @@
 				5F36BDAD1E4707EF00B2233B /* TriangleViewController.swift in Sources */,
 				5F36BDAF1E485C2400B2233B /* LineItemTableViewController.swift in Sources */,
 				5F4F4FC41E3F1F0800B1C6FD /* MyCompanyModel.swift in Sources */,
+				5F36BDB71E4A6E4A00B2233B /* NotesTableViewCell.swift in Sources */,
 				5F30303B1E3869180018BE74 /* AppDelegate.swift in Sources */,
 				5F36BDA91E46FCBC00B2233B /* CircleViewController.swift in Sources */,
 				5F4F4FD41E40B2D400B1C6FD /* DataManager.swift in Sources */,
@@ -274,6 +305,7 @@
 				5F36BDA71E46FC7200B2233B /* RectangleViewController.swift in Sources */,
 				5F36BD9D1E4677C900B2233B /* AddLineItemViewController.swift in Sources */,
 				5F36BD9F1E46D60F00B2233B /* ContainerViewController.swift in Sources */,
+				5F36BDB31E4A6E2400B2233B /* ClientTableViewCell.swift in Sources */,
 				5F4F4FCF1E3FE19A00B1C6FD /* AddQuoteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

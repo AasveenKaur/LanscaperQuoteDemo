@@ -48,7 +48,8 @@ class ContainerViewController: UIViewController {
             
         }
         else if (segue.identifier == EMPTY_SEGUE_TRIANGLE_IDENTIFIER){
-            
+            let vc = segue.destination as! TriangleViewController
+            vc.delegate = self.delegate as! AddLineItemViewController
             self.swapFromViewController(fromVC: self.childViewControllers[0], toViewCOntroller: segue.destination)
             
         }

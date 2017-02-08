@@ -24,11 +24,23 @@ class LineItemTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.viewControllers[0]
+    }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "SegueToLineItemTypePage"){
+            let destinationVC = segue.destination as! AddLineItemViewController
+            destinationVC.delegate = self.navigationController?.viewControllers[0] as! AddQuoteViewController?
+         
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
+      
         return 0
     }
 

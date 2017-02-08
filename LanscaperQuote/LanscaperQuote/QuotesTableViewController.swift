@@ -68,11 +68,11 @@ class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerD
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "segueToAddQuoteVC"){
-        let destination = segue.destination as! UINavigationController;
-        let vc =   destination.topViewController as! AddQuoteViewController
-            vc.delegate = self
+        //let destination = segue.destination as! UINavigationController;
+       // let vc =   destination.topViewController as! AddQuoteViewController
+         //   vc.delegate = self
            
-        print(vc)
+       // print(vc)
         }
     }
     

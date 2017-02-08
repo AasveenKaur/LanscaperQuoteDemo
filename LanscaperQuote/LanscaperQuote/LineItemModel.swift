@@ -17,6 +17,22 @@ class LineItemModel: NSObject , NSCoding{
     var tax: Float = 0.0
     
  
+    
+    init(lineItemID: String = "",
+         name:String = "",
+         lineItemdescription: String = "",
+         quantity:Float = 0.0,
+         price: Float = 0.0,
+         tax: Float = 0.0
+        ) {
+        self.lineItemID = NSUUID().uuidString
+        self.name = name
+        self.lineItemdescription = lineItemdescription
+        self.quantity = quantity
+        self.price = price
+        self.tax = tax
+    }
+    
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(lineItemID, forKey: "lineItemID")
         aCoder.encode(name, forKey: "name")

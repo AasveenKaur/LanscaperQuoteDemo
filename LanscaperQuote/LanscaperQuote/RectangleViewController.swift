@@ -21,11 +21,22 @@ class RectangleViewController: UIViewController {
     @IBOutlet weak var bedWidth: UITextField!
     var delegate: RectangleViewControllerDelegate?
     @IBAction func calculateButtonPressed(_ sender: Any) {
-        var volume = ((Float(bedDepth.text!)!/12)*Float(bedLength.text!)!*Float(bedWidth.text!)!)/27
-        volume = round(100*volume)/100
+        let volume = calculateVolume()
         delegate?.controller(controller: self, didCalculateMulchQuantity: volume, forBag: 100)
         result.text = "You will need approximately \(volume) cubic yards of soil"
         result.isHidden = false
+    }
+    
+    func calculateVolume() -> Float {
+        var volume:Float = 0.0
+        if let depth = Float(bedDepth.text!), let length = Float(bedLength.text!), let width = Float(bedWidth.text!){
+         volume = (length*width*depth)/27  // convert into cubic yard
+         volume = round(100*volume)/100
+        }
+        else{
+            print("ERROR IN INPUT")
+        }
+        return volume
     }
     
     override func viewDidLoad() {

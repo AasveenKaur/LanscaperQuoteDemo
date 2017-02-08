@@ -9,8 +9,12 @@
 import UIKit
 import Foundation
 import QuartzCore
+protocol AddLineItemViewControllerDelegate {
+    func controller(controller: AddLineItemViewController, didSaveLineItemWithName name:String, itemDescription description: String, itemQuantity quantity:Float, itemPrice rate:Float, itemTax tax:Float )
+}
 
-class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate, ContainerViewControllerDelegate, RectangleViewControllerDelegate, CircleViewControllerDelegate {
+class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate, ContainerViewControllerDelegate, RectangleViewControllerDelegate, CircleViewControllerDelegate, TriangleViewControllerDelegate, UITextFieldDelegate {
+    var delegate: AddLineItemViewControllerDelegate?
     var prevSHapeButton:UIButton?
      @IBOutlet weak var lineItemTypePicker: UITextField!
     
@@ -21,17 +25,22 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     @IBOutlet weak var addTaxButton: UIButton!
     @IBOutlet var ItemSections: [UILabel]!
     
-    @IBOutlet weak var quantityValue: UILabel!
+    @IBOutlet weak var quantityValue: UITextField!
     @IBOutlet weak var totalValue: UILabel!
-    @IBOutlet weak var taxValue: UILabel!
-    @IBOutlet weak var rateValue: UILabel!
+    @IBOutlet weak var taxValue: UITextField!
+    @IBOutlet weak var rateValue: UITextField!
     
     var containerViewController:ContainerViewController?
     
+   
+    @IBAction func rateValueChanged(_ sender: UITextField) {
+    
+    totalValue.text = "\(Float(sender.text!)!*Float(quantityValue.text!)!)"
+    }
     
    
     @IBAction func DoneButtonPressed(_ sender: Any) {
-        
+        delegate?.controller(controller: self, didSaveLineItemWithName: itemNameField.text!, itemDescription: itemDescriptionField.text, itemQuantity: Float(quantityValue.text!)!, itemPrice: Float(rateValue.text!)!, itemTax: Float(taxValue.text!)!)
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -81,7 +90,9 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        taxValue.delegate = self
+        rateValue.delegate = self
+        quantityValue.delegate = self
         
         let pickerView = UIPickerView()
         prevSHapeButton = shapeButtons[0]
@@ -92,6 +103,8 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
 
         // Do any additional setup after loading the view.
     }
+    
+ 
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "segueContainerView" ){
@@ -158,5 +171,8 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         quantityValue.text = "\(area)"
 
     }
+    func controller(controller: TriangleViewController, didCalculateTriangleMulchQuantity mulch: Float, forBag bagVolume: Float) {
+        print("hundal-->\(mulch)")
+        quantityValue.text = "\(mulch)"    }
 
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 protocol TriangleViewControllerDelegate {
-    func controller(controller: TriangleViewController, didCalculateMulchQuantity mulch:Float, forBag bagVolume: Float)
+    func controller(controller: TriangleViewController, didCalculateTriangleMulchQuantity mulch:Float, forBag bagVolume: Float)
 }
 
 class TriangleViewController: UIViewController {
@@ -21,7 +21,12 @@ class TriangleViewController: UIViewController {
     @IBOutlet weak var bedDepth: UITextField!
     
     @IBAction func triangleCalculateButtonPressed(_ sender: Any) {
-        result.text = "You will need approximately 0.62 cubic yards of soil"
+        
+        let volume = calculateVolume()
+        delegate?.controller(controller: self, didCalculateTriangleMulchQuantity: volume, forBag: 2)
+        result.text = "You will need approximately \(volume) cubic yards of soil"
+        result.isHidden = false
+        
     }
 
     
@@ -30,6 +35,20 @@ class TriangleViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    func calculateVolume() -> Float {
+        var volume:Float = 0.0
+        
+        if let depth = Float(bedDepth.text!), let height = Float(bedHeight.text!), let base = Float(bedBase.text!){
+            volume = (((height*base)/2)*depth)/27  // convert into cubic yard
+            volume = round(100*volume)/100 // Round off to 2 decimal
+        }
+        else{
+            print("ERROR IN INPUT")
+        }
+        return volume
+    }
+
 
         override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
