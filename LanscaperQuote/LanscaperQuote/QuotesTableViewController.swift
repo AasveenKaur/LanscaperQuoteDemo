@@ -46,7 +46,9 @@ class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerD
         cell.quoteNumber.text = "#\(ob.estimateNumber)"
         cell.clientName.text = ob.client.name
         cell.quoteTotal.text = "$\(ob.totalAmount!)"
-        
+        if(indexPath.row%2 == 0){
+            cell.backgroundColor = UIColor(red: 0.04, green: 0.16, blue: 0.35, alpha: 1.0)
+        }
         
         
         return cell

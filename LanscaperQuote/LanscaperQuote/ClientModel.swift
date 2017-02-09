@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClientModel: NSObject {
+class ClientModel: NSObject , NSCoding {
     var clientID: String = NSUUID().uuidString
     var name: String = ""
     var email: String = ""
@@ -41,18 +41,14 @@ class ClientModel: NSObject {
     }
     
     required init?(coder aDecoder: NSCoder) {
-    clientID = aDecoder.decodeObject(forKey: "clientID") as! String
+  
         clientID = aDecoder.decodeObject(forKey: "clientID") as! String
-
         name = aDecoder.decodeObject(forKey: "name") as! String
-
         email = aDecoder.decodeObject(forKey: "email") as! String
-
         phoneOne = (aDecoder.decodeObject(forKey: "phoneOne") as! String)
-
         phoneTwo = (aDecoder.decodeObject(forKey: "phoneTwo") as! String)
-         address = (aDecoder.decodeObject(forKey: "address") as! AddressModel)
-         notes = (aDecoder.decodeObject(forKey: "notes") as! String)
+        address = (aDecoder.decodeObject(forKey: "address") as! AddressModel)
+        notes = (aDecoder.decodeObject(forKey: "notes") as! String)
 
     
     }

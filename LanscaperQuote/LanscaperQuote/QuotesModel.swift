@@ -68,6 +68,7 @@ class QuotesModel: NSObject, NSCoding {
 public func encode(with aCoder: NSCoder) {
         aCoder.encode(quoteID, forKey: "quoteID")
         aCoder.encode(estimateNumber, forKey: "estimateNumber")
+        aCoder.encode(client, forKey: "client")
         aCoder.encode(LineItems, forKey: "LineItems")
         aCoder.encode(totalAmount, forKey: "totalAmount")
         aCoder.encode(notes, forKey: "notes")
@@ -91,6 +92,7 @@ public func encode(with aCoder: NSCoder) {
         
         quoteID = aDecoder.decodeObject(forKey: "quoteID") as! String
         estimateNumber = aDecoder.decodeObject(forKey: "estimateNumber") as! String
+        client = aDecoder.decodeObject(forKey: "client") as! ClientModel
         LineItems = (aDecoder.decodeObject(forKey: "LineItems") as! [LineItemModel])
         totalAmount = aDecoder.decodeObject(forKey: "totalAmount") as! Float?
         notes = (aDecoder.decodeObject(forKey: "notes") as! String)
