@@ -18,6 +18,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     var prevSHapeButton:UIButton?
      @IBOutlet weak var lineItemTypePicker: UITextField!
     
+    @IBOutlet weak var subHeader: UILabel!
     @IBOutlet weak var itemNameField: UITextField!
     @IBOutlet weak var itemDescriptionField: UITextView!
     @IBOutlet var shapeButtons: [UIButton]!
@@ -139,8 +140,10 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
             for eachButton in shapeButtons{
                 eachButton.isHidden = false
             }
+            subHeader.isHidden = false
             containerSubView.isHidden = false
             addTaxButton.isHidden = false
+            
             for eachSection in  ItemSections{
                 eachSection.isHidden = false
             }

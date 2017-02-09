@@ -18,7 +18,7 @@ class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerD
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-       Quotelist = DataProvider.sharedInstance.FetchQuotes() 
+       Quotelist = DataProvider.sharedInstance.fetchQuotes()
     }
     
    

@@ -28,12 +28,18 @@ class DataProvider: NSObject {
     }
     
     // Fetch all quotes
-    func FetchQuotes() -> [QuotesModel] {
+    func fetchQuotes() -> [QuotesModel] {
         if let quotes =  dataManager.loadQuotes(){
         return quotes
         }
         return []
     }
     
-   
+    func saveLineItems(lineItems:[LineItemModel])  {
+        
+    }
+    
+    func fetchLineItems() -> [LineItemModel] {
+        return [LineItemModel()]
+    }
 }

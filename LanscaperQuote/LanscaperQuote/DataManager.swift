@@ -13,13 +13,13 @@ class DataManager: NSObject {
     
     
     func saveQuotes(Quotelist:[QuotesModel]) {
-        if let filePath = pathForItems() {
+        if let filePath = pathForItems(plist: "quote.plist") {
             NSKeyedArchiver.archiveRootObject(Quotelist, toFile: filePath)
         }
     }
     
     func loadQuotes()  -> [QuotesModel]?{
-        if let filePath = pathForItems(), FileManager.default.fileExists(atPath: filePath) {
+        if let filePath = pathForItems(plist: "quote.plist"), FileManager.default.fileExists(atPath: filePath) {
             if let archivedItems = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [QuotesModel] {
                let  Quotelist = archivedItems
                 return Quotelist
@@ -28,11 +28,11 @@ class DataManager: NSObject {
         return nil
     }
     
-    private func pathForItems() -> String? {
+    private func pathForItems(plist:String) -> String? {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         
         if let documents = paths.first, let documentsURL = NSURL(string: documents) {
-            return documentsURL.appendingPathComponent("quote.plist")?.path
+            return documentsURL.appendingPathComponent(plist)?.path
         }
         
         return nil

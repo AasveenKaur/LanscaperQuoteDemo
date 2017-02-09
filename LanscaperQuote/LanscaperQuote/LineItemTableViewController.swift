@@ -9,9 +9,15 @@
 import UIKit
 
 class LineItemTableViewController: UITableViewController {
-
+ var LineItemslist = [LineItemModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
+       let Quotelist = DataProvider.sharedInstance.fetchQuotes()
+        for eachQuote in Quotelist{
+            for eachLineItem in  eachQuote.LineItems!{
+                LineItemslist.append(eachLineItem)
+            }
+        }
         self.tableView.backgroundView = UIImageView.init(image:UIImage(named:"background" ))
         self.tableView.separatorStyle = .none
         // Uncomment the following line to preserve selection between presentations
@@ -27,7 +33,7 @@ class LineItemTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.navigationController?.viewControllers[0]
+      
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,23 +48,27 @@ class LineItemTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
       
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return LineItemslist.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LineItemsCellID", for: indexPath)
+        cell.textLabel?.text = LineItemslist[indexPath.row].name
+        cell.detailTextLabel?.text = LineItemslist[indexPath.row].lineItemdescription
+        if(indexPath.row%2 == 0){
+            cell.backgroundColor = UIColor(red: 0.04, green: 0.16, blue: 0.35, alpha: 1.0)
+        }
         // Configure the cell...
 
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.
