@@ -12,12 +12,7 @@ class LineItemTableViewController: UITableViewController {
  var LineItemslist = [LineItemModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
-       let Quotelist = DataProvider.sharedInstance.fetchQuotes()
-        for eachQuote in Quotelist{
-            for eachLineItem in  eachQuote.LineItems!{
-                LineItemslist.append(eachLineItem)
-            }
-        }
+     
         self.tableView.backgroundView = UIImageView.init(image:UIImage(named:"background" ))
         self.tableView.separatorStyle = .none
         // Uncomment the following line to preserve selection between presentations
@@ -26,6 +21,8 @@ class LineItemTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+  
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -33,7 +30,13 @@ class LineItemTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-      
+        let Quotelist = DataProvider.sharedInstance.fetchQuotes()
+        for eachQuote in Quotelist{
+            for eachLineItem in  eachQuote.LineItems!{
+                LineItemslist.append(eachLineItem)
+            }
+        }
+        tableView.reloadData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

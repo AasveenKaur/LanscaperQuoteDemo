@@ -49,7 +49,6 @@
                             <outlet property="delegate" destination="IIS-pG-f6Y" id="Bwy-Rw-tBi"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Line Items" id="b8e-o5-NTa"/>
                     <navigationItem key="navigationItem" title="Line Items" id="lp7-HK-nxX">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bq2-ON-fkU">
                             <connections>
@@ -60,7 +59,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zKl-QE-d2E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3996" y="930.58470764617698"/>
+            <point key="canvasLocation" x="4935.1999999999998" y="930.58470764617698"/>
         </scene>
         <!--Clients-->
         <scene sceneID="jZl-qd-QSe">
@@ -325,7 +324,7 @@
                                 <connections>
                                     <outlet property="lineItem" destination="HnP-ze-bR9" id="R9k-Tk-1v9"/>
                                     <outlet property="lineItemTotal" destination="5vL-B4-Wfb" id="6Bz-z7-xBW"/>
-                                    <segue destination="IIS-pG-f6Y" kind="show" id="4s5-Pc-i1C"/>
+                                    <segue destination="IIS-pG-f6Y" kind="show" id="pyT-Zh-EU4"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StaticAddLineItemsCellID" rowHeight="73" id="MDK-fj-W21" customClass="NotesTableViewCell" customModule="LanscaperQuote" customModuleProvider="target">
@@ -358,7 +357,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <segue destination="IIS-pG-f6Y" kind="show" id="YYH-HV-7kC"/>
+                                                <segue destination="IIS-pG-f6Y" kind="show" id="NoW-8D-G85"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -1290,7 +1289,7 @@
                         <segue destination="7yK-kJ-0Aj" kind="relationship" relationship="viewControllers" id="rys-ut-wbS"/>
                         <segue destination="fyE-Ea-Nxa" kind="relationship" relationship="viewControllers" id="cEA-Jm-lMC"/>
                         <segue destination="8Z4-qZ-xgJ" kind="relationship" relationship="viewControllers" id="qv1-zV-BXj"/>
-                        <segue destination="IIS-pG-f6Y" kind="relationship" relationship="viewControllers" id="e9X-05-lfy"/>
+                        <segue destination="XNV-Tl-JiW" kind="relationship" relationship="viewControllers" id="e9X-05-lfy"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqM-vl-OcH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1370,12 +1369,31 @@
             </objects>
             <point key="canvasLocation" x="2200.8000000000002" y="930.58470764617698"/>
         </scene>
+        <!--Line Items-->
+        <scene sceneID="UOw-0e-iyi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XNV-Tl-JiW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Line Items" id="b8e-o5-NTa"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7GG-xs-OmU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IIS-pG-f6Y" kind="relationship" relationship="rootViewController" id="i0c-3v-2zH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WZj-ri-xZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3996" y="930.58470764617698"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Red" width="256" height="256"/>
         <image name="triangle" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4s5-Pc-i1C"/>
+        <segue reference="pyT-Zh-EU4"/>
     </inferredMetricsTieBreakers>
 </document>
