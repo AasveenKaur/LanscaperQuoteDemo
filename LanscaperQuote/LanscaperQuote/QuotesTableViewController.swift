@@ -10,6 +10,7 @@ import UIKit
 
 class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerDelegate {
  var Quotelist = [QuotesModel]()
+    var selectedQuote = QuotesModel()
     override func viewDidLoad() {
         super.viewDidLoad()
      print(Quotelist)
@@ -91,13 +92,24 @@ class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerD
         let destination = segue.destination as! UINavigationController;
         let vc =   destination.topViewController as! AddQuoteViewController
         vc.delegate = self
-           
-      
+        }
+        else if (segue.identifier == "segueToPreviewVC"){
+            let destination = segue.destination as! PreviewViewController;
+            destination.quoteDetails = selectedQuote
         }
     }
     
     
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You selected cell #\(indexPath.row)!")
+        
+       
+        selectedQuote = self.Quotelist[(indexPath.row)]
+        performSegue(withIdentifier: "segueToPreviewVC", sender: self)
+    }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -108,14 +120,6 @@ class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerD
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
