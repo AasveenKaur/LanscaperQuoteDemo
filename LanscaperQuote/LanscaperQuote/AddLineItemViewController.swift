@@ -133,7 +133,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         }
     }
     func showHiddenScreenForLineItemType(lineItemType:String)  {
-        if(lineItemType == "Mulch Calculator" || lineItemType == "Soil Calculator"){
+        //if(lineItemType == "Mulch Calculator" || lineItemType == "Soil Calculator"){
             itemNameField.isHidden = false
             
             itemDescriptionField.isHidden = false
@@ -151,7 +151,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
             rateValue.isHidden = false
             totalValue.isHidden = false
             taxValue.isHidden = false
-        }
+        //}
      
         
     }
@@ -175,10 +175,16 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     
         if(row != 0){
+            
             lineItemTypePicker.text = pickOption[row]
-        self.view.endEditing(true)
+            self.view.endEditing(true)
             showHiddenScreenForLineItemType(lineItemType: lineItemTypePicker.text!)
+            if(row == 2){
+                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER)
+            }
         }
+        
+
        
     
     }

@@ -76,7 +76,8 @@ class QuoteComposer: NSObject {
             
             // For all the items except for the last one we'll use the "single_item.html" template.
             // For the last one we'll use the "last_item.html" template.
-            for i in 0..<items.count {
+            //for i in 0..<items.count {
+                for i in 0..<100 {
                 var itemHTMLContent: String!
                 
                 // Determine the proper template file.
@@ -88,13 +89,14 @@ class QuoteComposer: NSObject {
                 }
                 
                 // Replace the description and price placeholders with the actual values.
-                itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#ITEM_DESC#", with: items[i].name )
+                itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#ITEM_DESC#", with: "items[i].name" )
                 
                 // Format each item's price as a currency value.
                 //let formattedPrice = AppDelegate.getAppDelegate().getStringValueFormattedAsCurrency(items[i]["price"]!)
                 
-                itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with: "\(items[i].price)")
-                
+                //itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with: getStringValueFormattedAsCurrency("\(items[i].price)"))
+                itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with: "100")
+
                 // Add the item's HTML code to the general items string.
                 allItems += itemHTMLContent
             }
@@ -110,6 +112,38 @@ class QuoteComposer: NSObject {
         }
         
         return nil
+    }
+    
+   
+    func exportHTMLContentToPDF(HTMLContent: String) {
+        let printPageRenderer = CustomPrintPageRenderer()
+        
+        let printFormatter = UIMarkupTextPrintFormatter(markupText: HTMLContent)
+        printPageRenderer.addPrintFormatter(printFormatter, startingAtPageAt: 0)
+        
+        let pdfData = drawPDFUsingPrintPageRenderer(printPageRenderer: printPageRenderer)
+        
+        pdfFilename = "\(getDocDir())/Invoice\(invoiceNumber).pdf"
+        pdfData?.write(toFile: pdfFilename, atomically: true)
+        
+        print(pdfFilename)
+    }
+    
+    func drawPDFUsingPrintPageRenderer(printPageRenderer: UIPrintPageRenderer) -> NSData! {
+    
+    let pdfData = NSMutableData()
+    
+    UIGraphicsBeginPDFContextToData(pdfData, CGRect.zero, nil)
+       
+        for i in 0 ..< printPageRenderer.numberOfPages{
+    UIGraphicsBeginPDFPage()
+    
+    printPageRenderer.drawPage(at: i, in: UIGraphicsGetPDFContextBounds())
+        }
+    UIGraphicsEndPDFContext()
+    
+    return pdfData
+        
     }
 }
 

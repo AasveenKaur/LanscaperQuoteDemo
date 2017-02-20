@@ -36,8 +36,7 @@ class CircleViewController: UIViewController {
         var volume:Float = 0.0
         
         if let depth = Float(bedDepth.text!), let diameter = Float(bedDiameter.text!){
-            volume = (pie*(diameter/2)*(diameter/2)*depth)/27  // convert into cubic yard
-            volume = round(100*volume)/100 // Round off to 2 decimal
+            volume = calculateSoilOrMulchVolumeforCircularPatternWith(diameter: diameter, withDepth: depth)
         }
         else{
             print("ERROR IN INPUT")

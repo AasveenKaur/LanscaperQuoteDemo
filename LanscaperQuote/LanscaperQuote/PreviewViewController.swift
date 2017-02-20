@@ -8,6 +8,7 @@
 
 import UIKit
 
+import MessageUI
 class PreviewViewController: UIViewController {
 
     @IBOutlet weak var webPreview: UIWebView!
@@ -15,8 +16,31 @@ class PreviewViewController: UIViewController {
     var quoteComposer: QuoteComposer!
     
     var HTMLContent: String!
-    var quoteDetails = QuotesModel()
+        var quoteDetails = QuotesModel()
+    
+    @IBAction func printQuote(_ sender: Any) {
+        // Make PDF of HTML
+        quoteComposer.exportHTMLContentToPDF(HTMLContent: HTMLContent)
+        let urlwithPercentEscapes = self.quoteComposer.pdfFilename.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)
+        let request = NSURLRequest(url: NSURL(string: urlwithPercentEscapes!)! as URL)
+       
+        self.webPreview.loadRequest(request as URLRequest)
+    }
+    @IBAction func emailQuote(_ sender: Any) {
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposeViewController = MFMailComposeViewController()
+            mailComposeViewController.setSubject("Invoice")
+            mailComposeViewController.addAttachmentData(NSData(contentsOfFile: quoteComposer.pdfFilename)! as Data, mimeType: "application/pdf", fileName: "Invoice")
+            present(mailComposeViewController, animated: true, completion: nil)
+        }
+    }
+    @IBAction func deleteQuote(_ sender: Any) {
+    }
+
+    
     override func viewDidLoad() {
+        
+        
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -38,12 +62,12 @@ class PreviewViewController: UIViewController {
             webPreview.loadHTMLString(invoiceHTML, baseURL: NSURL(string: quoteComposer.pathToInvoiceHTMLTemplate!)! as URL)
             HTMLContent = invoiceHTML
            
-            
-            
         }
-       
-        
-       
     }
+    
 
+    
+  
+
+    
 }

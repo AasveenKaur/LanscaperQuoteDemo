@@ -30,13 +30,12 @@ class RectangleViewController: UIViewController {
     func calculateVolume() -> Float {
         var volume:Float = 0.0
         if let depth = Float(bedDepth.text!), let length = Float(bedLength.text!), let width = Float(bedWidth.text!){
-         volume = (length*width*depth)/27  // convert into cubic yard
-         volume = round(100*volume)/100
-        }
+           volume = calculateSoilOrMulchVolumeforRectangularPatternWith(length: length, withWidth: width, withDepth: depth)
+            }
         else{
             print("ERROR IN INPUT")
         }
-        return volume
+      return volume
     }
     
     override func viewDidLoad() {

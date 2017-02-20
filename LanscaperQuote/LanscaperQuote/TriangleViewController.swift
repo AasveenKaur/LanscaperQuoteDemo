@@ -40,8 +40,7 @@ class TriangleViewController: UIViewController {
         var volume:Float = 0.0
         
         if let depth = Float(bedDepth.text!), let height = Float(bedHeight.text!), let base = Float(bedBase.text!){
-            volume = (((height*base)/2)*depth)/27  // convert into cubic yard
-            volume = round(100*volume)/100 // Round off to 2 decimal
+         volume =  calculateSoilOrMulchVolumeforTrianglePatternWith(height: height, withBase: base, withDepth: depth)
         }
         else{
             print("ERROR IN INPUT")
