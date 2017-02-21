@@ -179,6 +179,9 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
             lineItemTypePicker.text = pickOption[row]
             self.view.endEditing(true)
             showHiddenScreenForLineItemType(lineItemType: lineItemTypePicker.text!)
+            if(row == 1){
+                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_PAVER_IDENTIFIER)
+            }
             if(row == 2){
                 containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER)
             }

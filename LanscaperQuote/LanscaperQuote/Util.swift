@@ -20,6 +20,7 @@ let EMPTY_SEGUE_RECTANGLE_IDENTIFIER  = "emptySegueRectangle"
 let EMPTY_SEGUE_CIRCLE_IDENTIFIER = "emptySegueCircle"
 let EMPTY_SEGUE_TRIANGLE_IDENTIFIER = "emptySegueTriangle"
 let EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER = "emptySegueRetainingWall"
+let EMPTY_SEGUE_PAVER_IDENTIFIER = "emptySeguePaver"
 let pickOption = ["Select calculator type","Paver Calculator", "Retaining Wall Calculator", "Soil Calculator", "Mulch Calculator", "Grass Seed Calculator", "Sod Calculator", "Plant and Flower Calculator" , " Landscape Material Yardage Calculator" ,"Fence Calculator", "Deck Calculator", "Acreage Calculator", "Other" ]
 let pie:Float = 3.14
  let currencyCode = "$"
