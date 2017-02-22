@@ -10,6 +10,27 @@ import UIKit
 
 class RetainingWallViewController: UIViewController {
 
+    @IBOutlet weak var wallWidth: UITextField!
+    
+    @IBOutlet weak var wallHeight: UITextField!
+    
+    @IBOutlet weak var blockWidth: UITextField!
+    
+    @IBOutlet weak var blockHeight: UITextField!
+    
+    @IBOutlet weak var blockPrice: UITextField!
+    
+    @IBOutlet weak var capWidth: UITextField!
+    
+    @IBOutlet weak var capHeight: UITextField!
+    
+    @IBOutlet weak var capPrice: UITextField!
+    @IBOutlet weak var result: UILabel!
+    
+    @IBAction func calculateResult(_ sender: Any) {
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

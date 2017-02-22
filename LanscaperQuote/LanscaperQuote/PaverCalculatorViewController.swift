@@ -9,7 +9,17 @@
 import UIKit
 
 class PaverCalculatorViewController: UIViewController {
+    @IBOutlet weak var patioWidth: UITextField!
 
+    @IBOutlet weak var patioLength: UITextField!
+    
+    @IBOutlet weak var paverWidth: UITextField!
+    
+    @IBOutlet weak var paverLength: NSLayoutConstraint!
+    
+    @IBOutlet weak var result: UILabel!
+    @IBAction func calculateResult(_ sender: Any) {
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

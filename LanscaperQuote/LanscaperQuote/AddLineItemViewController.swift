@@ -57,6 +57,9 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
 
     }
     
+    @IBAction func cancel(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
    
     @IBAction func DoneButtonPressed(_ sender: Any) {
         delegate?.controller(controller: self, didSaveLineItemWithName: itemNameField.text!, itemDescription: itemDescriptionField.text, itemQuantity: Float(quantityValue.text!)!, itemPrice: Float(rateValue.text!)!, itemTax: Float(taxValue.text!)!)
@@ -80,7 +83,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         //containerViewController?.swapFromViewControllers()
         if(prevSHapeButton != sender ){
         containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_CIRCLE_IDENTIFIER)
-            if(prevSHapeButton == shapeButtons[0]){
+            if(prevSHapeButton?.tag == 1){
             prevSHapeButton?.backgroundColor = UIColor.green
             }
             else{
@@ -96,7 +99,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         //containerViewController?.swapFromViewControllers()
         if(prevSHapeButton != sender ){
         containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_RECTANGLE_IDENTIFIER)
-             if(prevSHapeButton == shapeButtons[1]){
+             if(prevSHapeButton?.tag == 2){
             prevSHapeButton?.backgroundColor = UIColor.green
              }else{
                 prevSHapeButton?.isSelected = false
@@ -115,7 +118,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         quantityValue.delegate = self
         
         let pickerView = UIPickerView()
-        prevSHapeButton = shapeButtons[0]
+        prevSHapeButton = self.view.viewWithTag(1) as? UIButton
         prevSHapeButton?.backgroundColor = UIColor.red
         pickerView.delegate = self
         
