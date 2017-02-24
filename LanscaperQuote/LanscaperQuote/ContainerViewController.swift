@@ -15,6 +15,7 @@ protocol ContainerViewControllerDelegate {
 class ContainerViewController: UIViewController {
     var delegate: ContainerViewControllerDelegate?
     var currentSegueIdentifier:String?
+    var currentCalculatorType:String = ""
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,8 @@ class ContainerViewController: UIViewController {
         if (segue.identifier == EMPTY_SEGUE_RECTANGLE_IDENTIFIER ) {
             let vc = segue.destination as! RectangleViewController
             vc.delegate = self.delegate as! AddLineItemViewController
-                       if(self.childViewControllers.count > 0 ){
+            vc.calculatorType = currentCalculatorType
+            if(self.childViewControllers.count > 0 ){
              //swap
                
                 self.swapFromViewController(fromVC: self.childViewControllers[0], toViewCOntroller: segue.destination)
@@ -64,6 +66,13 @@ class ContainerViewController: UIViewController {
             self.swapFromViewController(fromVC: self.childViewControllers[0], toViewCOntroller: segue.destination)
             
         }
+        else if (segue.identifier == EMPTY_SEGUE_GRASS_SEED_IDENTIFIER){
+            let vc = segue.destination as! GrassSeedViewController
+            //vc.delegate = self.delegate as! AddLineItemViewController
+            self.swapFromViewController(fromVC: self.childViewControllers[0], toViewCOntroller: segue.destination)
+            }
+      
+        
         
         
         
@@ -84,8 +93,9 @@ class ContainerViewController: UIViewController {
    
     
     
-    func showViewWithSegue(segueIdentifier:String)  {
+    func showViewWithSegue(segueIdentifier:String, calculatorType:String )  {
         self.currentSegueIdentifier = segueIdentifier
+        self.currentCalculatorType = calculatorType
         self.performSegue(withIdentifier: self.currentSegueIdentifier!, sender: nil)
     }
  

@@ -14,12 +14,14 @@ protocol RectangleViewControllerDelegate {
 
 class RectangleViewController: UIViewController {
    
+    var calculatorType:String = ""
     @IBOutlet weak var result: UILabel!
     @IBOutlet weak var bedDepth: UITextField!
+    @IBOutlet weak var bedDepthLabel: UILabel!
     @IBOutlet weak var bedLength: UITextField!
-    
     @IBOutlet weak var bedWidth: UITextField!
     var delegate: RectangleViewControllerDelegate?
+    
     @IBAction func calculateButtonPressed(_ sender: Any) {
         let volume = calculateVolume()
         delegate?.controller(controller: self, didCalculateMulchQuantity: volume, forBag: 100)
@@ -40,7 +42,15 @@ class RectangleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if(calculatorType == pickOption[6] || calculatorType == pickOption[9]){
+            bedDepth.isHidden = true
+            bedDepthLabel.isHidden = true
+        } else if(calculatorType == pickOption[7]){
+            bedDepthLabel.text = "Plant Spacing(in inches)"
+        }else if (calculatorType == pickOption[8]){
+            bedDepthLabel.text = "Bed height (in feet)"
+        }
+        
         // Do any additional setup after loading the view.
     }
 

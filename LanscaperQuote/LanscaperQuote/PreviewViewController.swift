@@ -9,7 +9,7 @@
 import UIKit
 
 import MessageUI
-class PreviewViewController: UIViewController {
+class PreviewViewController: UIViewController,MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var webPreview: UIWebView!
     
@@ -27,12 +27,19 @@ class PreviewViewController: UIViewController {
         self.webPreview.loadRequest(request as URLRequest)
     }
     @IBAction func emailQuote(_ sender: Any) {
+//        if MFMailComposeViewController.canSendMail() {
+//            let mailComposeViewController = MFMailComposeViewController()
+//            mailComposeViewController.setSubject("Invoice")
+//            mailComposeViewController.addAttachmentData(NSData(contentsOfFile: quoteComposer.pdfFilename)! as Data, mimeType: "application/pdf", fileName: "Invoice")
+//            present(mailComposeViewController, animated: true, completion: nil)
+//        }
+//        
+//        
+        
+        let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
-            let mailComposeViewController = MFMailComposeViewController()
-            mailComposeViewController.setSubject("Invoice")
-            mailComposeViewController.addAttachmentData(NSData(contentsOfFile: quoteComposer.pdfFilename)! as Data, mimeType: "application/pdf", fileName: "Invoice")
-            present(mailComposeViewController, animated: true, completion: nil)
-        }
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        } 
     }
     @IBAction func deleteQuote(_ sender: Any) {
     }
@@ -65,7 +72,22 @@ class PreviewViewController: UIViewController {
         }
     }
     
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        mailComposerVC.addAttachmentData(NSData(contentsOfFile: quoteComposer.pdfFilename)! as Data, mimeType: "application/pdf", fileName: "Invoice")
 
+        mailComposerVC.setToRecipients(["someone@somewhere.com"])
+        mailComposerVC.setSubject("Sending you an in-app e-mail...")
+        mailComposerVC.setMessageBody("Sending e-mail in-app is not so bad!", isHTML: false)
+        
+        return mailComposerVC
+    }
+    
+    // MARK: MFMailComposeViewControllerDelegate Method
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
     
   
 
