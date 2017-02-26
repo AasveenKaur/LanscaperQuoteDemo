@@ -59,6 +59,7 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         super.viewDidLoad()
         self.tableView.backgroundView = UIImageView.init(image:UIImage(named:"background" ))
         self.tableView.separatorStyle = .none
+        self.tableView.allowsMultipleSelectionDuringEditing = false
         //LineItems.append(LineItemModel())
         //client.append(ClientModel())
         // Do any additional setup after loading the view.
@@ -67,6 +68,8 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     override func viewDidAppear(_ animated: Bool) {
         
     }
+    
+    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 3

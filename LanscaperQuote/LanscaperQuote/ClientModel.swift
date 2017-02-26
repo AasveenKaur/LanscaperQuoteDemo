@@ -24,10 +24,10 @@ class ClientModel: NSObject , NSCoding {
         self.phoneTwo = phoneTwo
         self.phoneOne = phoneOne
         self.address = address
-        self.name = name
+        
     }
     
-    
+
 
  public func encode(with aCoder: NSCoder) {
             aCoder.encode(clientID, forKey: "clientID")
@@ -49,8 +49,6 @@ class ClientModel: NSObject , NSCoding {
         phoneTwo = (aDecoder.decodeObject(forKey: "phoneTwo") as! String)
         address = (aDecoder.decodeObject(forKey: "address") as! AddressModel)
         notes = (aDecoder.decodeObject(forKey: "notes") as! String)
-
-    
-    }
+}
 
 }

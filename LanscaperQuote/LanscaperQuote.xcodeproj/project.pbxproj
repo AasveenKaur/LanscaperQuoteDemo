@@ -37,6 +37,21 @@
 		5F4F4FCF1E3FE19A00B1C6FD /* AddQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FCE1E3FE19A00B1C6FD /* AddQuoteViewController.swift */; };
 		5F4F4FD21E4004D300B1C6FD /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FD11E4004D300B1C6FD /* DataProvider.swift */; };
 		5F4F4FD41E40B2D400B1C6FD /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F4FD31E40B2D400B1C6FD /* DataManager.swift */; };
+		5F54E6381E6028EA009CEE75 /* LineItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E62C1E6028EA009CEE75 /* LineItem+CoreDataClass.swift */; };
+		5F54E63A1E6028EA009CEE75 /* Quote+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E62E1E6028EA009CEE75 /* Quote+CoreDataClass.swift */; };
+		5F54E63C1E6028EA009CEE75 /* Company+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6301E6028EA009CEE75 /* Company+CoreDataClass.swift */; };
+		5F54E63E1E6028EA009CEE75 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6321E6028EA009CEE75 /* User+CoreDataClass.swift */; };
+		5F54E6401E6028EA009CEE75 /* Address+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6341E6028EA009CEE75 /* Address+CoreDataClass.swift */; };
+		5F54E6421E6028EA009CEE75 /* Client+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6361E6028EA009CEE75 /* Client+CoreDataClass.swift */; };
+		5F54E6691E60E961009CEE75 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6631E60E961009CEE75 /* User+CoreDataProperties.swift */; };
+		5F54E66A1E60E961009CEE75 /* Client+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6641E60E961009CEE75 /* Client+CoreDataProperties.swift */; };
+		5F54E66B1E60E961009CEE75 /* Company+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6651E60E961009CEE75 /* Company+CoreDataProperties.swift */; };
+		5F54E66C1E60E961009CEE75 /* Address+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6661E60E961009CEE75 /* Address+CoreDataProperties.swift */; };
+		5F54E66D1E60E961009CEE75 /* LineItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6671E60E961009CEE75 /* LineItem+CoreDataProperties.swift */; };
+		5F54E6701E6206B6009CEE75 /* Quote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E66F1E6206B6009CEE75 /* Quote+CoreDataProperties.swift */; };
+		5F54E6721E6220FC009CEE75 /* ClientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6711E6220FC009CEE75 /* ClientTableViewController.swift */; };
+		5F54E6741E62247A009CEE75 /* InvoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6731E62247A009CEE75 /* InvoiceTableViewController.swift */; };
+		5F54E6761E622550009CEE75 /* InvoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6751E622550009CEE75 /* InvoiceTableViewCell.swift */; };
 		5FA2A5811E591CCA00B1F60F /* QuoteComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A5801E591CCA00B1F60F /* QuoteComposer.swift */; };
 		5FA2A5831E593ABF00B1F60F /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A5821E593ABF00B1F60F /* PreviewViewController.swift */; };
 		5FA2A5861E5A4D8100B1F60F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FA2A5841E5A4D8100B1F60F /* Main.storyboard */; };
@@ -349,6 +364,9 @@
 		5FA2A7F11E5B9B1F00B1F60F /* PaverCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A7F01E5B9B1F00B1F60F /* PaverCalculatorViewController.swift */; };
 		5FA2A7F31E5B9B3600B1F60F /* RetainingWallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A7F21E5B9B3600B1F60F /* RetainingWallViewController.swift */; };
 		5FA2A8001E5E24CA00B1F60F /* GrassSeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A7FF1E5E24CA00B1F60F /* GrassSeedViewController.swift */; };
+		5FA2A81E1E6004FF00B1F60F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA2A81D1E6004FF00B1F60F /* CoreData.framework */; };
+		5FA2A8221E60057E00B1F60F /* LandscaperQuote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A8201E60057E00B1F60F /* LandscaperQuote.xcdatamodeld */; };
+		5FA2A8241E60069F00B1F60F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A8231E60069F00B1F60F /* CoreDataManager.swift */; };
 		5FA8ECBB1E3DB2AA00A86BA6 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA8ECBA1E3DB2AA00A86BA6 /* BaseTableViewController.swift */; };
 		5FA8ECBD1E3DB2DF00A86BA6 /* QuotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA8ECBC1E3DB2DF00A86BA6 /* QuotesTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -386,6 +404,21 @@
 		5F4F4FCE1E3FE19A00B1C6FD /* AddQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuoteViewController.swift; sourceTree = "<group>"; };
 		5F4F4FD11E4004D300B1C6FD /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		5F4F4FD31E40B2D400B1C6FD /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		5F54E62C1E6028EA009CEE75 /* LineItem+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "LineItem+CoreDataClass.swift"; path = "../LineItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5F54E62E1E6028EA009CEE75 /* Quote+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Quote+CoreDataClass.swift"; path = "../Quote+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5F54E6301E6028EA009CEE75 /* Company+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Company+CoreDataClass.swift"; path = "../Company+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5F54E6321E6028EA009CEE75 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "../User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5F54E6341E6028EA009CEE75 /* Address+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Address+CoreDataClass.swift"; path = "../Address+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5F54E6361E6028EA009CEE75 /* Client+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Client+CoreDataClass.swift"; path = "../Client+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5F54E6631E60E961009CEE75 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "../User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5F54E6641E60E961009CEE75 /* Client+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Client+CoreDataProperties.swift"; path = "../Client+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5F54E6651E60E961009CEE75 /* Company+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Company+CoreDataProperties.swift"; path = "../Company+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5F54E6661E60E961009CEE75 /* Address+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Address+CoreDataProperties.swift"; path = "../Address+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5F54E6671E60E961009CEE75 /* LineItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "LineItem+CoreDataProperties.swift"; path = "../LineItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5F54E66F1E6206B6009CEE75 /* Quote+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Quote+CoreDataProperties.swift"; path = "../Quote+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5F54E6711E6220FC009CEE75 /* ClientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewController.swift; sourceTree = "<group>"; };
+		5F54E6731E62247A009CEE75 /* InvoiceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceTableViewController.swift; sourceTree = "<group>"; };
+		5F54E6751E622550009CEE75 /* InvoiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceTableViewCell.swift; sourceTree = "<group>"; };
 		5FA2A5801E591CCA00B1F60F /* QuoteComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteComposer.swift; sourceTree = "<group>"; };
 		5FA2A5821E593ABF00B1F60F /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		5FA2A5851E5A4D8100B1F60F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -698,6 +731,9 @@
 		5FA2A7F01E5B9B1F00B1F60F /* PaverCalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaverCalculatorViewController.swift; sourceTree = "<group>"; };
 		5FA2A7F21E5B9B3600B1F60F /* RetainingWallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetainingWallViewController.swift; sourceTree = "<group>"; };
 		5FA2A7FF1E5E24CA00B1F60F /* GrassSeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrassSeedViewController.swift; sourceTree = "<group>"; };
+		5FA2A81D1E6004FF00B1F60F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5FA2A8211E60057E00B1F60F /* LandscaperQuote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LandscaperQuote.xcdatamodel; sourceTree = "<group>"; };
+		5FA2A8231E60069F00B1F60F /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5FA8ECBA1E3DB2AA00A86BA6 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		5FA8ECBC1E3DB2DF00A86BA6 /* QuotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -707,6 +743,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FA2A81E1E6004FF00B1F60F /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,6 +755,7 @@
 			children = (
 				5F3030391E3869180018BE74 /* LanscaperQuote */,
 				5F3030381E3869180018BE74 /* Products */,
+				5FA2A81C1E6004FF00B1F60F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -732,6 +770,7 @@
 		5F3030391E3869180018BE74 /* LanscaperQuote */ = {
 			isa = PBXGroup;
 			children = (
+				5FA2A81F1E60053200B1F60F /* core data stuff */,
 				5FA2A5871E5A575600B1F60F /* Resources */,
 				5F36BDB11E4A679100B2233B /* Custom cells */,
 				5F36BDB01E493DEB00B2233B /* Add Entity Controllers */,
@@ -804,6 +843,7 @@
 				5F36BDB61E4A6E4A00B2233B /* NotesTableViewCell.swift */,
 				5F36BDBA1E4A7E4D00B2233B /* SubTotalTableViewCell.swift */,
 				5F36BDBE1E4BDC9F00B2233B /* QuoteTableViewCell.swift */,
+				5F54E6751E622550009CEE75 /* InvoiceTableViewCell.swift */,
 			);
 			name = "Custom cells";
 			sourceTree = "<group>";
@@ -826,8 +866,22 @@
 			children = (
 				5F4F4FD11E4004D300B1C6FD /* DataProvider.swift */,
 				5F4F4FD31E40B2D400B1C6FD /* DataManager.swift */,
+				5FA2A8231E60069F00B1F60F /* CoreDataManager.swift */,
 			);
 			name = "Data Helper Classes";
+			sourceTree = "<group>";
+		};
+		5F54E66E1E60E9A2009CEE75 /* property classes */ = {
+			isa = PBXGroup;
+			children = (
+				5F54E66F1E6206B6009CEE75 /* Quote+CoreDataProperties.swift */,
+				5F54E6631E60E961009CEE75 /* User+CoreDataProperties.swift */,
+				5F54E6641E60E961009CEE75 /* Client+CoreDataProperties.swift */,
+				5F54E6651E60E961009CEE75 /* Company+CoreDataProperties.swift */,
+				5F54E6661E60E961009CEE75 /* Address+CoreDataProperties.swift */,
+				5F54E6671E60E961009CEE75 /* LineItem+CoreDataProperties.swift */,
+			);
+			name = "property classes";
 			sourceTree = "<group>";
 		};
 		5FA2A5871E5A575600B1F60F /* Resources */ = {
@@ -1159,12 +1213,37 @@
 			path = "iconbeast lite 300 - png";
 			sourceTree = "<group>";
 		};
+		5FA2A81C1E6004FF00B1F60F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5FA2A81D1E6004FF00B1F60F /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5FA2A81F1E60053200B1F60F /* core data stuff */ = {
+			isa = PBXGroup;
+			children = (
+				5F54E66E1E60E9A2009CEE75 /* property classes */,
+				5FA2A8201E60057E00B1F60F /* LandscaperQuote.xcdatamodeld */,
+				5F54E62C1E6028EA009CEE75 /* LineItem+CoreDataClass.swift */,
+				5F54E62E1E6028EA009CEE75 /* Quote+CoreDataClass.swift */,
+				5F54E6361E6028EA009CEE75 /* Client+CoreDataClass.swift */,
+				5F54E6341E6028EA009CEE75 /* Address+CoreDataClass.swift */,
+				5F54E6301E6028EA009CEE75 /* Company+CoreDataClass.swift */,
+				5F54E6321E6028EA009CEE75 /* User+CoreDataClass.swift */,
+			);
+			name = "core data stuff";
+			sourceTree = "<group>";
+		};
 		5FA8ECB91E3DB27100A86BA6 /* TableViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				5FA8ECBA1E3DB2AA00A86BA6 /* BaseTableViewController.swift */,
 				5FA8ECBC1E3DB2DF00A86BA6 /* QuotesTableViewController.swift */,
 				5F36BDAE1E485C2400B2233B /* LineItemTableViewController.swift */,
+				5F54E6711E6220FC009CEE75 /* ClientTableViewController.swift */,
+				5F54E6731E62247A009CEE75 /* InvoiceTableViewController.swift */,
 			);
 			name = TableViewControllers;
 			sourceTree = "<group>";
@@ -1547,17 +1626,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F54E6701E6206B6009CEE75 /* Quote+CoreDataProperties.swift in Sources */,
+				5F54E6381E6028EA009CEE75 /* LineItem+CoreDataClass.swift in Sources */,
+				5F54E6421E6028EA009CEE75 /* Client+CoreDataClass.swift in Sources */,
 				5F36BDBB1E4A7E4D00B2233B /* SubTotalTableViewCell.swift in Sources */,
 				5FA2A5931E5A692E00B1F60F /* CustomPrintPageRenderer.swift in Sources */,
+				5F54E6761E622550009CEE75 /* InvoiceTableViewCell.swift in Sources */,
 				5FA8ECBB1E3DB2AA00A86BA6 /* BaseTableViewController.swift in Sources */,
 				5F30303D1E3869180018BE74 /* ViewController.swift in Sources */,
+				5F54E66A1E60E961009CEE75 /* Client+CoreDataProperties.swift in Sources */,
 				5FA2A8001E5E24CA00B1F60F /* GrassSeedViewController.swift in Sources */,
 				5F36BDAB1E47020B00B2233B /* EmptySegue.swift in Sources */,
 				5F4F4FC21E3F1E1C00B1C6FD /* UserModel.swift in Sources */,
+				5F54E66C1E60E961009CEE75 /* Address+CoreDataProperties.swift in Sources */,
 				5F4F4FC01E3F1CB100B1C6FD /* LineItemModel.swift in Sources */,
 				5F36BD9B1E44653000B2233B /* AddNoteViewController.swift in Sources */,
+				5F54E6741E62247A009CEE75 /* InvoiceTableViewController.swift in Sources */,
 				5F36BDB51E4A6E3700B2233B /* LineItemTableViewCell.swift in Sources */,
 				5F4F4FC61E3F1FD300B1C6FD /* AddressModel.swift in Sources */,
+				5F54E63E1E6028EA009CEE75 /* User+CoreDataClass.swift in Sources */,
 				5F36BD971E445E7C00B2233B /* BaseViewController.swift in Sources */,
 				5F4F4FBC1E3F15B100B1C6FD /* QuotesModel.swift in Sources */,
 				5F4F4FD21E4004D300B1C6FD /* DataProvider.swift in Sources */,
@@ -1568,11 +1655,19 @@
 				5F4F4FBE1E3F1BB200B1C6FD /* ClientModel.swift in Sources */,
 				5F36BDAD1E4707EF00B2233B /* TriangleViewController.swift in Sources */,
 				5F36BDAF1E485C2400B2233B /* LineItemTableViewController.swift in Sources */,
+				5F54E66B1E60E961009CEE75 /* Company+CoreDataProperties.swift in Sources */,
 				5FA2A7F31E5B9B3600B1F60F /* RetainingWallViewController.swift in Sources */,
+				5F54E63A1E6028EA009CEE75 /* Quote+CoreDataClass.swift in Sources */,
+				5FA2A8241E60069F00B1F60F /* CoreDataManager.swift in Sources */,
 				5F4F4FC41E3F1F0800B1C6FD /* MyCompanyModel.swift in Sources */,
+				5F54E66D1E60E961009CEE75 /* LineItem+CoreDataProperties.swift in Sources */,
 				5FA2A7F11E5B9B1F00B1F60F /* PaverCalculatorViewController.swift in Sources */,
 				5FA2A5811E591CCA00B1F60F /* QuoteComposer.swift in Sources */,
+				5F54E6721E6220FC009CEE75 /* ClientTableViewController.swift in Sources */,
+				5F54E63C1E6028EA009CEE75 /* Company+CoreDataClass.swift in Sources */,
+				5F54E6401E6028EA009CEE75 /* Address+CoreDataClass.swift in Sources */,
 				5F36BDB71E4A6E4A00B2233B /* NotesTableViewCell.swift in Sources */,
+				5FA2A8221E60057E00B1F60F /* LandscaperQuote.xcdatamodeld in Sources */,
 				5F30303B1E3869180018BE74 /* AppDelegate.swift in Sources */,
 				5FA2A5831E593ABF00B1F60F /* PreviewViewController.swift in Sources */,
 				5F36BDA91E46FCBC00B2233B /* CircleViewController.swift in Sources */,
@@ -1580,6 +1675,7 @@
 				5F36BDA41E46DC0700B2233B /* Util.swift in Sources */,
 				5F36BDA71E46FC7200B2233B /* RectangleViewController.swift in Sources */,
 				5F36BD9D1E4677C900B2233B /* AddLineItemViewController.swift in Sources */,
+				5F54E6691E60E961009CEE75 /* User+CoreDataProperties.swift in Sources */,
 				5F36BD9F1E46D60F00B2233B /* ContainerViewController.swift in Sources */,
 				5F36BDB31E4A6E2400B2233B /* ClientTableViewCell.swift in Sources */,
 				5F4F4FCF1E3FE19A00B1C6FD /* AddQuoteViewController.swift in Sources */,
@@ -1749,6 +1845,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5FA2A8201E60057E00B1F60F /* LandscaperQuote.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5FA2A8211E60057E00B1F60F /* LandscaperQuote.xcdatamodel */,
+			);
+			currentVersion = 5FA2A8211E60057E00B1F60F /* LandscaperQuote.xcdatamodel */;
+			path = LandscaperQuote.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5F30302F1E3869180018BE74 /* Project object */;
 }

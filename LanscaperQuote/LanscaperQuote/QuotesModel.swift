@@ -64,7 +64,8 @@ class QuotesModel: NSObject, NSCoding {
         self.invoiceStatus = invoiceStatus
         self.sentToClient = sentToClient
     }
-    
+  
+        
 public func encode(with aCoder: NSCoder) {
         aCoder.encode(quoteID, forKey: "quoteID")
         aCoder.encode(estimateNumber, forKey: "estimateNumber")

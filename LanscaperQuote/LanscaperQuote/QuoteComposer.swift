@@ -27,17 +27,40 @@ class QuoteComposer: NSObject {
    
     
     var invoiceNumber: String!
-    
+    var invoiceDate: String!
+    var recipientInfo:String!
+    var totalAmount:String!
     var pdfFilename: String!
+    var items:Set<LineItem>!
     
     override init(){
         super.init()
     }
     
-    func renderInvoice(invoiceNumber: String, invoiceDate: String, recipientInfo: String, items: [LineItemModel], totalAmount: String) -> String! {
+//    func renderInvoice(invoiceNumber: String, invoiceDate: String, recipientInfo: String, items: [LineItemModel], totalAmount: String) -> String! {
         // Store the invoice number for future use.
-            self.invoiceNumber = invoiceNumber
+    func renderInvoice(selectedQuote:Quote) -> String! {
+       
         
+        if let invoiceNumber = selectedQuote.estimateNumber{
+            self.invoiceNumber = invoiceNumber
+        }
+        if let invoiceDate = selectedQuote.date{
+            self.invoiceDate = "\(invoiceDate)"
+        }
+        if let client = selectedQuote.value(forKey: "client") as? Client {
+            self.recipientInfo = client.name
+        }
+        if let lineItems = selectedQuote.value(forKey:"lineItems") as? Set<LineItem>{
+            self.items = lineItems
+            for l in lineItems{
+                
+                print("LineItem->\( l.itemName)")
+                print("LineItem->\( l.itemDescription)")
+            }
+            print("-------")
+        }
+        self.totalAmount = "\(selectedQuote.totalAmount)"
         do {
             // Load the invoice HTML template code into a String variable.
             var HTMLContent = try String(contentsOfFile: pathToInvoiceHTMLTemplate!)
@@ -48,8 +71,6 @@ class QuoteComposer: NSObject {
             HTMLContent = HTMLContent.replacingOccurrences(of:"#LOGO_IMAGE#", with: "\(murl)")
             
            
-            
-            
             // Invoice number.
             HTMLContent = HTMLContent.replacingOccurrences(of:"#INVOICE_NUMBER#", with: invoiceNumber)
             
@@ -76,8 +97,9 @@ class QuoteComposer: NSObject {
             
             // For all the items except for the last one we'll use the "single_item.html" template.
             // For the last one we'll use the "last_item.html" template.
-            //for i in 0..<items.count {
-                for i in 0..<100 {
+            var i = 0
+            for item in items {
+               
                 var itemHTMLContent: String!
                 
                 // Determine the proper template file.
@@ -89,16 +111,17 @@ class QuoteComposer: NSObject {
                 }
                 
                 // Replace the description and price placeholders with the actual values.
-                itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#ITEM_DESC#", with: "items[i].name" )
+                itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#ITEM_DESC#", with: item.itemName!)
                 
                 // Format each item's price as a currency value.
                 //let formattedPrice = AppDelegate.getAppDelegate().getStringValueFormattedAsCurrency(items[i]["price"]!)
                 
-                //itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with: getStringValueFormattedAsCurrency("\(items[i].price)"))
-                itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with: "100")
+                itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with: getStringValueFormattedAsCurrency("\(item.price)"))
+                //itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with: "100")
 
                 // Add the item's HTML code to the general items string.
                 allItems += itemHTMLContent
+                i += 1
             }
             
             // Set the items.

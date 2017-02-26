@@ -13,6 +13,7 @@ class DataProvider: NSObject {
     
     //MARK: Shared Instance
     var dataManager:DataManager
+    var coreDataManager:CoreDataManager
     static let sharedInstance : DataProvider = {
         let instance = DataProvider()
         return instance
@@ -20,11 +21,18 @@ class DataProvider: NSObject {
     
     private override init() {
         dataManager = DataManager()
+        coreDataManager = CoreDataManager()
     }
     
     // Saves all quotes
     func saveQuotes(quote:[QuotesModel])  {
      dataManager.saveQuotes(Quotelist: quote)
+        
+    }
+    
+    func saveAQuote(quote:QuotesModel)  {
+      coreDataManager.saveQuote(quote:quote)
+      coreDataManager.show()
     }
     
     // Fetch all quotes
@@ -42,4 +50,16 @@ class DataProvider: NSObject {
     func fetchLineItems() -> [LineItemModel] {
         return [LineItemModel()]
     }
+    
+    func showIt()  {
+        coreDataManager.show()
+    }
+
+func deleteQuote(quote:Quote){
+  coreDataManager.deleteQuote(quote: quote)
+}
+
+    
+   
+    
 }

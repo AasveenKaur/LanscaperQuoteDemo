@@ -22,8 +22,10 @@ let EMPTY_SEGUE_TRIANGLE_IDENTIFIER = "emptySegueTriangle"
 let EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER = "emptySegueRetainingWall"
 let EMPTY_SEGUE_PAVER_IDENTIFIER = "emptySeguePaver"
 let EMPTY_SEGUE_GRASS_SEED_IDENTIFIER = "emptySegueGrassSeed"
+let ESTIMATE_NUMBER = "estimateNumber"
 let pickOption = ["Select calculator type","Paver Calculator", "Retaining Wall Calculator", "Soil Calculator", "Mulch Calculator", "Grass Seed Calculator", "Sod Calculator", "Plant and Flower Calculator" , " Landscape Material Yardage Calculator" , "Acreage Calculator", "Other" ]//"Fence Calculator", "Deck Calculator",
 let pie:Float = 3.14
+
  let currencyCode = "$"
 let CubicFeetToCubicYardConversionNumber = 27
 
@@ -40,6 +42,30 @@ func getStringValueFormattedAsCurrency(_ value: String) -> String {
 
 func getDocDir() -> String {
     return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+}
+
+var estimateNumberGenerator:Int{
+get{
+    return UserDefaults.standard.object(forKey: ESTIMATE_NUMBER) as? Int ?? 1
+}
+set{
+    let defaults = UserDefaults.standard
+    let int = defaults.integer(forKey: ESTIMATE_NUMBER)
+    if(int == 0){
+    defaults.set(int+2, forKey:ESTIMATE_NUMBER)
+    }else{
+         defaults.set(int+1, forKey:ESTIMATE_NUMBER)
+    }
+    defaults.synchronize()
+}
+}
+extension UserDefaults {
+    class func incrementIntegerForKey(key:String) {
+        let defaults = standard
+        let int = standard.integer(forKey: key)
+        defaults.set(int+1, forKey:key)
+        defaults.synchronize()
+    }
 }
 
 
@@ -83,6 +109,15 @@ func roundOffToTwoDecimalPlacesWith(quantity:Float) -> Float{
     return round(100*quantity)/100
 }
 
-
+func showAlert(readableErrorDescription:String,viewController:UIViewController)  {
+    let alertController:UIAlertController =  UIAlertController(title:  "Alert!", message: readableErrorDescription, preferredStyle: .alert)
+    
+    
+    alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler:{(alert: UIAlertAction!) in
+        
+    }))
+    
+    viewController.present(alertController, animated: true, completion: nil)
+}
 
 

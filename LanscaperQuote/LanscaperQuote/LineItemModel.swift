@@ -32,7 +32,7 @@ class LineItemModel: NSObject , NSCoding{
         self.price = price
         self.tax = tax
     }
-    
+
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(lineItemID, forKey: "lineItemID")
         aCoder.encode(name, forKey: "name")

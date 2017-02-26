@@ -16,34 +16,8 @@ class PreviewViewController: UIViewController,MFMailComposeViewControllerDelegat
     var quoteComposer: QuoteComposer!
     
     var HTMLContent: String!
-        var quoteDetails = QuotesModel()
+    var quoteDetails:Quote!
     
-    @IBAction func printQuote(_ sender: Any) {
-        // Make PDF of HTML
-        quoteComposer.exportHTMLContentToPDF(HTMLContent: HTMLContent)
-        let urlwithPercentEscapes = self.quoteComposer.pdfFilename.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)
-        let request = NSURLRequest(url: NSURL(string: urlwithPercentEscapes!)! as URL)
-       
-        self.webPreview.loadRequest(request as URLRequest)
-    }
-    @IBAction func emailQuote(_ sender: Any) {
-//        if MFMailComposeViewController.canSendMail() {
-//            let mailComposeViewController = MFMailComposeViewController()
-//            mailComposeViewController.setSubject("Invoice")
-//            mailComposeViewController.addAttachmentData(NSData(contentsOfFile: quoteComposer.pdfFilename)! as Data, mimeType: "application/pdf", fileName: "Invoice")
-//            present(mailComposeViewController, animated: true, completion: nil)
-//        }
-//        
-//        
-        
-        let mailComposeViewController = configuredMailComposeViewController()
-        if MFMailComposeViewController.canSendMail() {
-            self.present(mailComposeViewController, animated: true, completion: nil)
-        } 
-    }
-    @IBAction func deleteQuote(_ sender: Any) {
-    }
-
     
     override func viewDidLoad() {
         
@@ -64,17 +38,19 @@ class PreviewViewController: UIViewController,MFMailComposeViewControllerDelegat
     }
     func createInvoiceAsHTML() {
         quoteComposer = QuoteComposer()
-        if let invoiceHTML =  quoteComposer.renderInvoice(invoiceNumber: quoteDetails.estimateNumber, invoiceDate: "\(quoteDetails.date)", recipientInfo: quoteDetails.client.name, items: quoteDetails.LineItems!, totalAmount: "\(quoteDetails.totalAmount)") {
-            
-            webPreview.loadHTMLString(invoiceHTML, baseURL: NSURL(string: quoteComposer.pathToInvoiceHTMLTemplate!)! as URL)
+        
+      if let invoiceHTML = quoteComposer.renderInvoice(selectedQuote: quoteDetails){
             HTMLContent = invoiceHTML
+            webPreview.loadHTMLString(invoiceHTML, baseURL: NSURL(string: quoteComposer.pathToInvoiceHTMLTemplate!)! as URL)
+
            
         }
     }
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        mailComposerVC.mailComposeDelegate = self
+        // Extremely important to set the --mailComposeDelegate-- property,  NOT the --delegate-- property
         mailComposerVC.addAttachmentData(NSData(contentsOfFile: quoteComposer.pdfFilename)! as Data, mimeType: "application/pdf", fileName: "Invoice")
 
         mailComposerVC.setToRecipients(["someone@somewhere.com"])
@@ -90,6 +66,36 @@ class PreviewViewController: UIViewController,MFMailComposeViewControllerDelegat
     }
     
   
+    @IBAction func convertToInvoice(_ sender: Any) {
+    }
+    @IBAction func printQuote(_ sender: Any) {
+       
+        //let request = makePDFOfHTML()
+        //self.webPreview.loadRequest(request as URLRequest)
+        showAlert(readableErrorDescription: "Air printer functionality coming soon!", viewController: self)
+    }
+    
+    func makePDFOfHTML() -> NSURLRequest{
+    // Make PDF of HTML
+    quoteComposer.exportHTMLContentToPDF(HTMLContent: HTMLContent)
+    let urlwithPercentEscapes = self.quoteComposer.pdfFilename.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)
+    let request = NSURLRequest(url: NSURL(string: urlwithPercentEscapes!)! as URL)
+    return request
+    }
+    
+    @IBAction func emailQuote(_ sender: Any) {
+        self.makePDFOfHTML()
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        }
+    }
+    @IBAction func deleteQuote(_ sender: Any) {
+        DataProvider.sharedInstance.deleteQuote(quote: quoteDetails)
+        dismiss(animated: true) { 
+            
+        }
+    }
 
     
 }

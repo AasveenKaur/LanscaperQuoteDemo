@@ -17,6 +17,7 @@ class DataManager: NSObject {
             NSKeyedArchiver.archiveRootObject(Quotelist, toFile: filePath)
         }
     }
+
     
     func loadQuotes()  -> [QuotesModel]?{
         if let filePath = pathForItems(plist: "quote.plist"), FileManager.default.fileExists(atPath: filePath) {
@@ -37,5 +38,7 @@ class DataManager: NSObject {
         
         return nil
     }
+    
+    
     
 }
