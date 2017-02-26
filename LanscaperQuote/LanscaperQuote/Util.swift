@@ -23,8 +23,8 @@ let EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER = "emptySegueRetainingWall"
 let EMPTY_SEGUE_PAVER_IDENTIFIER = "emptySeguePaver"
 let EMPTY_SEGUE_GRASS_SEED_IDENTIFIER = "emptySegueGrassSeed"
 let ESTIMATE_NUMBER = "estimateNumber"
-//let pickOption = ["Select calculator type","Paver Calculator", "Retaining Wall Calculator", "Soil Calculator", "Mulch Calculator", "Grass Seed Calculator", "Sod Calculator", "Plant and Flower Calculator" , " Landscape Material Yardage Calculator" , "Acreage Calculator", "Other" ]//"Fence Calculator", "Deck Calculator",
-let pickOption = ["Select calculator type", "Soil Calculator", "Mulch Calculator"]
+let pickOption = ["Select calculator type","Paver Calculator", "Retaining Wall Calculator", "Soil Calculator", "Mulch Calculator", "Grass Seed Calculator", "Sod Calculator", "Plant and Flower Calculator" , " Landscape Material Yardage Calculator" , "Acreage Calculator", "Other" ]//"Fence Calculator", "Deck Calculator",
+//let pickOption = ["Select calculator type", "Soil Calculator", "Mulch Calculator"]
 
 let pie:Float = 3.14
 
@@ -103,7 +103,7 @@ func calculateSoilOrMulchVolumeforTrianglePatternWith(height:Float,withBase base
 }
 
 func calculateAreaForRectangularPatternWith(length:Float, withWidth width:Float)-> Float{
-   return length*width
+   return length * width
 }
 
 
@@ -172,7 +172,7 @@ func getDoneButtonOnKeyboard(target: Any?, action: Selector?) -> UIToolbar
 }
 
 func calculateTaxOn(amount:Float, taxPercentage:Float) -> Float{
-    return (amount * (taxPercentage / 100))
+    return (amount * (taxPercentage / Float(100)))
 }
 
 func calculateSubtotal(price:Float, quantity:Float) -> Float {
@@ -185,6 +185,22 @@ func calculateSubtotalWithTax(subTotal:Float, tax:Float) -> Float {
 
 
 
+func divideBoth(first:Float, second:Float) -> Float{
+    return first / second
+}
+
+
+func addMargin(amount:Float) -> Float{
+    return calculateSubtotalWithTax(subTotal: amount,tax: 5)
+}
+
+func inchToFeet(inch:Float) -> Float{
+ return inch / Float(12)
+}
+
+func feetToInch(feet:Float) -> Float{
+    return feet * Float(12)
+}
 
 
 

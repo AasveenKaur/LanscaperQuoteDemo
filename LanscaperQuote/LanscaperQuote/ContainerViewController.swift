@@ -59,12 +59,12 @@ class ContainerViewController: UIViewController {
         }
         else if (segue.identifier == EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER){
             let vc = segue.destination as! RetainingWallViewController
-            //vc.delegate = self.delegate as! AddLineItemViewController
+            vc.delegate = self.delegate as! AddLineItemViewController
             self.swapFromViewController(fromVC: self.childViewControllers[0], toViewCOntroller: segue.destination)
             
         } else if (segue.identifier == EMPTY_SEGUE_PAVER_IDENTIFIER){
             let vc = segue.destination as! PaverCalculatorViewController
-            //vc.delegate = self.delegate as! AddLineItemViewController
+            vc.delegate = self.delegate as! PaverCalculatorViewControllerDelegate
             self.swapFromViewController(fromVC: self.childViewControllers[0], toViewCOntroller: segue.destination)
             
         }
@@ -74,13 +74,9 @@ class ContainerViewController: UIViewController {
             self.swapFromViewController(fromVC: self.childViewControllers[0], toViewCOntroller: segue.destination)
             }
       
-        
-        
-        
-        
-        
-        
     }
+    
+   
     
     func swapFromViewController(fromVC:UIViewController , toViewCOntroller toVC:UIViewController)  {
         toVC.view.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)

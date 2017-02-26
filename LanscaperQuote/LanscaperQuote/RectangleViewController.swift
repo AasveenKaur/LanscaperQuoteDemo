@@ -55,7 +55,7 @@ class RectangleViewController: BaseViewController {
         bedLength.inputAccessoryView = getDoneButtonOnKeyboard(target: self, action: #selector(RectangleViewController.doneButtonAction))
         bedWidth.inputAccessoryView = getDoneButtonOnKeyboard(target: self, action: #selector(RectangleViewController.doneButtonAction))
         bedDepth.inputAccessoryView = getDoneButtonOnKeyboard(target: self, action: #selector(RectangleViewController.doneButtonAction))
-       /* if(calculatorType == pickOption[6] || calculatorType == pickOption[9]){
+        if(calculatorType == pickOption[6] || calculatorType == pickOption[9]){
             bedDepth.isHidden = true
             bedDepthLabel.isHidden = true
         } else if(calculatorType == pickOption[7]){
@@ -63,7 +63,7 @@ class RectangleViewController: BaseViewController {
         }else if (calculatorType == pickOption[8]){
             bedDepthLabel.text = "Bed height (in feet)"
         }
-        */
+        
         // Do any additional setup after loading the view.
     }
 

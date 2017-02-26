@@ -13,7 +13,7 @@ protocol AddLineItemViewControllerDelegate {
     func controller(controller: AddLineItemViewController, didSaveLineItemWithName name:String, itemDescription description: String, itemQuantity quantity:Float, itemPrice rate:Float, itemTax tax:Float )
 }
 
-class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate, ContainerViewControllerDelegate, RectangleViewControllerDelegate, CircleViewControllerDelegate, TriangleViewControllerDelegate {
+class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate, ContainerViewControllerDelegate, RectangleViewControllerDelegate, CircleViewControllerDelegate, TriangleViewControllerDelegate , PaverCalculatorViewControllerDelegate, RetainingWallViewControllerDelegate{
     
     @IBOutlet weak var scrollView: UIScrollView!
     var activeField: UITextField?
@@ -253,18 +253,18 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
                 /*
                  ["0-Select calculator type","1-Paver Calculator", "2-Retaining Wall Calculator", "3-Soil Calculator", "4-Mulch Calculator", "5-Grass Seed Calculator", "6-Sod Calculator", "7-Plant and Flower Calculator" , " 8-Landscape Material Yardage Calculator" , "9-Acreage Calculator", "10-Other" ]
                  */
-                //            case 1:
-                //                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_PAVER_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-                //                updateContainerViewHeightWith(myConstant: 500)
-                //
-                //            case 2:
-                //                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-            //                updateContainerViewHeightWith(myConstant: 500)
-            case 1:
+                            case 1:
+                                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_PAVER_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
+                                updateContainerViewHeightWith(myConstant: 500)
+                
+                            case 2:
+                                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
+                            updateContainerViewHeightWith(myConstant: 500)
+            case 3:
                 setContainerViewForBedPattern()
                 updateContainerViewHeightWith(myConstant: 300)
                 
-            case 2:
+            case 4:
                 setContainerViewForBedPattern()
                 updateContainerViewHeightWith(myConstant: 300)
                 
@@ -313,10 +313,20 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         }
     }
     //MARK:-CALCULATION DELEGATES
+    
+    func didCalculateRetainingBlocks(controller: RetainingWallViewController, blocks: Float) {
+        quantityValue.text = "\(blocks)"
+    }
+    func didCalculatePaver(controller: PaverCalculatorViewController, paver: Float) {
+        quantityValue.text = "\(paver)"
+
+    }
+    
     func controller(controller: RectangleViewController, didCalculateMulchQuantity mulch: Float, forBag bagVolume: Float) {
         print("hundal-->\(mulch)")
         quantityValue.text = "\(mulch)"
     }
+    
     
     func controller(controller: CircleViewController, didCalculateArea area:Float){
         print("kaur-->\(area)")
