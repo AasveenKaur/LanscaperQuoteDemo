@@ -67,6 +67,10 @@ class PreviewViewController: UIViewController,MFMailComposeViewControllerDelegat
     
   
     @IBAction func convertToInvoice(_ sender: Any) {
+        let oldStatus = quoteDetails.invoiceStatus
+        let newStatus = !oldStatus
+        showInvoiceAlert(quote: quoteDetails, viewController: self, status:newStatus)
+       
     }
     @IBAction func printQuote(_ sender: Any) {
        

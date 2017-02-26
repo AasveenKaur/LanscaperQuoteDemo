@@ -11,7 +11,7 @@ protocol TriangleViewControllerDelegate {
     func controller(controller: TriangleViewController, didCalculateTriangleMulchQuantity mulch:Float, forBag bagVolume: Float)
 }
 
-class TriangleViewController: UIViewController {
+class TriangleViewController: BaseViewController {
     var delegate: TriangleViewControllerDelegate?
     @IBOutlet weak var bedBase: UITextField!
     @IBOutlet weak var result: UILabel!
@@ -54,6 +54,6 @@ class TriangleViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+  
 
 }

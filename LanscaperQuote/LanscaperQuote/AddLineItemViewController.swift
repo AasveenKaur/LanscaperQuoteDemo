@@ -15,6 +15,8 @@ protocol AddLineItemViewControllerDelegate {
 
 class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate, ContainerViewControllerDelegate, RectangleViewControllerDelegate, CircleViewControllerDelegate, TriangleViewControllerDelegate {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    var activeField: UITextField?
     
     @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
     
@@ -33,7 +35,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     @IBOutlet weak var addTaxButton: UIButton!
     @IBOutlet var ItemSections: [UILabel]!
     @IBOutlet weak var totalValue: UILabel!
-  
+    
     
     var containerViewController:ContainerViewController?
     
@@ -68,8 +70,17 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     }
     
     @IBAction func DoneButtonPressed(_ sender: Any) {
-        delegate?.controller(controller: self, didSaveLineItemWithName: itemNameField.text!, itemDescription: itemDescriptionField.text, itemQuantity: Float(quantityValue.text!)!, itemPrice: Float(rateValue.text!)!, itemTax: Float(taxValue.text!)!)
-        self.navigationController?.popToRootViewController(animated: true)
+        if let itemNameField =  itemNameField.text, let quantity = quantityValue.text , let rate =  rateValue.text , let tax = taxValue.text  {
+            if((checkIfTextFieldHasText(textField: self.itemNameField)) && (checkIfTextFieldHasText(textField: quantityValue)) && (checkIfTextFieldHasText(textField: rateValue)))
+            {
+                delegate?.controller(controller: self, didSaveLineItemWithName: itemNameField, itemDescription: itemDescriptionField.text, itemQuantity: Float(quantity)!, itemPrice: Float(rate)!, itemTax: Float(tax)!)
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+                
+            else{
+                showAlert(readableErrorDescription: "Line item values missing", viewController: self)
+            }
+        }
     }
     
     
@@ -77,7 +88,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         //containerViewController?.swapFromViewControllers()
         if(prevSHapeButton != sender ){
             containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_TRIANGLE_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-
+            
             prevSHapeButton?.backgroundColor = UIColor.green
             
             prevSHapeButton = sender
@@ -90,7 +101,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         //containerViewController?.swapFromViewControllers()
         if(prevSHapeButton != sender ){
             containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_CIRCLE_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-
+            
             if(prevSHapeButton?.tag == 1){
                 prevSHapeButton?.backgroundColor = UIColor.green
             }
@@ -107,7 +118,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         //containerViewController?.swapFromViewControllers()
         if(prevSHapeButton != sender ){
             containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_RECTANGLE_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-
+            
             if(prevSHapeButton?.tag == 2){
                 prevSHapeButton?.backgroundColor = UIColor.green
             }else{
@@ -121,7 +132,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+         self.addDoneButtonOnKeyboard()
         self.taxValue.delegate =  self
         self.rateValue.delegate = self
         self.quantityValue.delegate = self
@@ -129,7 +140,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         self.itemNameField.delegate = self
         self.itemDescriptionField.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector((AddLineItemViewController).keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector((AddLineItemViewController).keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector((AddLineItemViewController).keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -143,6 +154,33 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         // Do any additional setup after loading the view.
     }
     
+    func addDoneButtonOnKeyboard()
+    {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        doneToolbar.barStyle       = UIBarStyle.default
+        let flexSpace              = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem  = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(AddLineItemViewController.doneButtonAction))
+        
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+        
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        self.quantityValue.inputAccessoryView = doneToolbar
+        self.rateValue.inputAccessoryView = doneToolbar
+        self.taxValue.inputAccessoryView = doneToolbar
+        
+    }
+    func doneButtonAction()
+    {
+        self.quantityValue.resignFirstResponder()
+        self.rateValue.resignFirstResponder()
+        self.taxValue.resignFirstResponder()
+    }
+
+    
     deinit{
         NotificationCenter.default.removeObserver(self)
         
@@ -155,6 +193,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
             self.containerViewController = (segue.destination as! ContainerViewController)
             self.containerViewController?.delegate = self
         }
+        
     }
     func showHiddenScreenForLineItemType(lineItemType:String)  {
         
@@ -214,25 +253,25 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
                 /*
                  ["0-Select calculator type","1-Paver Calculator", "2-Retaining Wall Calculator", "3-Soil Calculator", "4-Mulch Calculator", "5-Grass Seed Calculator", "6-Sod Calculator", "7-Plant and Flower Calculator" , " 8-Landscape Material Yardage Calculator" , "9-Acreage Calculator", "10-Other" ]
                  */
+                //            case 1:
+                //                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_PAVER_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
+                //                updateContainerViewHeightWith(myConstant: 500)
+                //
+                //            case 2:
+                //                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
+            //                updateContainerViewHeightWith(myConstant: 500)
             case 1:
-                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_PAVER_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-                updateContainerViewHeightWith(myConstant: 500)
+                setContainerViewForBedPattern()
+                updateContainerViewHeightWith(myConstant: 300)
                 
             case 2:
-                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-                updateContainerViewHeightWith(myConstant: 500)
-            case 3:
                 setContainerViewForBedPattern()
                 updateContainerViewHeightWith(myConstant: 300)
-
-            case 4:
-                setContainerViewForBedPattern()
-                updateContainerViewHeightWith(myConstant: 300)
-
+                
             case 5:
                 containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_GRASS_SEED_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-               updateContainerViewHeightWith(myConstant: 500)
-
+                updateContainerViewHeightWith(myConstant: 500)
+                
             case 6:
                 containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_RECTANGLE_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
                 updateContainerViewHeightWith(myConstant:300)
@@ -264,13 +303,13 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     func setContainerViewForBedPattern()   {
         if (prevSHapeButton?.tag == 2) {
             containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_CIRCLE_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-
+            
         }else if(prevSHapeButton?.tag == 3){
             containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_TRIANGLE_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-
+            
         }else{
             containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_RECTANGLE_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-
+            
         }
     }
     //MARK:-CALCULATION DELEGATES
@@ -303,7 +342,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         }else if(self.rateValue.isFirstResponder) {
             self.rateValue.resignFirstResponder()
         }
-
+        
     }
     
     //MARK: - Text field handlers
@@ -315,9 +354,9 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if(textField.text == textField.placeholder){
-            textField.placeholder = ""
             textField.text = ""
         }
+         activeField = textField
     }
     
     func checkIfTextFieldHasText(textField:UITextField) -> Bool {
@@ -329,7 +368,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         return false
     }
     
-   
+    
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if(text == "\n") {
@@ -339,37 +378,56 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         return true
     }
     
-    //MARK: - Scroll screen on keyboard show/hide
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWasShown(notification: NSNotification){
+        //Need to calculate keyboard exact size due to Apple suggestions
         
-        if(itemNameField.isEditing || lineItemTypePicker.isEditing || itemDescriptionField.isFirstResponder){}
-        else {if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-            else {
-                
+        var info = notification.userInfo!
+        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        var aRect : CGRect = self.view.frame
+        aRect.size.height -= keyboardSize!.height
+        if let activeField = self.activeField {
+            if (!aRect.contains(activeField.frame.origin)){
+                if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+
+                if view.frame.origin.y == 0{
+                    self.view.frame.origin.y -= keyboardSize.height
+                }
+                }
+
             }
         }
-        }
-        
     }
     
-    
-    
-    func keyboardWillBeHidden(notification: NSNotification) {
+    func keyboardWillBeHidden(notification: NSNotification){
+        //Once keyboard disappears, restore original positions
+        var info = notification.userInfo!
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if view.frame.origin.y != 0 {
                 self.view.frame.origin.y += keyboardSize.height
             }
             else {
                 
-            }
+            }}
+
+
+        //self.view.endEditing(true)
+        //self.scrollView.isScrollEnabled = true
+    }
+    
+   
+    
+    func textFieldDidEndEditing(_ textField: UITextField){
+        activeField = nil
+    }
+    
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if(textView.text == "Line Item Description"){
+            textView.text = ""
         }
     }
     
     
-
-    
+  
     
 }

@@ -14,7 +14,7 @@ class LineItemTableViewController: UITableViewController, NSFetchedResultsContro
     
     var myManagedObjectContext: NSManagedObjectContext!
     
-    lazy var fetchedResultsController: NSFetchedResultsController<Quote> = {
+    lazy var fetchedResultsController: NSFetchedResultsController<LineItem> = {
         
         
         let fetchedResultsController = DataProvider.sharedInstance.coreDataManager.lineItemFetchViewCOntroller()
@@ -27,6 +27,7 @@ class LineItemTableViewController: UITableViewController, NSFetchedResultsContro
     var selectedLineItem = LineItemModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.allowsMultipleSelectionDuringEditing = false
         do {
             try self.fetchedResultsController.performFetch()
         } catch {
@@ -157,7 +158,16 @@ class LineItemTableViewController: UITableViewController, NSFetchedResultsContro
         }
     }
 
-
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+        }
+    }
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

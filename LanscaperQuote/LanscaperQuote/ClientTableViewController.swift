@@ -12,7 +12,7 @@ import CoreData
 class ClientTableViewController: UITableViewController , NSFetchedResultsControllerDelegate{
     var myManagedObjectContext: NSManagedObjectContext!
     
-    lazy var fetchedResultsController: NSFetchedResultsController<Quote> = {
+    lazy var fetchedResultsController: NSFetchedResultsController<Client> = {
         
         
         let fetchedResultsController = DataProvider.sharedInstance.coreDataManager.clientFetchViewCOntroller()
@@ -82,6 +82,7 @@ class ClientTableViewController: UITableViewController , NSFetchedResultsControl
         // Configure the cell...
         // Configure Table View Cell
         configureCell(cell: cell, atIndexPath: indexPath as NSIndexPath)
+        
         if(indexPath.row%2 == 0){
             cell.backgroundColor = UIColor(red: 0.04, green: 0.16, blue: 0.35, alpha: 1.0)
         }

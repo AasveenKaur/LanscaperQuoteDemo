@@ -13,8 +13,8 @@ func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName c
     
    
 }
-class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDelegate ,ClientModalViewControllerDelegate{
-    
+class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDelegate ,ClientModalViewControllerDelegate,showLineItemViewControllerDelegate{
+    var selectedLineItem:LineItemModel!
     var delegate: AddQuoteViewControllerDelegate?
     var LineItems:Array = [LineItemModel]()
     var client:Array  = [ClientModel]()
@@ -35,7 +35,7 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         
         
-      let demoClient = ClientModel(name: "JAZZ")
+      
         // Notify Delegate
         delegate?.controller(controller: self, didSaveQuoteWithClientName: client[0], lineItemsList: LineItems, totalCost: totalValue, additonalInformation: note[0])
         
@@ -100,7 +100,7 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
                 return 150.0
             }
         }
-        return 55.0
+        return 52.0
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -150,6 +150,31 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if(indexPath.section == 0){
+            if(!(client.count == 0)){
+                return true
+            }
+        }
+        if(indexPath.section == 1){
+            if((indexPath.row < LineItems.count )){
+                return true
+            }
+        }
+        return false
+       
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+    
+            tableView.beginUpdates()
+            self.LineItems.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if(section == 1){
             let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "SectionHeaderTableViewCellID")!
@@ -166,6 +191,19 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         let vc = segue.destination as! ClientModalViewController
         vc.delegate = self
         }
+        if(segue.identifier == "SegueToEditClientModalVC"){
+            let vc = segue.destination as! ClientModalViewController
+            vc.delegate = self
+            vc.client = self.client[0]
+        }
+        if(segue.identifier == "SegueToShowLineItem"){
+            let vc = segue.destination as! showLineItemViewController
+            vc.delegate = self
+            vc.lineItem = selectedLineItem
+        }
+        
+        
+
     }
     
     
@@ -188,8 +226,35 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         SubTotalCell.totalValue.text = "$\(self.totalValue)"
     }
     
+    func controller(controller: showLineItemViewController, didEditLineItemWithName name: String, itemDescription description: String, itemQuantity quantity: Float, itemPrice rate: Float, itemTax tax: Float) {
+        tableView.beginUpdates()
+        let lineItem = LineItemModel( name: name, lineItemdescription: description, quantity: quantity, price: rate, tax: tax)
+        if let index = self.LineItems.index(of:selectedLineItem) {
+            //delete previous one
+            self.LineItems.remove(at: index)
+            self.LineItems.insert(lineItem, at: index)
+            tableView.reloadRows(at: [NSIndexPath.init(row: index, section: 1) as IndexPath], with: .fade)
+            subTotalValue -= (self.LineItems[index].quantity*self.LineItems[index].price)
+        }
+        //red-add or edit
+        tableView.endUpdates()
+        
+        subTotalValue += quantity*rate
+        taxValue = tax
+        totalValue = (((tax+100)/100)*subTotalValue)
+        // I wanted to update this cell specifically
+        let indexPathForSubTotalTableViewCell = IndexPath(row: LineItems.count+1 , section: 1)
+        let SubTotalCell = tableView.cellForRow(at: indexPathForSubTotalTableViewCell) as! SubTotalTableViewCell
+        SubTotalCell.subTotalValue.text = "$\(self.subTotalValue)"
+        SubTotalCell.taxValue.text = "\(self.taxValue)%"
+        SubTotalCell.totalValue.text = "$\(self.totalValue)"
+    }
+    
     func controller(controller: ClientModalViewController, didSaveClientWithName name: String, phoneNumber phoneNo: String, emailAddress email: String) {
         tableView.beginUpdates()
+        if(self.client.count > 0){
+            self.client.removeAll()
+        }
         self.client.append(ClientModel(name: name, email: email, phoneOne: phoneNo))
         // I wanted to update this cell specifically
         let ClientCell = IndexPath(row: client.count-1, section: 0)
@@ -201,5 +266,14 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        if(cell is LineItemTableViewCell ){
+            selectedLineItem = self.LineItems[indexPath.row]
+            performSegue(withIdentifier: "SegueToShowLineItem", sender: self)
+        }
+        
+        
+    }
     
 }

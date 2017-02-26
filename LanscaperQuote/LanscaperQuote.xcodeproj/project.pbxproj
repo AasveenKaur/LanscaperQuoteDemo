@@ -52,6 +52,7 @@
 		5F54E6721E6220FC009CEE75 /* ClientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6711E6220FC009CEE75 /* ClientTableViewController.swift */; };
 		5F54E6741E62247A009CEE75 /* InvoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6731E62247A009CEE75 /* InvoiceTableViewController.swift */; };
 		5F54E6761E622550009CEE75 /* InvoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6751E622550009CEE75 /* InvoiceTableViewCell.swift */; };
+		5F54E67A1E62CB54009CEE75 /* showLineItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6791E62CB54009CEE75 /* showLineItemViewController.swift */; };
 		5FA2A5811E591CCA00B1F60F /* QuoteComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A5801E591CCA00B1F60F /* QuoteComposer.swift */; };
 		5FA2A5831E593ABF00B1F60F /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A5821E593ABF00B1F60F /* PreviewViewController.swift */; };
 		5FA2A5861E5A4D8100B1F60F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FA2A5841E5A4D8100B1F60F /* Main.storyboard */; };
@@ -419,6 +420,7 @@
 		5F54E6711E6220FC009CEE75 /* ClientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewController.swift; sourceTree = "<group>"; };
 		5F54E6731E62247A009CEE75 /* InvoiceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceTableViewController.swift; sourceTree = "<group>"; };
 		5F54E6751E622550009CEE75 /* InvoiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceTableViewCell.swift; sourceTree = "<group>"; };
+		5F54E6791E62CB54009CEE75 /* showLineItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = showLineItemViewController.swift; sourceTree = "<group>"; };
 		5FA2A5801E591CCA00B1F60F /* QuoteComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteComposer.swift; sourceTree = "<group>"; };
 		5FA2A5821E593ABF00B1F60F /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		5FA2A5851E5A4D8100B1F60F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -795,6 +797,7 @@
 				5F36BD961E445E7C00B2233B /* BaseViewController.swift */,
 				5F36BD9E1E46D60F00B2233B /* ContainerViewController.swift */,
 				5FA2A5821E593ABF00B1F60F /* PreviewViewController.swift */,
+				5F54E6791E62CB54009CEE75 /* showLineItemViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1628,6 +1631,7 @@
 			files = (
 				5F54E6701E6206B6009CEE75 /* Quote+CoreDataProperties.swift in Sources */,
 				5F54E6381E6028EA009CEE75 /* LineItem+CoreDataClass.swift in Sources */,
+				5F54E67A1E62CB54009CEE75 /* showLineItemViewController.swift in Sources */,
 				5F54E6421E6028EA009CEE75 /* Client+CoreDataClass.swift in Sources */,
 				5F36BDBB1E4A7E4D00B2233B /* SubTotalTableViewCell.swift in Sources */,
 				5FA2A5931E5A692E00B1F60F /* CustomPrintPageRenderer.swift in Sources */,

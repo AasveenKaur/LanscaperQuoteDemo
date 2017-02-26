@@ -12,7 +12,7 @@ protocol RectangleViewControllerDelegate {
     func controller(controller: RectangleViewController, didCalculateMulchQuantity mulch:Float, forBag bagVolume: Float)
 }
 
-class RectangleViewController: UIViewController {
+class RectangleViewController: BaseViewController {
    
     var calculatorType:String = ""
     @IBOutlet weak var result: UILabel!
@@ -40,9 +40,17 @@ class RectangleViewController: UIViewController {
       return volume
     }
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(calculatorType == pickOption[6] || calculatorType == pickOption[9]){
+        bedLength.delegate = self
+        bedWidth.delegate = self
+        bedDepth.delegate = self
+        bedLength.inputAccessoryView = getDoneButtonOnKeyboard(target: self, action: #selector(RectangleViewController.doneButtonAction))
+        bedWidth.inputAccessoryView = getDoneButtonOnKeyboard(target: self, action: #selector(RectangleViewController.doneButtonAction))
+        bedDepth.inputAccessoryView = getDoneButtonOnKeyboard(target: self, action: #selector(RectangleViewController.doneButtonAction))
+       /* if(calculatorType == pickOption[6] || calculatorType == pickOption[9]){
             bedDepth.isHidden = true
             bedDepthLabel.isHidden = true
         } else if(calculatorType == pickOption[7]){
@@ -50,15 +58,26 @@ class RectangleViewController: UIViewController {
         }else if (calculatorType == pickOption[8]){
             bedDepthLabel.text = "Bed height (in feet)"
         }
-        
+        */
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let aSet = NSCharacterSet(charactersIn:"0123456789.").inverted
+        let compSepByCharInSet = string.components(separatedBy: aSet)
+        let numberFiltered = compSepByCharInSet.joined(separator: "")
+        return string == numberFiltered
     }
     
-
+       func doneButtonAction()
+    {
+        self.bedLength.resignFirstResponder()
+        self.bedDepth.resignFirstResponder()
+        self.bedWidth.resignFirstResponder()
+    }
+    
+    
+    
 
 }

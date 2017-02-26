@@ -15,6 +15,8 @@ class LineItemTableViewCell: UITableViewCell {
     @IBOutlet weak var lineItemTotal: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .none
+        
         // Initialization code
     }
 

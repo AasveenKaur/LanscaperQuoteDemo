@@ -139,7 +139,7 @@ class CoreDataManager: NSObject {
         return fetchedResultsController as! NSFetchedResultsController<Quote>
     }
     
-    func lineItemFetchViewCOntroller()  -> NSFetchedResultsController<Quote> {
+    func lineItemFetchViewCOntroller()  -> NSFetchedResultsController<LineItem> {
         // Initialize Fetch Request
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LineItem")
         
@@ -150,10 +150,10 @@ class CoreDataManager: NSObject {
         // Initialize Fetched Results Controller
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
-        return fetchedResultsController as! NSFetchedResultsController<Quote>
+        return fetchedResultsController as! NSFetchedResultsController<LineItem>
     }
     
-    func clientFetchViewCOntroller()  -> NSFetchedResultsController<Quote> {
+    func clientFetchViewCOntroller()  -> NSFetchedResultsController<Client> {
         // Initialize Fetch Request
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Client")
         
@@ -164,7 +164,7 @@ class CoreDataManager: NSObject {
         // Initialize Fetched Results Controller
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
-        return fetchedResultsController as! NSFetchedResultsController<Quote>
+        return fetchedResultsController as! NSFetchedResultsController<Client>
     }
 
 
@@ -192,6 +192,18 @@ class CoreDataManager: NSObject {
             print(saveError)
         }
     }
+
+    func updateQuoteInvoiceStatus(quote:Quote, status:Bool)  {
+    
+    quote.invoiceStatus = status
+   
+    do {
+        try self.managedObjectContext.save()
+    } catch {
+        let saveError = error as NSError
+        print(saveError)
+    }
+}
 
     
 }

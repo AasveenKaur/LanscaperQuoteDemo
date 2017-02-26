@@ -23,7 +23,8 @@ let EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER = "emptySegueRetainingWall"
 let EMPTY_SEGUE_PAVER_IDENTIFIER = "emptySeguePaver"
 let EMPTY_SEGUE_GRASS_SEED_IDENTIFIER = "emptySegueGrassSeed"
 let ESTIMATE_NUMBER = "estimateNumber"
-let pickOption = ["Select calculator type","Paver Calculator", "Retaining Wall Calculator", "Soil Calculator", "Mulch Calculator", "Grass Seed Calculator", "Sod Calculator", "Plant and Flower Calculator" , " Landscape Material Yardage Calculator" , "Acreage Calculator", "Other" ]//"Fence Calculator", "Deck Calculator",
+//let pickOption = ["Select calculator type","Paver Calculator", "Retaining Wall Calculator", "Soil Calculator", "Mulch Calculator", "Grass Seed Calculator", "Sod Calculator", "Plant and Flower Calculator" , " Landscape Material Yardage Calculator" , "Acreage Calculator", "Other" ]//"Fence Calculator", "Deck Calculator",
+let pickOption = ["Select calculator type", "Soil Calculator", "Mulch Calculator"]
 let pie:Float = 3.14
 
  let currencyCode = "$"
@@ -118,6 +119,51 @@ func showAlert(readableErrorDescription:String,viewController:UIViewController) 
     }))
     
     viewController.present(alertController, animated: true, completion: nil)
+}
+
+func showInvoiceAlert(quote:Quote,viewController:UIViewController, status:Bool)  {
+    var message = ""
+    if (status == true){
+        message = "Are you sure you want to convert Quote to Invoice?"
+    }
+    else{
+        message = "Are you sure you want to convert Invoice to Quote?"
+    }
+    let alertController:UIAlertController =  UIAlertController(title:  "Alert!", message:message , preferredStyle: .alert)
+    
+    
+    alertController.addAction(UIAlertAction(title: "YES", style: .default, handler:{(alert: UIAlertAction!) in
+        DataProvider.sharedInstance.updateQuoteInvoiceStatus(quote: quote , status: status)
+    }))
+    
+    alertController.addAction(UIAlertAction(title: "NO", style: .cancel, handler:nil))
+    
+    viewController.present(alertController, animated: true, completion: nil)
+}
+
+func checkIfTextFieldHasText(textField:UITextField) -> Bool {
+    if let text = textField.text, !text.isEmpty
+    {
+        //return true if it's not empty
+        return true
+    }
+    return false
+}
+
+func getDoneButtonOnKeyboard(target: Any?, action: Selector?) -> UIToolbar
+{
+    let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+    doneToolbar.barStyle       = UIBarStyle.default
+    let flexSpace              = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+    let done: UIBarButtonItem  = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: target, action: action)
+    
+    var items = [UIBarButtonItem]()
+    items.append(flexSpace)
+    items.append(done)
+    
+    doneToolbar.items = items
+    doneToolbar.sizeToFit()
+    return doneToolbar
 }
 
 

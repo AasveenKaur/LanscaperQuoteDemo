@@ -60,6 +60,8 @@ func deleteQuote(quote:Quote){
 }
 
     
-   
+    func  updateQuoteInvoiceStatus(quote:Quote, status:Bool){
+    coreDataManager.updateQuoteInvoiceStatus(quote: quote, status: status)
+    }
     
 }

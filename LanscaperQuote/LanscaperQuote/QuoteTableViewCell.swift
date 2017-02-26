@@ -13,6 +13,7 @@ class QuoteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.selectionStyle = .none
     }
 
     @IBOutlet weak var quoteNumber: UILabel!
@@ -21,6 +22,7 @@ class QuoteTableViewCell: UITableViewCell {
     @IBOutlet weak var clientName: UILabel!
     
     @IBOutlet weak var quoteTotal: UILabel!
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

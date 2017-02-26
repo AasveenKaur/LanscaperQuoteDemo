@@ -11,7 +11,7 @@ protocol CircleViewControllerDelegate {
     func controller(controller: CircleViewController, didCalculateArea area:Float)
 }
 
-class CircleViewController: UIViewController {
+class CircleViewController: BaseViewController {
     var delegate: CircleViewControllerDelegate?
     @IBAction func circleCalculateButtonPressed(_ sender: Any) {
         let volume = calculateVolume()
@@ -49,6 +49,7 @@ class CircleViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+
 
 
 }
