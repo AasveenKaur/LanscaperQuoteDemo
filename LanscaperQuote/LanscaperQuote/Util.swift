@@ -25,10 +25,13 @@ let EMPTY_SEGUE_GRASS_SEED_IDENTIFIER = "emptySegueGrassSeed"
 let ESTIMATE_NUMBER = "estimateNumber"
 //let pickOption = ["Select calculator type","Paver Calculator", "Retaining Wall Calculator", "Soil Calculator", "Mulch Calculator", "Grass Seed Calculator", "Sod Calculator", "Plant and Flower Calculator" , " Landscape Material Yardage Calculator" , "Acreage Calculator", "Other" ]//"Fence Calculator", "Deck Calculator",
 let pickOption = ["Select calculator type", "Soil Calculator", "Mulch Calculator"]
+
 let pie:Float = 3.14
 
  let currencyCode = "$"
 let CubicFeetToCubicYardConversionNumber = 27
+
+
 
 func getStringValueFormattedAsCurrency(_ value: String) -> String {
     let numberFormatter = NumberFormatter()
@@ -44,6 +47,8 @@ func getStringValueFormattedAsCurrency(_ value: String) -> String {
 func getDocDir() -> String {
     return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 }
+
+
 
 var estimateNumberGenerator:Int{
 get{
@@ -75,7 +80,7 @@ extension UserDefaults {
 
 func calculateSoilOrMulchVolumeforRectangularPatternWith(length:Float, withWidth width:Float, withDepth depth:Float ) -> Float{
      var volume:Float = 0.0
-     volume = length*width*depth
+     volume = length * width * depth
      volume = convertCubicFeetToCubicYardWith(volume: volume)
      volume = roundOffToTwoDecimalPlacesWith(quantity: volume)
      return  volume
@@ -83,7 +88,7 @@ func calculateSoilOrMulchVolumeforRectangularPatternWith(length:Float, withWidth
 
 func calculateSoilOrMulchVolumeforCircularPatternWith(diameter:Float, withDepth depth:Float ) -> Float{
     var volume:Float = 0.0
-    volume = (pie*(diameter/2)*(diameter/2)*depth)
+    volume = (pie * (diameter / 2) * (diameter / 2) * depth)
     volume = convertCubicFeetToCubicYardWith(volume: volume)
     volume = roundOffToTwoDecimalPlacesWith(quantity: volume)
     return  volume
@@ -91,7 +96,7 @@ func calculateSoilOrMulchVolumeforCircularPatternWith(diameter:Float, withDepth 
 
 func calculateSoilOrMulchVolumeforTrianglePatternWith(height:Float,withBase base:Float , withDepth depth:Float ) -> Float{
     var volume:Float = 0.0
-    volume = (((height*base)/2)*depth)
+    volume = (((height * base) / 2) * depth)
     volume = convertCubicFeetToCubicYardWith(volume: volume)
     volume = roundOffToTwoDecimalPlacesWith(quantity: volume)
     return  volume
@@ -165,5 +170,21 @@ func getDoneButtonOnKeyboard(target: Any?, action: Selector?) -> UIToolbar
     doneToolbar.sizeToFit()
     return doneToolbar
 }
+
+func calculateTaxOn(amount:Float, taxPercentage:Float) -> Float{
+    return (amount * (taxPercentage / 100))
+}
+
+func calculateSubtotal(price:Float, quantity:Float) -> Float {
+    return price * quantity
+}
+
+func calculateSubtotalWithTax(subTotal:Float, tax:Float) -> Float {
+    return subTotal + calculateTaxOn(amount: subTotal, taxPercentage: tax)
+}
+
+
+
+
 
 

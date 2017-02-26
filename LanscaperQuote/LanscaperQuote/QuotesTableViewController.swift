@@ -26,7 +26,7 @@ class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+      print("jatti\(calculateTaxOn(amount: 100,taxPercentage: 12.8))")
         do {
             try self.fetchedResultsController.performFetch()
         } catch {

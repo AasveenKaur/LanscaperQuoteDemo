@@ -12,6 +12,7 @@ protocol TriangleViewControllerDelegate {
 }
 
 class TriangleViewController: BaseViewController {
+    var calculatorType:String = ""
     var delegate: TriangleViewControllerDelegate?
     @IBOutlet weak var bedBase: UITextField!
     @IBOutlet weak var result: UILabel!
@@ -24,7 +25,11 @@ class TriangleViewController: BaseViewController {
         
         let volume = calculateVolume()
         delegate?.controller(controller: self, didCalculateTriangleMulchQuantity: volume, forBag: 2)
-        result.text = "You will need approximately \(volume) cubic yards of soil"
+        if(calculatorType == "Mulch Calculator"){
+        result.text = "You will need approximately \(volume) cubic yards of mulch"
+        }else if(calculatorType == "Soil Calculator"){
+            result.text = "You will need approximately \(volume) cubic yards of soil"
+        }
         result.isHidden = false
         
     }
@@ -32,7 +37,9 @@ class TriangleViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        bedBase.inputAccessoryView = getDoneButtonOnKeyboard(target: self, action: #selector(RectangleViewController.doneButtonAction))
+        bedHeight.inputAccessoryView = getDoneButtonOnKeyboard(target: self, action: #selector(RectangleViewController.doneButtonAction))
+        bedDepth.inputAccessoryView = getDoneButtonOnKeyboard(target: self, action: #selector(RectangleViewController.doneButtonAction))
         // Do any additional setup after loading the view.
     }
     
@@ -54,6 +61,13 @@ class TriangleViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-  
+    func doneButtonAction()
+    {
+        self.bedBase.resignFirstResponder()
+        self.bedDepth.resignFirstResponder()
+        self.bedHeight.resignFirstResponder()
+        
+    }
+
 
 }

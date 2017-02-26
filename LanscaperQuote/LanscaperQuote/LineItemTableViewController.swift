@@ -8,12 +8,15 @@
 
 import UIKit
 import CoreData
-
+protocol LineItemTableViewControllerDelegate {
+    func controller(controller: LineItemTableViewController, didSendLineItem lineItem:LineItem )
+}
 class LineItemTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
  
     
     var myManagedObjectContext: NSManagedObjectContext!
-    
+    var delegate: LineItemTableViewControllerDelegate?
+    var addLineItemToQuote = false
     lazy var fetchedResultsController: NSFetchedResultsController<LineItem> = {
         
         
@@ -24,7 +27,7 @@ class LineItemTableViewController: UITableViewController, NSFetchedResultsContro
         return fetchedResultsController
     }()
     
-    var selectedLineItem = LineItemModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.allowsMultipleSelectionDuringEditing = false
@@ -167,6 +170,13 @@ class LineItemTableViewController: UITableViewController, NSFetchedResultsContro
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(addLineItemToQuote == true){
+         let selectedLineItem = fetchedResultsController.object(at: indexPath)
+         delegate?.controller(controller: self, didSendLineItem: selectedLineItem)
+         self.navigationController?.popViewController(animated: true)
+        }
+    }
     
     /*
     // Override to support conditional editing of the table view.

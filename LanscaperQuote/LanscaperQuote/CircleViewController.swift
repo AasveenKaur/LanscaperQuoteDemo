@@ -13,10 +13,15 @@ protocol CircleViewControllerDelegate {
 
 class CircleViewController: BaseViewController {
     var delegate: CircleViewControllerDelegate?
+    var calculatorType:String = ""
     @IBAction func circleCalculateButtonPressed(_ sender: Any) {
         let volume = calculateVolume()
         delegate?.controller(controller: self, didCalculateArea: volume)
-        result.text = "You will need approximately \(volume) cubic yards of soil"
+        if(calculatorType == "Mulch Calculator"){
+        result.text = "You will need approximately \(volume) cubic yards of mulch"
+        }else if(calculatorType == "Soil Calculator"){
+            result.text = "You will need approximately \(volume) cubic yards of soil"
+        }
         result.isHidden = false
     }
     
@@ -28,7 +33,9 @@ class CircleViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        bedDiameter.inputAccessoryView = getDoneButtonOnKeyboard(target: self, action: #selector(RectangleViewController.doneButtonAction))
+        bedDepth.inputAccessoryView = getDoneButtonOnKeyboard(target: self, action: #selector(RectangleViewController.doneButtonAction))
+        
         // Do any additional setup after loading the view.
     }
     
@@ -49,6 +56,12 @@ class CircleViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+       func doneButtonAction()
+    {
+        self.bedDiameter.resignFirstResponder()
+        self.bedDepth.resignFirstResponder()
+        
+    }
 
 
 

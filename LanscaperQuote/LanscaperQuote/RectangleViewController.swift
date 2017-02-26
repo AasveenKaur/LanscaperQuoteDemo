@@ -25,8 +25,13 @@ class RectangleViewController: BaseViewController {
     @IBAction func calculateButtonPressed(_ sender: Any) {
         let volume = calculateVolume()
         delegate?.controller(controller: self, didCalculateMulchQuantity: volume, forBag: 100)
-        result.text = "You will need approximately \(volume) cubic yards of soil"
+        if(calculatorType == "Mulch Calculator"){
+        result.text = "You will need approximately \(volume) cubic yards of mulch"
+        }else if(calculatorType == "Soil Calculator"){
+            result.text = "You will need approximately \(volume) cubic yards of soil"
+        }
         result.isHidden = false
+            
     }
     
     func calculateVolume() -> Float {

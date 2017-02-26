@@ -13,7 +13,7 @@ func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName c
     
    
 }
-class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDelegate ,ClientModalViewControllerDelegate,showLineItemViewControllerDelegate{
+class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDelegate ,ClientModalViewControllerDelegate,showLineItemViewControllerDelegate,LineItemTableViewControllerDelegate,AddNoteViewControllerDelegate{
     var selectedLineItem:LineItemModel!
     var delegate: AddQuoteViewControllerDelegate?
     var LineItems:Array = [LineItemModel]()
@@ -31,6 +31,14 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     //    @IBOutlet weak var mySignatureNeeded: UISwitch!
     //    @IBOutlet weak var dateValue: UILabel!
     //    @IBOutlet weak var poNumberValue: UITextField!
+    
+    
+    @IBAction func addLineItemButtonPressed(_ sender: Any) {
+      
+            
+            performSegue(withIdentifier: "segueToLineItemTable", sender: self)
+        
+    }
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         
@@ -167,11 +175,13 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-    
+            let item = self.LineItems[indexPath.row]
+            updateSubTotalCell(quantity:item.quantity, price: item.price, tax: item.tax, add:false)
             tableView.beginUpdates()
             self.LineItems.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
+            
         }
     }
     
@@ -201,9 +211,17 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
             vc.delegate = self
             vc.lineItem = selectedLineItem
         }
+        if(segue.identifier == "segueToLineItemTable"){
+            let vc = segue.destination as! LineItemTableViewController
+            vc.delegate = self
+            vc.addLineItemToQuote = true
+        }
+        if(segue.identifier == "segueToNoteView"){
+            let vc = segue.destination as! AddNoteViewController
+            vc.delegate = self
+            
+        }
         
-        
-
     }
     
     
@@ -215,21 +233,41 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         tableView.insertRows(at: [NSIndexPath.init(row: LineItems.count-1, section: 1) as IndexPath], with: .left)
         
         tableView.endUpdates()
-        subTotalValue += quantity*rate
-        taxValue = tax
-        totalValue = (((tax+100)/100)*subTotalValue)
+        updateSubTotalCell(quantity:quantity, price: rate, tax: tax, add:true)
+    }
+    
+    
+    func updateSubTotalCell(quantity:Float, price: Float, tax: Float, add:Bool)  {
+        let currentSubtotal = calculateSubtotal(price: price, quantity: quantity)
+        let currentTax = calculateTaxOn(amount: currentSubtotal, taxPercentage: tax)
+        let currentTotal = calculateSubtotalWithTax(subTotal: currentSubtotal, tax: tax)
+        if(add){
+          
+        subTotalValue +=  currentSubtotal
+        taxValue += currentTax
+        totalValue +=   currentTotal
+        }
+        else{
+            subTotalValue -=  currentSubtotal
+            taxValue -= currentTax
+            totalValue -=   currentTotal
+        }
         // I wanted to update this cell specifically
         let indexPathForSubTotalTableViewCell = IndexPath(row: LineItems.count+1 , section: 1)
         let SubTotalCell = tableView.cellForRow(at: indexPathForSubTotalTableViewCell) as! SubTotalTableViewCell
         SubTotalCell.subTotalValue.text = "$\(self.subTotalValue)"
-        SubTotalCell.taxValue.text = "\(self.taxValue)%"
+        SubTotalCell.taxValue.text = "$\(self.taxValue)"
         SubTotalCell.totalValue.text = "$\(self.totalValue)"
-    }
+        }
     
     func controller(controller: showLineItemViewController, didEditLineItemWithName name: String, itemDescription description: String, itemQuantity quantity: Float, itemPrice rate: Float, itemTax tax: Float) {
+        
         tableView.beginUpdates()
         let lineItem = LineItemModel( name: name, lineItemdescription: description, quantity: quantity, price: rate, tax: tax)
         if let index = self.LineItems.index(of:selectedLineItem) {
+            let item = self.LineItems[index]
+            updateSubTotalCell(quantity:item.quantity, price: item.price, tax: item.tax, add:false)
+
             //delete previous one
             self.LineItems.remove(at: index)
             self.LineItems.insert(lineItem, at: index)
@@ -239,15 +277,7 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         //red-add or edit
         tableView.endUpdates()
         
-        subTotalValue += quantity*rate
-        taxValue = tax
-        totalValue = (((tax+100)/100)*subTotalValue)
-        // I wanted to update this cell specifically
-        let indexPathForSubTotalTableViewCell = IndexPath(row: LineItems.count+1 , section: 1)
-        let SubTotalCell = tableView.cellForRow(at: indexPathForSubTotalTableViewCell) as! SubTotalTableViewCell
-        SubTotalCell.subTotalValue.text = "$\(self.subTotalValue)"
-        SubTotalCell.taxValue.text = "\(self.taxValue)%"
-        SubTotalCell.totalValue.text = "$\(self.totalValue)"
+        updateSubTotalCell(quantity:quantity, price: rate, tax: tax, add:true)
     }
     
     func controller(controller: ClientModalViewController, didSaveClientWithName name: String, phoneNumber phoneNo: String, emailAddress email: String) {
@@ -262,6 +292,32 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         tableView.endUpdates()
     }
     
+    func controller(controller: LineItemTableViewController, didSendLineItem lineItem: LineItem) {
+        tableView.beginUpdates()
+        if let itemName = lineItem.itemName, let desc = lineItem.itemDescription{
+            let rate = lineItem.price
+            let quantity = lineItem.quantity
+            let tax = lineItem.tax
+             let lineItem = LineItemModel( name:itemName , lineItemdescription: desc, quantity: quantity, price: rate, tax: tax)
+            self.LineItems.append(lineItem)
+            
+            tableView.insertRows(at: [NSIndexPath.init(row: LineItems.count-1, section: 1) as IndexPath], with: .left)
+            
+            tableView.endUpdates()
+            updateSubTotalCell(quantity:quantity, price: rate, tax: tax, add:true)
+            
+        }
+       
+      
+    }
+    
+    func controller(controller: AddNoteViewController, didSaveNote note: String) {
+        self.note[0] = note
+        let indexPathForNoteTableViewCell = IndexPath(row: 0 , section: 2)
+        let NoteCell = tableView.cellForRow(at: indexPathForNoteTableViewCell) as! NotesTableViewCell
+        NoteCell.notes.text = note
+    }
+    
     @IBAction func prepareForUnwind(segue:UIStoryboardSegue){
         
     }
@@ -272,7 +328,8 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
             selectedLineItem = self.LineItems[indexPath.row]
             performSegue(withIdentifier: "SegueToShowLineItem", sender: self)
         }
-        
+       
+       
         
     }
     

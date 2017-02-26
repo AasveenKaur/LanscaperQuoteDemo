@@ -46,11 +46,13 @@ class ContainerViewController: UIViewController {
         else if (segue.identifier == EMPTY_SEGUE_CIRCLE_IDENTIFIER){
             let vc = segue.destination as! CircleViewController
             vc.delegate = self.delegate as! AddLineItemViewController
+            vc.calculatorType = currentCalculatorType
             self.swapFromViewController(fromVC: self.childViewControllers[0], toViewCOntroller: segue.destination)
             
         }
         else if (segue.identifier == EMPTY_SEGUE_TRIANGLE_IDENTIFIER){
             let vc = segue.destination as! TriangleViewController
+            vc.calculatorType = currentCalculatorType
             vc.delegate = self.delegate as! AddLineItemViewController
             self.swapFromViewController(fromVC: self.childViewControllers[0], toViewCOntroller: segue.destination)
             
