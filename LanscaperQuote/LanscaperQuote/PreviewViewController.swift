@@ -19,12 +19,40 @@ class PreviewViewController: UIViewController,MFMailComposeViewControllerDelegat
     var quoteDetails:Quote!
     
     
+    
+
+    @IBOutlet weak var myToolBar: UIToolbar!
     override func viewDidLoad() {
+       setUpCustomBar()
+        
+        
         
         
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func setUpCustomBar()  {
+        let barItemOneButton = buttonForBarItemWith(imageName: "email.png", title: "Email")
+        barItemOneButton.addTarget(self, action:  #selector(self.emailQuote), for: .touchUpInside)
+        myToolBar.items?[0] = UIBarButtonItem(customView: barItemOneButton)
+        
+        let barItemTwoButton = buttonForBarItemWith(imageName: "printer.png", title: "Print")
+        barItemTwoButton.addTarget(self, action:  #selector(self.printQuote), for: .touchUpInside)
+        myToolBar.items?[1] = UIBarButtonItem(customView: barItemTwoButton)
+
+        let barItemThreeButton = buttonForBarItemWith(imageName: "dollar-sign.png", title: "To Invoice")
+        barItemThreeButton.addTarget(self, action:  #selector(self.convertToInvoice), for: .touchUpInside)
+        myToolBar.items?[2] = UIBarButtonItem(customView: barItemThreeButton)
+        
+        let barItemFourButton = buttonForBarItemWith(imageName: "recycle-bin.png", title: "Delete")
+        barItemFourButton.addTarget(self, action:  #selector(self.deleteQuote), for: .touchUpInside)
+        myToolBar.items?[3] = UIBarButtonItem(customView: barItemFourButton)
+        
+        
+        
+        
     }
     
     
@@ -53,9 +81,9 @@ class PreviewViewController: UIViewController,MFMailComposeViewControllerDelegat
         // Extremely important to set the --mailComposeDelegate-- property,  NOT the --delegate-- property
         mailComposerVC.addAttachmentData(NSData(contentsOfFile: quoteComposer.pdfFilename)! as Data, mimeType: "application/pdf", fileName: "Invoice")
 
-        mailComposerVC.setToRecipients(["someone@somewhere.com"])
-        mailComposerVC.setSubject("Sending you an in-app e-mail...")
-        mailComposerVC.setMessageBody("Sending e-mail in-app is not so bad!", isHTML: false)
+        mailComposerVC.setToRecipients([(quoteDetails.client?.email!)!])
+        mailComposerVC.setSubject("Your quote \(quoteDetails.estimateNumber!)# from Acme Co.")
+        mailComposerVC.setMessageBody("We are excited about the possibility of working with you.", isHTML: false)
         
         return mailComposerVC
     }

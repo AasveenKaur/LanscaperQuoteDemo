@@ -51,7 +51,7 @@ class LineItemTableViewController: UITableViewController, NSFetchedResultsContro
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-       
+         tabBarItem = UITabBarItem(title: "Line Items", image: UIImage(named: "shopping-cart.png"), tag: 0)
         myManagedObjectContext = DataProvider.sharedInstance.coreDataManager.managedObjectContext
         print(myManagedObjectContext)
     }
@@ -165,10 +165,11 @@ class LineItemTableViewController: UITableViewController, NSFetchedResultsContro
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == .delete) {
-        }
-    }
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if (editingStyle == .delete) {
+//            
+//        }
+//    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(addLineItemToQuote == true){

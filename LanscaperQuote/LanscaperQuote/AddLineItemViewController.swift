@@ -13,7 +13,7 @@ protocol AddLineItemViewControllerDelegate {
     func controller(controller: AddLineItemViewController, didSaveLineItemWithName name:String, itemDescription description: String, itemQuantity quantity:Float, itemPrice rate:Float, itemTax tax:Float )
 }
 
-class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate, ContainerViewControllerDelegate, RectangleViewControllerDelegate, CircleViewControllerDelegate, TriangleViewControllerDelegate , PaverCalculatorViewControllerDelegate, RetainingWallViewControllerDelegate{
+class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate, ContainerViewControllerDelegate, RectangleViewControllerDelegate, CircleViewControllerDelegate, TriangleViewControllerDelegate , PaverBlockCalculatorViewControllerDelegate{
     
     @IBOutlet weak var scrollView: UIScrollView!
     var activeField: UITextField?
@@ -132,7 +132,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         self.addDoneButtonOnKeyboard()
+        self.addDoneButtonOnKeyboard()
         self.taxValue.delegate =  self
         self.rateValue.delegate = self
         self.quantityValue.delegate = self
@@ -179,7 +179,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         self.rateValue.resignFirstResponder()
         self.taxValue.resignFirstResponder()
     }
-
+    
     
     deinit{
         NotificationCenter.default.removeObserver(self)
@@ -253,13 +253,14 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
                 /*
                  ["0-Select calculator type","1-Paver Calculator", "2-Retaining Wall Calculator", "3-Soil Calculator", "4-Mulch Calculator", "5-Grass Seed Calculator", "6-Sod Calculator", "7-Plant and Flower Calculator" , " 8-Landscape Material Yardage Calculator" , "9-Acreage Calculator", "10-Other" ]
                  */
-                            case 1:
-                                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_PAVER_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-                                updateContainerViewHeightWith(myConstant: 500)
+            case 1:
+                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_PAVER_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
+                updateContainerViewHeightWith(myConstant: 500)
                 
-                            case 2:
-                                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
-                            updateContainerViewHeightWith(myConstant: 500)
+            case 2:
+                containerViewController?.showViewWithSegue(segueIdentifier: EMPTY_SEGUE_PAVER_IDENTIFIER,calculatorType: lineItemTypePicker.text!)
+                updateContainerViewHeightWith(myConstant: 500)
+                
             case 3:
                 setContainerViewForBedPattern()
                 updateContainerViewHeightWith(myConstant: 300)
@@ -314,13 +315,12 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     }
     //MARK:-CALCULATION DELEGATES
     
-    func didCalculateRetainingBlocks(controller: RetainingWallViewController, blocks: Float) {
-        quantityValue.text = "\(blocks)"
+    
+    func didCalculatePaverOrBlock(controller: PaverBlockCalculatorViewController, paverOrBlock: Float) {
+        quantityValue.text = "\(paverOrBlock)"
     }
-    func didCalculatePaver(controller: PaverCalculatorViewController, paver: Float) {
-        quantityValue.text = "\(paver)"
-
-    }
+    
+    
     
     func controller(controller: RectangleViewController, didCalculateMulchQuantity mulch: Float, forBag bagVolume: Float) {
         print("hundal-->\(mulch)")
@@ -366,7 +366,7 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         if(textField.text == textField.placeholder){
             textField.text = ""
         }
-         activeField = textField
+        activeField = textField
     }
     
     func checkIfTextFieldHasText(textField:UITextField) -> Bool {
@@ -398,12 +398,12 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
         if let activeField = self.activeField {
             if (!aRect.contains(activeField.frame.origin)){
                 if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-
-                if view.frame.origin.y == 0{
-                    self.view.frame.origin.y -= keyboardSize.height
+                    
+                    if view.frame.origin.y == 0{
+                        self.view.frame.origin.y -= keyboardSize.height
+                    }
                 }
-                }
-
+                
             }
         }
     }
@@ -418,13 +418,13 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
             else {
                 
             }}
-
-
+        
+        
         //self.view.endEditing(true)
         //self.scrollView.isScrollEnabled = true
     }
     
-   
+    
     
     func textFieldDidEndEditing(_ textField: UITextField){
         activeField = nil
@@ -438,6 +438,6 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     }
     
     
-  
+    
     
 }

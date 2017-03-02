@@ -13,6 +13,11 @@ import CoreData
 public class Client: NSManagedObject {
 
     class func createClient(_ moc: NSManagedObjectContext, clientModel: ClientModel) -> Client {
+        let clientName = clientModel.name
+        let existingClient = clients(moc, name: clientName)
+        if existingClient.count == 1 {
+            return existingClient[0] as! Client
+        }
         let newClient = NSEntityDescription.insertNewObject(forEntityName: "Client", into: moc) as! Client
         newClient.name = clientModel.name
         newClient.email = clientModel.email
@@ -25,5 +30,19 @@ public class Client: NSManagedObject {
         return newClient
     }
     
+    class func clients(_ moc: NSManagedObjectContext, name: String) -> NSArray {
+        let model = moc.persistentStoreCoordinator?.managedObjectModel
+        let request = model?.fetchRequestFromTemplate(withName: "clientWithName",
+                                                      substitutionVariables: ["clientName": name])
+        do {
+            let result = try moc.fetch(request!)
+            return result as NSArray
+        }
+        catch {
+            print ("fetch", request!, "failed:", error)
+            abort()
+        }
+    }
+
     
 }

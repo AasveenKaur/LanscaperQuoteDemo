@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ClientTableViewController: UITableViewController , NSFetchedResultsControllerDelegate{
+class ClientTableViewController: UITableViewController , NSFetchedResultsControllerDelegate,AddQuoteViewControllerDelegate {
     var myManagedObjectContext: NSManagedObjectContext!
     
     lazy var fetchedResultsController: NSFetchedResultsController<Client> = {
@@ -21,7 +21,8 @@ class ClientTableViewController: UITableViewController , NSFetchedResultsControl
         
         return fetchedResultsController
     }()
-      var selectedClient = ClientModel()
+      var selectedClient = Client()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         do {
@@ -43,7 +44,7 @@ class ClientTableViewController: UITableViewController , NSFetchedResultsControl
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+        tabBarItem = UITabBarItem(title: "Clients", image: UIImage(named: "man.png"), tag: 0)
         myManagedObjectContext = DataProvider.sharedInstance.coreDataManager.managedObjectContext
         print(myManagedObjectContext)
     }
@@ -77,7 +78,8 @@ class ClientTableViewController: UITableViewController , NSFetchedResultsControl
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ClientCellID", for: indexPath)
+        
+        let cell:ClientTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "ClientTableViewCellIDTwo")! as! ClientTableViewCell
         
         // Configure the cell...
         // Configure Table View Cell
@@ -91,18 +93,18 @@ class ClientTableViewController: UITableViewController , NSFetchedResultsControl
         return cell
     }
     
-    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+    func configureCell(cell: ClientTableViewCell, atIndexPath indexPath: NSIndexPath) {
         // Fetch Record
         let record = fetchedResultsController.object(at: indexPath as IndexPath)
         
         // Update Cell
         if let name = record.value(forKey: "name") as? String {
             
-            cell.textLabel?.text =  name
+            cell.customer.text =  name
         }
-        if let email = record.value(forKey: "email") as? String {
-            cell.detailTextLabel?.text = email
-        }
+//        if let email = record.value(forKey: "email") as? String {
+//            cell.detailTextLabel?.text = email
+//        }
         
     }
 
@@ -131,8 +133,8 @@ class ClientTableViewController: UITableViewController , NSFetchedResultsControl
             break;
         case .update:
             if let indexPath = indexPath {
-                let cell = tableView.cellForRow(at: indexPath as IndexPath)
-                configureCell(cell: cell!, atIndexPath: indexPath as NSIndexPath)
+                let cell = tableView.cellForRow(at: indexPath as IndexPath) as! ClientTableViewCell
+                configureCell(cell: cell, atIndexPath: indexPath as NSIndexPath)
             }
             break;
         case .move:
@@ -147,7 +149,39 @@ class ClientTableViewController: UITableViewController , NSFetchedResultsControl
         }
     }
 
+    func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName client: ClientModel, lineItemsList lineItems: [LineItemModel], totalCost total: Float, additonalInformation notes: String, discount: Float) {
+        // self.tableView.beginUpdates()
+        let newEstimateNUmber = estimateNumberGenerator
+        let quote =  QuotesModel( estimateNumber: "\(newEstimateNUmber)", client: client, LineItems: lineItems, totalAmount: total, notes: notes, discount: discount)
+        estimateNumberGenerator += 1
+        DataProvider.sharedInstance.saveAQuote(quote: quote)
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        selectedClient = self.fetchedResultsController.object(at: indexPath)
+        performSegue(withIdentifier: "segueToAddQuoteFromClientTable", sender: nil)
 
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let destination = segue.destination as! UINavigationController;
+        let vc =   destination.topViewController as! AddQuoteViewController
+        vc.delegate = self
+        let name = selectedClient.value(forKey:"name" )!
+        let email = selectedClient.value(forKey:"email" )!
+        let phone = selectedClient.value(forKey:"phoneOne" )!
+        let model = ClientModel( name:name as! String , email: email as! String, phoneOne: phone as! String)
+        vc.client = [model]
+      
+        
+    }
+
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -183,14 +217,6 @@ class ClientTableViewController: UITableViewController , NSFetchedResultsControl
     }
     */
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

@@ -15,6 +15,8 @@ class QuoteComposer: NSObject {
     let pathToSingleItemHTMLTemplate = Bundle.main.path(forResource: "single_item", ofType: "html")
     
     let pathToLastItemHTMLTemplate = Bundle.main.path(forResource: "last_item", ofType: "html")
+    let pathToTaxItemHTMLTemplate = Bundle.main.path(forResource: "tax_item", ofType: "html")
+    
     
     let senderInfo = "Gabriel Theodoropoulos<br>123 Somewhere Str.<br>10000 - MyCity<br>MyCountry"
     
@@ -89,12 +91,10 @@ class QuoteComposer: NSObject {
             // Payment method.
             HTMLContent = HTMLContent.replacingOccurrences(of:"#PAYMENT_METHOD#", with: paymentMethod)
             
-            // Total amount.
-            HTMLContent = HTMLContent.replacingOccurrences(of:"#TOTAL_AMOUNT#", with: totalAmount)
-            
             // The invoice items will be added by using a loop.
             var allItems = ""
-            
+            var alltax:Float = 0.0
+            var allSubTotal:Float = 0.0
             // For all the items except for the last one we'll use the "single_item.html" template.
             // For the last one we'll use the "last_item.html" template.
             var i = 0
@@ -103,26 +103,56 @@ class QuoteComposer: NSObject {
                 var itemHTMLContent: String!
                 
                 // Determine the proper template file.
-                if i != items.count - 1 {
+                //if i != items.count - 1 {
                     itemHTMLContent = try String(contentsOfFile: pathToSingleItemHTMLTemplate!)
-                }
-                else {
-                    itemHTMLContent = try String(contentsOfFile: pathToLastItemHTMLTemplate!)
-                }
+                //}
+                //else {
+                  //  itemHTMLContent = try String(contentsOfFile: pathToLastItemHTMLTemplate!)
+                //}
                 
                 // Replace the description and price placeholders with the actual values.
                 itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#ITEM_DESC#", with: item.itemName!)
-                
-                // Format each item's price as a currency value.
-                //let formattedPrice = AppDelegate.getAppDelegate().getStringValueFormattedAsCurrency(items[i]["price"]!)
-                
-                itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with: getStringValueFormattedAsCurrency("\(item.price)"))
+              
+                let subTotal:Float = calculateSubtotal(price: item.price, quantity: item.quantity)
+                 let subTotalPDF = getStringValueFormattedAsCurrency("\(subTotal)")
+        itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with:"$\(subTotalPDF)")
                 //itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with: "100")
 
                 // Add the item's HTML code to the general items string.
                 allItems += itemHTMLContent
                 i += 1
+                let taxOnSubtotal:Float = calculateTaxOn(amount: subTotal, taxPercentage:item.tax)
+                alltax = roundOffToTwoDecimalPlacesWith(quantity: Float(alltax) + taxOnSubtotal)
+                allSubTotal = roundOffToTwoDecimalPlacesWith(quantity:(allSubTotal + subTotal))
+                }
+            var discountValuePDF = "$0.0"
+            var taxValuePDF = "$\(alltax)"
+             var totalValuePDF = "$\(self.totalAmount!)"
+            if(selectedQuote.discount != 0){
+                let discount = calculateTaxOn(amount: allSubTotal, taxPercentage: selectedQuote.discount)
+                if (discount != 0.0){
+                    discountValuePDF = "-$\(calculateTaxOn(amount: allSubTotal, taxPercentage: selectedQuote.discount))"
+                }
+                
+               taxValuePDF = "$\(applyDiscount(amount:alltax , discount: selectedQuote.discount))"
+               totalValuePDF =   "$\(applyDiscount(amount:allSubTotal , discount: selectedQuote.discount) + applyDiscount(amount:alltax , discount: selectedQuote.discount))"
             }
+            
+            // Total amount.
+            HTMLContent = HTMLContent.replacingOccurrences(of:"#TOTAL_AMOUNT#", with: totalValuePDF)
+            // Set TAX and discount
+                var taxHTMLContent = try String(contentsOfFile: pathToTaxItemHTMLTemplate!)
+                // Replace the description and price placeholders with the actual values.
+                taxHTMLContent = taxHTMLContent.replacingOccurrences(of:"#TAX_DESC#", with: "Tax")
+                taxHTMLContent = taxHTMLContent.replacingOccurrences(of:"#TAX#", with: taxValuePDF)
+                allItems += taxHTMLContent
+            
+          
+                var discountHTMLContent = try String(contentsOfFile: pathToTaxItemHTMLTemplate!)
+
+                 discountHTMLContent = discountHTMLContent.replacingOccurrences(of:"#TAX_DESC#", with: "Discount")
+                discountHTMLContent = discountHTMLContent.replacingOccurrences(of:"#TAX#", with:discountValuePDF)
+                allItems += discountHTMLContent
             
             // Set the items.
             HTMLContent = HTMLContent.replacingOccurrences(of:"#ITEMS#", with: allItems)
@@ -137,7 +167,16 @@ class QuoteComposer: NSObject {
         return nil
     }
     
-   
+//    tax = roundOffToTwoDecimalPlacesWith(quantity:(tax + item.tax))
+//}
+//// Set TAX and discount
+//var itemHTMLContent = try String(contentsOfFile: pathToLastItemHTMLTemplate!)
+//// Replace the description and price placeholders with the actual values.
+//itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#ITEM_DESC#", with: "Tax")
+//itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with: "\(tax)")
+//
+//itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#ITEM_DESC#", with: "Discount")
+//itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#PRICE#", with: "\(selectedQuote.discount)")
     func exportHTMLContentToPDF(HTMLContent: String) {
         let printPageRenderer = CustomPrintPageRenderer()
         
@@ -158,7 +197,7 @@ class QuoteComposer: NSObject {
     
     UIGraphicsBeginPDFContextToData(pdfData, CGRect.zero, nil)
        
-        for i in 0 ..< printPageRenderer.numberOfPages{
+    for i in 0 ..< printPageRenderer.numberOfPages{
     UIGraphicsBeginPDFPage()
     
     printPageRenderer.drawPage(at: i, in: UIGraphicsGetPDFContextBounds())

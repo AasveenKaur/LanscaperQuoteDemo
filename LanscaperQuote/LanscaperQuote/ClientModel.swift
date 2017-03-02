@@ -27,7 +27,7 @@ class ClientModel: NSObject , NSCoding {
         
     }
     
-
+   
 
  public func encode(with aCoder: NSCoder) {
             aCoder.encode(clientID, forKey: "clientID")

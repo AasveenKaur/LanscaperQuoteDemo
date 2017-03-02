@@ -9,7 +9,7 @@
 import UIKit
 protocol AddQuoteViewControllerDelegate {
     
-func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName client: ClientModel, lineItemsList lineItems: [LineItemModel], totalCost total:Float, additonalInformation notes:String)
+    func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName client: ClientModel, lineItemsList lineItems: [LineItemModel], totalCost total:Float, additonalInformation notes:String, discount:Float)
     
    
 }
@@ -19,7 +19,9 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     var LineItems:Array = [LineItemModel]()
     var client:Array  = [ClientModel]()
     var note:Array = ["NOTES"]
-    
+    @IBAction func addDiscountMaskButton(_ sender: Any) {
+        getDiscount()
+    }
     var discountValue:Float = 0.0
     var subTotalValue: Float = 0.0
     var  taxValue:  Float = 0.0
@@ -45,15 +47,20 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         
       
         // Notify Delegate
-        delegate?.controller(controller: self, didSaveQuoteWithClientName: client[0], lineItemsList: LineItems, totalCost: totalValue, additonalInformation: note[0])
+        delegate?.controller(controller: self, didSaveQuoteWithClientName: client[0], lineItemsList: LineItems, totalCost: totalValue, additonalInformation: note[0], discount: self.discountValue)
         
     
-    
-        // Dismiss View Controller
-        dismiss(animated: true) {
-            
-        }
-        //self.navigationController?.popViewController(animated: true)
+        let alertController:UIAlertController =  UIAlertController(title:  "Succesful!", message: "New quote saved!", preferredStyle: .alert)
+        
+        
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler:{(alert: UIAlertAction!) in
+            self.dismiss(animated: true) {
+                
+            }
+
+        }))
+        self.present(alertController, animated: true, completion: nil)
+       
     }
     
     //
@@ -68,16 +75,17 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         self.tableView.backgroundView = UIImageView.init(image:UIImage(named:"background" ))
         self.tableView.separatorStyle = .none
         self.tableView.allowsMultipleSelectionDuringEditing = false
-        //LineItems.append(LineItemModel())
-        //client.append(ClientModel())
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
+       
         
     }
     
     
+    @IBAction func cancelPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -138,6 +146,7 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
             }
             else if(indexPath.row < LineItems.count){
                 let cell:LineItemTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "LineItemTableViewCellID")! as! LineItemTableViewCell
+                cell.lineItemNumber.text = "\(indexPath.row+1)#"
                 cell.lineItem.text = LineItems[(indexPath.row)].name
                 cell.lineItemTotal.text =  "$\(LineItems[(indexPath.row)].quantity*LineItems[(indexPath.row)].price)"
                 //set the data here
@@ -174,14 +183,27 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if(indexPath.section == 1){
         if (editingStyle == .delete) {
             let item = self.LineItems[indexPath.row]
             updateSubTotalCell(quantity:item.quantity, price: item.price, tax: item.tax, add:false)
             tableView.beginUpdates()
             self.LineItems.remove(at: indexPath.row)
+            if (self.LineItems.count == 0){
+                self.discountValue = 0.0
+            }
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
             
+        }
+        }else if(indexPath.section == 0){
+            if (editingStyle == .delete) {
+                tableView.beginUpdates()
+                self.client.removeAll()
+                self.tableView.reloadRows(at: [NSIndexPath.init(row: 0, section: 0) as IndexPath], with: .fade)
+                tableView.endUpdates()
+            
+            }
         }
     }
     
@@ -243,22 +265,44 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
         let currentTotal = calculateSubtotalWithTax(subTotal: currentSubtotal, tax: tax)
         if(add){
           
-        subTotalValue +=  currentSubtotal
-        taxValue += currentTax
-        totalValue +=   currentTotal
+            subTotalValue = roundOffToTwoDecimalPlacesWith(quantity:subTotalValue + currentSubtotal)
+            taxValue = roundOffToTwoDecimalPlacesWith(quantity:taxValue + currentTax)
+        totalValue =  roundOffToTwoDecimalPlacesWith(quantity: totalValue + currentTotal)
         }
         else{
-            subTotalValue -=  currentSubtotal
-            taxValue -= currentTax
-            totalValue -=   currentTotal
+            subTotalValue = roundOffToTwoDecimalPlacesWith(quantity:subTotalValue - currentSubtotal)
+            taxValue = roundOffToTwoDecimalPlacesWith(quantity: taxValue - currentTax)
+            totalValue =   roundOffToTwoDecimalPlacesWith(quantity:totalValue - currentTotal)
         }
         // I wanted to update this cell specifically
         let indexPathForSubTotalTableViewCell = IndexPath(row: LineItems.count+1 , section: 1)
         let SubTotalCell = tableView.cellForRow(at: indexPathForSubTotalTableViewCell) as! SubTotalTableViewCell
         SubTotalCell.subTotalValue.text = "$\(self.subTotalValue)"
-        SubTotalCell.taxValue.text = "$\(self.taxValue)"
-        SubTotalCell.totalValue.text = "$\(self.totalValue)"
+        
+        setDiscount(SubTotalCell: SubTotalCell)
         }
+    
+    func setDiscount(SubTotalCell:SubTotalTableViewCell){
+        if(self.discountValue == 0.0){
+            SubTotalCell.discountValue.text = "$\(0.0)"
+            SubTotalCell.totalValue.text = "$\(self.totalValue)"
+            SubTotalCell.taxValue.text = "$\(self.taxValue)"
+        }
+        else {
+            let discount = calculateTaxOn(amount: self.subTotalValue, taxPercentage: self.discountValue)
+            if discount == 0.0{
+                SubTotalCell.discountValue.text = "$\(0.0)"
+            }
+            else {
+                SubTotalCell.discountValue.text = "-$\(calculateTaxOn(amount: self.subTotalValue, taxPercentage: self.discountValue))"
+            }
+            
+            SubTotalCell.taxValue.text = "$\(applyDiscount(amount:self.taxValue , discount: self.discountValue))"
+            SubTotalCell.totalValue.text =   "$\(applyDiscount(amount:self.subTotalValue , discount: self.discountValue) + applyDiscount(amount:self.taxValue , discount: self.discountValue))"
+            
+            
+        }
+    }
     
     func controller(controller: showLineItemViewController, didEditLineItemWithName name: String, itemDescription description: String, itemQuantity quantity: Float, itemPrice rate: Float, itemTax tax: Float) {
         
@@ -272,7 +316,6 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
             self.LineItems.remove(at: index)
             self.LineItems.insert(lineItem, at: index)
             tableView.reloadRows(at: [NSIndexPath.init(row: index, section: 1) as IndexPath], with: .fade)
-            subTotalValue -= (self.LineItems[index].quantity*self.LineItems[index].price)
         }
         //red-add or edit
         tableView.endUpdates()
@@ -320,6 +363,7 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     
     @IBAction func prepareForUnwind(segue:UIStoryboardSegue){
         
+    
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -328,9 +372,31 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
             selectedLineItem = self.LineItems[indexPath.row]
             performSegue(withIdentifier: "SegueToShowLineItem", sender: self)
         }
-       
-       
-        
     }
     
+    func getDiscount(){
+        //1. Create the alert controller.
+        let alert = UIAlertController(title: "Discount", message: "Please enter discount %.", preferredStyle: .alert)
+        
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            textField.text = "\(self.discountValue)%"
+        }
+        
+        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            print("Text field: \(textField?.text)")
+            self.discountValue =  (textField?.text?.floatValue)!
+            let indexPathForSubTotalTableViewCell = IndexPath(row: self.LineItems.count+1 , section: 1)
+            let SubTotalCell = self.tableView.cellForRow(at: indexPathForSubTotalTableViewCell) as! SubTotalTableViewCell
+           self.setDiscount(SubTotalCell: SubTotalCell)
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+        
+    }
 }

@@ -24,10 +24,11 @@ class QuotesModel: NSObject, NSCoding {
     var clientSignatureNeeded: Bool = true
     var mySignature:String? = ""
     var mySignatureNeeded: Bool = true
-    var date:Date = Date.init()
+    var date:String = ""
     var poNumber: String? = ""
     var invoiceStatus: Bool = false
     var sentToClient: Bool = false
+    var discount: Float? = 0.0
     
     
     init(quoteID: String = "",
@@ -42,10 +43,11 @@ class QuotesModel: NSObject, NSCoding {
          clientSignatureNeeded: Bool = true,
          mySignature:String = "",
          mySignatureNeeded: Bool = true,
-         date:Date = Date.init(),
+         date:String = "",
          poNumber: String? = "",
          invoiceStatus: Bool = false,
-         sentToClient: Bool = false) {
+         sentToClient: Bool = false,
+         discount:Float? = 0.0 ) {
         
         self.quoteID = NSUUID().uuidString
         self.estimateNumber = estimateNumber
@@ -59,10 +61,12 @@ class QuotesModel: NSObject, NSCoding {
         self.clientSignatureNeeded = clientSignatureNeeded
         self.mySignature = mySignature
         self.mySignatureNeeded = mySignatureNeeded
-        self.date = date
+        let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .short, timeStyle: .short)
+        self.date = timestamp
         self.poNumber = poNumber
         self.invoiceStatus = invoiceStatus
         self.sentToClient = sentToClient
+        self.discount = discount
     }
   
         
@@ -83,6 +87,7 @@ public func encode(with aCoder: NSCoder) {
         aCoder.encode(poNumber, forKey: "poNumber")
         aCoder.encode(invoiceStatus, forKey: "invoiceStatus")
         aCoder.encode(sentToClient, forKey: "sentToClient")
+        aCoder.encode(discount, forKey: "discount")
         
     }
     
@@ -103,10 +108,11 @@ public func encode(with aCoder: NSCoder) {
         mySignatureNeeded = aDecoder.decodeBool(forKey: "mySignatureNeeded")
         clientSignature = (aDecoder.decodeObject(forKey: "clientSignature") as! String)
         clientSignatureNeeded = aDecoder.decodeBool(forKey: "clientSignatureNeeded")
-        date = aDecoder.decodeObject(forKey: "date") as! Date
+        date = aDecoder.decodeObject(forKey: "date") as! String
         poNumber = (aDecoder.decodeObject(forKey: "poNumber") as! String)
         invoiceStatus = aDecoder.decodeBool(forKey: "invoiceStatus")
         sentToClient = aDecoder.decodeBool(forKey: "sentToClient")
+        discount = aDecoder.decodeObject(forKey: "discount") as! Float?
     }
     
     

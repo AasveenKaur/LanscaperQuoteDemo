@@ -47,7 +47,7 @@ class InvoiceTableViewController: UITableViewController , NSFetchedResultsContro
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+        tabBarItem = UITabBarItem(title: "Invoices", image: UIImage(named: "dollar-sign.png"), tag: 0)
         myManagedObjectContext = DataProvider.sharedInstance.coreDataManager.managedObjectContext
         print(myManagedObjectContext)
     }

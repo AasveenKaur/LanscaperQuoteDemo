@@ -42,10 +42,13 @@ class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerD
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-     //  Quotelist = DataProvider.sharedInstance.fetchQuotes()
+       
+        tabBarItem = UITabBarItem(title: "Quotes", image: UIImage(named: "document.png"), tag: 0)
         myManagedObjectContext = DataProvider.sharedInstance.coreDataManager.managedObjectContext
         print(myManagedObjectContext)
     }
+    
+    
     
    
     
@@ -116,12 +119,12 @@ class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerD
     
 
     
-    func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName client: ClientModel, lineItemsList lineItems: [LineItemModel], totalCost total: Float, additonalInformation notes: String) {
+    func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName client: ClientModel, lineItemsList lineItems: [LineItemModel], totalCost total: Float, additonalInformation notes: String, discount: Float) {
         
         
         // self.tableView.beginUpdates()
         let newEstimateNUmber = estimateNumberGenerator
-        let quote =  QuotesModel( estimateNumber: "\(newEstimateNUmber)", client: client, LineItems: lineItems, totalAmount: total, notes: notes)
+        let quote =  QuotesModel( estimateNumber: "\(newEstimateNUmber)", client: client, LineItems: lineItems, totalAmount: total, notes: notes, discount: discount)
         estimateNumberGenerator += 1
         DataProvider.sharedInstance.saveAQuote(quote: quote)
         

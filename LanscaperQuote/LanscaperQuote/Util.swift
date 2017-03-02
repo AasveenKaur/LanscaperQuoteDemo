@@ -19,7 +19,6 @@ enum shape {
 let EMPTY_SEGUE_RECTANGLE_IDENTIFIER  = "emptySegueRectangle"
 let EMPTY_SEGUE_CIRCLE_IDENTIFIER = "emptySegueCircle"
 let EMPTY_SEGUE_TRIANGLE_IDENTIFIER = "emptySegueTriangle"
-let EMPTY_SEGUE_RETAINING_WALL_IDENTIFIER = "emptySegueRetainingWall"
 let EMPTY_SEGUE_PAVER_IDENTIFIER = "emptySeguePaver"
 let EMPTY_SEGUE_GRASS_SEED_IDENTIFIER = "emptySegueGrassSeed"
 let ESTIMATE_NUMBER = "estimateNumber"
@@ -172,15 +171,16 @@ func getDoneButtonOnKeyboard(target: Any?, action: Selector?) -> UIToolbar
 }
 
 func calculateTaxOn(amount:Float, taxPercentage:Float) -> Float{
-    return (amount * (taxPercentage / Float(100)))
+    return roundOffToTwoDecimalPlacesWith(quantity: amount * (taxPercentage / Float(100)))
 }
 
+
 func calculateSubtotal(price:Float, quantity:Float) -> Float {
-    return price * quantity
+    return roundOffToTwoDecimalPlacesWith(quantity: price * quantity)
 }
 
 func calculateSubtotalWithTax(subTotal:Float, tax:Float) -> Float {
-    return subTotal + calculateTaxOn(amount: subTotal, taxPercentage: tax)
+    return roundOffToTwoDecimalPlacesWith(quantity: subTotal + calculateTaxOn(amount: subTotal, taxPercentage: tax))
 }
 
 
@@ -194,6 +194,10 @@ func addMargin(amount:Float) -> Float{
     return calculateSubtotalWithTax(subTotal: amount,tax: 5)
 }
 
+func applyDiscount(amount:Float, discount:Float) -> Float{
+    return amount - calculateTaxOn(amount: amount, taxPercentage:discount)
+}
+
 func inchToFeet(inch:Float) -> Float{
  return inch / Float(12)
 }
@@ -204,3 +208,57 @@ func feetToInch(feet:Float) -> Float{
 
 
 
+extension String {
+    var floatValue: Float! {
+        return (self as NSString).floatValue
+    }
+}
+
+
+extension UIButton {
+    func centerLabelVerticallyWithPadding(spacing:CGFloat) {
+        // update positioning of image and title
+        let imageSize = self.imageView!.frame.size
+        self.titleEdgeInsets = UIEdgeInsets(top:0,
+                                            left:-imageSize.width,
+                                            bottom:-(imageSize.height + spacing),
+                                            right:0)
+        let titleSize = self.titleLabel!.frame.size
+        self.imageEdgeInsets = UIEdgeInsets(top:-(titleSize.height + spacing),
+                                            left:0,
+                                            bottom: 0,
+                                            right:-titleSize.width)
+        
+        // reset contentInset, so intrinsicContentSize() is still accurate
+        let trueContentSize = self.titleLabel!.frame.union(self.imageView!.frame).size
+        let oldContentSize = self.intrinsicContentSize
+        let heightDelta = trueContentSize.height - oldContentSize.height
+        let widthDelta = trueContentSize.width - oldContentSize.width
+        self.contentEdgeInsets = UIEdgeInsets(top:heightDelta/2.0,
+                                              left:widthDelta/2.0,
+                                              bottom:heightDelta/2.0,
+                                              right:widthDelta/2.0)
+    }
+}
+
+func buttonForBarItemWith(imageName: String, title: String) -> UIButton {
+    let button = UIButton(type: .system)
+    button.setImage(UIImage(named: imageName), for: .normal)
+    button.setTitle(title, for: .normal)
+    button.sizeToFit()
+    button.centerLabelVerticallyWithPadding(spacing: 0)
+    return button
+}
+
+ func EmptyMessage(message:String, viewController:UITableViewController) {
+    let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: viewController.view.bounds.size.width, height: viewController.view.bounds.size.height))
+        messageLabel.text = message
+    messageLabel.textColor = UIColor.black
+    messageLabel.numberOfLines = 0;
+    messageLabel.textAlignment = .center;
+    messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
+    messageLabel.sizeToFit()
+    
+    viewController.tableView.backgroundView = messageLabel;
+    viewController.tableView.separatorStyle = .none;
+}

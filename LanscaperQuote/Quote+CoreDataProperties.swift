@@ -2,7 +2,7 @@
 //  Quote+CoreDataProperties.swift
 //  LanscaperQuote
 //
-//  Created by Aasveen Kaur on 2/25/17.
+//  Created by Aasveen Kaur on 2/28/17.
 //  Copyright © 2017 Aasveen. All rights reserved.
 //
 
@@ -17,14 +17,15 @@ extension Quote {
     }
 
     @NSManaged public var contractStatement: String?
-    @NSManaged public var date: NSDate?
+    @NSManaged public var date: String?
     @NSManaged public var estimateNumber: String?
     @NSManaged public var invoiceStatus: Bool
     @NSManaged public var note: String?
     @NSManaged public var poNumber: String?
+    @NSManaged public var quoteID: String?
     @NSManaged public var sentToClient: Bool
     @NSManaged public var totalAmount: Float
-    @NSManaged public var quoteID: String?
+    @NSManaged public var discount: Float
     @NSManaged public var client: Client?
     @NSManaged public var lineItems: NSSet?
 

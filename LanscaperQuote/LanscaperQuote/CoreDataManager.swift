@@ -101,6 +101,8 @@ class CoreDataManager: NSObject {
             print(error)
         }
     }
+    
+   
   
     func show()  {
         // Initialize Fetch Request

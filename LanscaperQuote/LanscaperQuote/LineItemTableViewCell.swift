@@ -12,6 +12,7 @@ class LineItemTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lineItem: UILabel!
     
+    @IBOutlet weak var lineItemNumber: UILabel!
     @IBOutlet weak var lineItemTotal: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

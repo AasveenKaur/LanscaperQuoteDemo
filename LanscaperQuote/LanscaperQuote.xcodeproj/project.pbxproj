@@ -48,11 +48,12 @@
 		5F54E66B1E60E961009CEE75 /* Company+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6651E60E961009CEE75 /* Company+CoreDataProperties.swift */; };
 		5F54E66C1E60E961009CEE75 /* Address+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6661E60E961009CEE75 /* Address+CoreDataProperties.swift */; };
 		5F54E66D1E60E961009CEE75 /* LineItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6671E60E961009CEE75 /* LineItem+CoreDataProperties.swift */; };
-		5F54E6701E6206B6009CEE75 /* Quote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E66F1E6206B6009CEE75 /* Quote+CoreDataProperties.swift */; };
 		5F54E6721E6220FC009CEE75 /* ClientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6711E6220FC009CEE75 /* ClientTableViewController.swift */; };
 		5F54E6741E62247A009CEE75 /* InvoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6731E62247A009CEE75 /* InvoiceTableViewController.swift */; };
 		5F54E6761E622550009CEE75 /* InvoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6751E622550009CEE75 /* InvoiceTableViewCell.swift */; };
 		5F54E67A1E62CB54009CEE75 /* showLineItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6791E62CB54009CEE75 /* showLineItemViewController.swift */; };
+		5F79507A1E66933D003B6ABB /* Quote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7950791E66933D003B6ABB /* Quote+CoreDataProperties.swift */; };
+		5F79507C1E66A23B003B6ABB /* tax_item.html in Resources */ = {isa = PBXBuildFile; fileRef = 5F79507B1E66A23B003B6ABB /* tax_item.html */; };
 		5FA2A5811E591CCA00B1F60F /* QuoteComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A5801E591CCA00B1F60F /* QuoteComposer.swift */; };
 		5FA2A5831E593ABF00B1F60F /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A5821E593ABF00B1F60F /* PreviewViewController.swift */; };
 		5FA2A5861E5A4D8100B1F60F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FA2A5841E5A4D8100B1F60F /* Main.storyboard */; };
@@ -362,8 +363,7 @@
 		5FA2A7ED1E5AC00D00B1F60F /* woman.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FA2A6C01E5AC00D00B1F60F /* woman.png */; };
 		5FA2A7EE1E5AC00D00B1F60F /* wooden-picket.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FA2A6C11E5AC00D00B1F60F /* wooden-picket.png */; };
 		5FA2A7EF1E5AC00D00B1F60F /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FA2A6C21E5AC00D00B1F60F /* write.png */; };
-		5FA2A7F11E5B9B1F00B1F60F /* PaverCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A7F01E5B9B1F00B1F60F /* PaverCalculatorViewController.swift */; };
-		5FA2A7F31E5B9B3600B1F60F /* RetainingWallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A7F21E5B9B3600B1F60F /* RetainingWallViewController.swift */; };
+		5FA2A7F11E5B9B1F00B1F60F /* PaverBlockCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A7F01E5B9B1F00B1F60F /* PaverBlockCalculatorViewController.swift */; };
 		5FA2A8001E5E24CA00B1F60F /* GrassSeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A7FF1E5E24CA00B1F60F /* GrassSeedViewController.swift */; };
 		5FA2A81E1E6004FF00B1F60F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA2A81D1E6004FF00B1F60F /* CoreData.framework */; };
 		5FA2A8221E60057E00B1F60F /* LandscaperQuote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A8201E60057E00B1F60F /* LandscaperQuote.xcdatamodeld */; };
@@ -416,11 +416,12 @@
 		5F54E6651E60E961009CEE75 /* Company+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Company+CoreDataProperties.swift"; path = "../Company+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5F54E6661E60E961009CEE75 /* Address+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Address+CoreDataProperties.swift"; path = "../Address+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5F54E6671E60E961009CEE75 /* LineItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "LineItem+CoreDataProperties.swift"; path = "../LineItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		5F54E66F1E6206B6009CEE75 /* Quote+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Quote+CoreDataProperties.swift"; path = "../Quote+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5F54E6711E6220FC009CEE75 /* ClientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewController.swift; sourceTree = "<group>"; };
 		5F54E6731E62247A009CEE75 /* InvoiceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceTableViewController.swift; sourceTree = "<group>"; };
 		5F54E6751E622550009CEE75 /* InvoiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceTableViewCell.swift; sourceTree = "<group>"; };
 		5F54E6791E62CB54009CEE75 /* showLineItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = showLineItemViewController.swift; sourceTree = "<group>"; };
+		5F7950791E66933D003B6ABB /* Quote+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Quote+CoreDataProperties.swift"; path = "../Quote+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5F79507B1E66A23B003B6ABB /* tax_item.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = tax_item.html; sourceTree = "<group>"; };
 		5FA2A5801E591CCA00B1F60F /* QuoteComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteComposer.swift; sourceTree = "<group>"; };
 		5FA2A5821E593ABF00B1F60F /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		5FA2A5851E5A4D8100B1F60F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -730,8 +731,7 @@
 		5FA2A6C01E5AC00D00B1F60F /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = woman.png; sourceTree = "<group>"; };
 		5FA2A6C11E5AC00D00B1F60F /* wooden-picket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wooden-picket.png"; sourceTree = "<group>"; };
 		5FA2A6C21E5AC00D00B1F60F /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
-		5FA2A7F01E5B9B1F00B1F60F /* PaverCalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaverCalculatorViewController.swift; sourceTree = "<group>"; };
-		5FA2A7F21E5B9B3600B1F60F /* RetainingWallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetainingWallViewController.swift; sourceTree = "<group>"; };
+		5FA2A7F01E5B9B1F00B1F60F /* PaverBlockCalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaverBlockCalculatorViewController.swift; sourceTree = "<group>"; };
 		5FA2A7FF1E5E24CA00B1F60F /* GrassSeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrassSeedViewController.swift; sourceTree = "<group>"; };
 		5FA2A81D1E6004FF00B1F60F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5FA2A8211E60057E00B1F60F /* LandscaperQuote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LandscaperQuote.xcdatamodel; sourceTree = "<group>"; };
@@ -819,8 +819,7 @@
 				5F36BDA61E46FC7200B2233B /* RectangleViewController.swift */,
 				5F36BDA81E46FCBC00B2233B /* CircleViewController.swift */,
 				5F36BDAC1E4707EF00B2233B /* TriangleViewController.swift */,
-				5FA2A7F01E5B9B1F00B1F60F /* PaverCalculatorViewController.swift */,
-				5FA2A7F21E5B9B3600B1F60F /* RetainingWallViewController.swift */,
+				5FA2A7F01E5B9B1F00B1F60F /* PaverBlockCalculatorViewController.swift */,
 				5FA2A7FF1E5E24CA00B1F60F /* GrassSeedViewController.swift */,
 			);
 			name = "Shape Calculator VC";
@@ -877,7 +876,7 @@
 		5F54E66E1E60E9A2009CEE75 /* property classes */ = {
 			isa = PBXGroup;
 			children = (
-				5F54E66F1E6206B6009CEE75 /* Quote+CoreDataProperties.swift */,
+				5F7950791E66933D003B6ABB /* Quote+CoreDataProperties.swift */,
 				5F54E6631E60E961009CEE75 /* User+CoreDataProperties.swift */,
 				5F54E6641E60E961009CEE75 /* Client+CoreDataProperties.swift */,
 				5F54E6651E60E961009CEE75 /* Company+CoreDataProperties.swift */,
@@ -896,6 +895,7 @@
 				5FA2A5881E5A576900B1F60F /* last_item.html */,
 				5FA2A58A1E5A577000B1F60F /* single_item.html */,
 				5FA2A5901E5A60B100B1F60F /* invoice.html */,
+				5F79507B1E66A23B003B6ABB /* tax_item.html */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1369,6 +1369,7 @@
 				5FA2A7B31E5AC00D00B1F60F /* smoking.png in Resources */,
 				5FA2A7A11E5AC00D00B1F60F /* satellite.png in Resources */,
 				5FA2A7231E5AC00D00B1F60F /* dress-hanger.png in Resources */,
+				5F79507C1E66A23B003B6ABB /* tax_item.html in Resources */,
 				5FA2A6F11E5AC00D00B1F60F /* business-tie.png in Resources */,
 				5FA2A7EC1E5AC00D00B1F60F /* woman-figure.png in Resources */,
 				5FA2A71A1E5AC00D00B1F60F /* desk-lamp.png in Resources */,
@@ -1629,7 +1630,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F54E6701E6206B6009CEE75 /* Quote+CoreDataProperties.swift in Sources */,
 				5F54E6381E6028EA009CEE75 /* LineItem+CoreDataClass.swift in Sources */,
 				5F54E67A1E62CB54009CEE75 /* showLineItemViewController.swift in Sources */,
 				5F54E6421E6028EA009CEE75 /* Client+CoreDataClass.swift in Sources */,
@@ -1653,6 +1653,7 @@
 				5F4F4FBC1E3F15B100B1C6FD /* QuotesModel.swift in Sources */,
 				5F4F4FD21E4004D300B1C6FD /* DataProvider.swift in Sources */,
 				5F36BD991E445E9D00B2233B /* AddClientViewController.swift in Sources */,
+				5F79507A1E66933D003B6ABB /* Quote+CoreDataProperties.swift in Sources */,
 				5FA8ECBD1E3DB2DF00A86BA6 /* QuotesTableViewController.swift in Sources */,
 				5F36BDBF1E4BDC9F00B2233B /* QuoteTableViewCell.swift in Sources */,
 				5F36BDBD1E4BD40100B2233B /* ClientModalViewController.swift in Sources */,
@@ -1660,12 +1661,11 @@
 				5F36BDAD1E4707EF00B2233B /* TriangleViewController.swift in Sources */,
 				5F36BDAF1E485C2400B2233B /* LineItemTableViewController.swift in Sources */,
 				5F54E66B1E60E961009CEE75 /* Company+CoreDataProperties.swift in Sources */,
-				5FA2A7F31E5B9B3600B1F60F /* RetainingWallViewController.swift in Sources */,
 				5F54E63A1E6028EA009CEE75 /* Quote+CoreDataClass.swift in Sources */,
 				5FA2A8241E60069F00B1F60F /* CoreDataManager.swift in Sources */,
 				5F4F4FC41E3F1F0800B1C6FD /* MyCompanyModel.swift in Sources */,
 				5F54E66D1E60E961009CEE75 /* LineItem+CoreDataProperties.swift in Sources */,
-				5FA2A7F11E5B9B1F00B1F60F /* PaverCalculatorViewController.swift in Sources */,
+				5FA2A7F11E5B9B1F00B1F60F /* PaverBlockCalculatorViewController.swift in Sources */,
 				5FA2A5811E591CCA00B1F60F /* QuoteComposer.swift in Sources */,
 				5F54E6721E6220FC009CEE75 /* ClientTableViewController.swift in Sources */,
 				5F54E63C1E6028EA009CEE75 /* Company+CoreDataClass.swift in Sources */,
@@ -1807,6 +1807,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UYUY4NQE32;
 				INFOPLIST_FILE = LanscaperQuote/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Aasveen.LanscaperQuote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1820,6 +1821,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UYUY4NQE32;
 				INFOPLIST_FILE = LanscaperQuote/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Aasveen.LanscaperQuote;
 				PRODUCT_NAME = "$(TARGET_NAME)";

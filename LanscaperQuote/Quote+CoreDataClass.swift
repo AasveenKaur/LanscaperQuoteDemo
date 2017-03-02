@@ -24,12 +24,13 @@ public class Quote: NSManagedObject {
         newQuote.quoteID = quoteModel.quoteID
         newQuote.totalAmount = quoteModel.totalAmount!
         newQuote.contractStatement = quoteModel.contractStatement
-        newQuote.date = quoteModel.date as NSDate?
+        newQuote.date = quoteModel.date
         newQuote.estimateNumber = quoteModel.estimateNumber
         newQuote.invoiceStatus = quoteModel.invoiceStatus
         newQuote.note = quoteModel.notes
         newQuote.poNumber = quoteModel.poNumber
         newQuote.sentToClient = quoteModel.sentToClient
+        newQuote.discount = quoteModel.discount!
         
         let newClient = Client.createClient(moc, clientModel: quoteModel.client)
         newQuote.client = newClient
