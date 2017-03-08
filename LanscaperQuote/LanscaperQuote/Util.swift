@@ -251,9 +251,17 @@ func buttonForBarItemWith(imageName: String, title: String) -> UIButton {
 }
 
  func EmptyMessage(message:String, viewController:UITableViewController) {
+    
+    let attachment = NSTextAttachment()
+    attachment.image = UIImage(named: "arrow-small-17.png")
+    let attachmentString = NSAttributedString(attachment: attachment)
+    let myString = NSMutableAttributedString(string: message)
+    myString.append(attachmentString)
+    
+    
     let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: viewController.view.bounds.size.width, height: viewController.view.bounds.size.height))
-        messageLabel.text = message
-    messageLabel.textColor = UIColor.black
+        messageLabel.attributedText = myString
+    messageLabel.textColor = UIColor(red: 0.04, green: 0.16, blue: 0.35, alpha: 1.0)
     messageLabel.numberOfLines = 0;
     messageLabel.textAlignment = .center;
     messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
@@ -261,4 +269,13 @@ func buttonForBarItemWith(imageName: String, title: String) -> UIButton {
     
     viewController.tableView.backgroundView = messageLabel;
     viewController.tableView.separatorStyle = .none;
+}
+
+func resetBackground(viewController:UITableViewController){
+    let backgroundImage = UIImage(named: "background")
+    let imageView = UIImageView(image: backgroundImage)
+    viewController.tableView.backgroundView = imageView
+    
+   
+    
 }

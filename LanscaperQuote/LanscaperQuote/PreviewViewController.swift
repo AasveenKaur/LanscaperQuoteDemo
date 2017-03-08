@@ -90,7 +90,23 @@ class PreviewViewController: UIViewController,MFMailComposeViewControllerDelegat
     
     // MARK: MFMailComposeViewControllerDelegate Method
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
+       var  message = ""
+        if(result == .cancelled){
+            message = "Email was not sent!"
+        }
+        else if (result == .failed){
+            message = "Email sending failed!"
+        }
+        else if (result == .saved){
+             message = "Email saved as draft!"
+        }
+        else if (result == .sent){
+            message = "Email sent succesfully!"
+        }
+        controller.dismiss(animated: true) { 
+            showAlert(readableErrorDescription: message, viewController: self)
+        }
+       
     }
     
   

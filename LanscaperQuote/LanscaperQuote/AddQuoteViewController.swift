@@ -43,11 +43,19 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     }
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        var  total:Float = 0
+        if(self.discountValue == 0){
+             total = self.totalValue
+
+}
+else{
+ total =   applyDiscount(amount:self.subTotalValue , discount: self.discountValue) + applyDiscount(amount:self.taxValue , discount: self.discountValue)
+
+
+}
+        delegate?.controller(controller: self, didSaveQuoteWithClientName: client[0], lineItemsList: LineItems, totalCost: total, additonalInformation: note[0], discount: self.discountValue)
+     
         
-        
-      
-        // Notify Delegate
-        delegate?.controller(controller: self, didSaveQuoteWithClientName: client[0], lineItemsList: LineItems, totalCost: totalValue, additonalInformation: note[0], discount: self.discountValue)
         
     
         let alertController:UIAlertController =  UIAlertController(title:  "Succesful!", message: "New quote saved!", preferredStyle: .alert)
@@ -88,7 +96,7 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -104,8 +112,11 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
             return (LineItems.count)+2
             
         }
-        else {
+        else  if(section == 2){
             return (note.count)
+        }
+        else {
+            return 1
         }
         
     }
@@ -159,9 +170,13 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
             }
             
         }
-        else {
+        else if(indexPath.section == 2){
             
             let cell:NotesTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "NotesTableViewCellID")! as! NotesTableViewCell
+            return cell
+        }
+        else{
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "PhotoCellID")!
             return cell
         }
         
@@ -243,6 +258,13 @@ class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDel
             vc.delegate = self
             
         }
+        if(segue.identifier == "segueToPictureView"){
+            let vc = segue.destination as! PictureViewController
+           // vc.delegate = self
+            
+        }
+
+        
         
     }
     

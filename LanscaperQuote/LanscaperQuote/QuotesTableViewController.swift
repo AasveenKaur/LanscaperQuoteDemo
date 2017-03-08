@@ -68,12 +68,19 @@ class QuotesTableViewController: BaseTableViewController,AddQuoteViewControllerD
         // #warning Incomplete implementation, return the number of rows
         if let sections = fetchedResultsController.sections {
             let sectionInfo = sections[section]
+            if(sectionInfo.numberOfObjects == 0){
+                EmptyMessage(message: "No Quote added, Tab above to create a new quote! ", viewController: self)
+            }
+else{
+resetBackground(viewController: self)
+}
             return sectionInfo.numberOfObjects
         }
         
         return 0
     }
     
+ 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
