@@ -23,21 +23,80 @@ class RectangleViewController: BaseViewController {
     var delegate: RectangleViewControllerDelegate?
     
     @IBAction func calculateButtonPressed(_ sender: Any) {
-        let volume = calculateVolume()
-        delegate?.controller(controller: self, didCalculateMulchQuantity: volume, forBag: 100)
-        if(calculatorType == "Mulch Calculator"){
-        result.text = "You will need approximately \(volume) cubic yards of mulch"
-        }else if(calculatorType == "Soil Calculator"){
-            result.text = "You will need approximately \(volume) cubic yards of soil"
-        }
-        result.isHidden = false
+        
+        if(checkIfTextFieldHasText(textField:bedLength) &&
+            checkIfTextFieldHasText(textField:bedWidth)){
             
+            if(checkIfTextFieldHasText(textField:bedDepth)){
+                if(calculatorType == "Mulch Calculator"){
+                    let volume = calculateVolume()
+                    result.text = "You will need approximately \(volume) cubic yards of mulch"
+                }else if(calculatorType == "Plant and Flower Calculator"){
+                    
+                    result.text = "You will need approximately \(Int(calculatePlants())) plants."
+                }
+                else if(calculatorType == "Soil Calculator"){
+                    let volume = calculateVolume()
+                    result.text = "You will need approximately \(volume) cubic yards of soil"
+                }
+                else if(calculatorType == "Landscape Material Yardage Calculator"){
+                    result.text = "You will need approximately \(calculateYardage()) cubic yards of material."
+                }
+                result.isHidden = false
+            }else{
+                if(calculatorType == "Acreage Calculator"){
+                    result.text = "You will need approximately \(calculateAcreage()) Acreage."
+                    result.isHidden = false
+                }
+                else{
+                    showAlert(readableErrorDescription: "Please enter all the values for calculation.", viewController:self )
+                }
+            }
+            
+           
+            
+        }else{
+            showAlert(readableErrorDescription: "Please enter all the values for calculation.", viewController:self )
+        }
+    }
+    
+    func calculateAcreage() -> Float {
+        if  let length = Float(bedLength.text!), let width = Float(bedWidth.text!){
+            let acre =  convertSquareFeetToAcreWith(area: (length*width))
+           
+        delegate?.controller(controller: self, didCalculateMulchQuantity: roundOffToTwoDecimalPlacesWith(quantity:acre ) , forBag: 100)
+            return roundOffToTwoDecimalPlacesWith(quantity:acre)
+        }
+        return 0.0
+    }
+    
+    func calculateYardage() -> Float {
+         if let depth = Float(bedDepth.text!), let length = Float(bedLength.text!), let width = Float(bedWidth.text!){
+            delegate?.controller(controller: self, didCalculateMulchQuantity: roundOffToTwoDecimalPlacesWith(quantity:convertCubicFeetToCubicYardWith(volume:(depth*length*width))), forBag: 100)
+        return roundOffToTwoDecimalPlacesWith(quantity:convertCubicFeetToCubicYardWith(volume:(depth*length*width)))
+        
+        }
+        return 0.0
+    }
+    
+    func calculatePlants() -> Float{
+        if let bedWidth = bedWidth.text?.floatValue, let bedLength = bedLength.text?.floatValue, let plantSpacing = bedDepth.text?.floatValue{
+        let row = feetToInch(feet:bedLength)/plantSpacing
+        let column = feetToInch(feet:bedWidth)/plantSpacing
+            delegate?.controller(controller: self, didCalculateMulchQuantity: ceil(row*column), forBag: 100)
+            return ceil(row*column)
+            
+            
+            
+        }
+        return 0.0
     }
     
     func calculateVolume() -> Float {
         var volume:Float = 0.0
         if let depth = Float(bedDepth.text!), let length = Float(bedLength.text!), let width = Float(bedWidth.text!){
            volume = calculateSoilOrMulchVolumeforRectangularPatternWith(length: length, withWidth: width, withDepth: depth)
+             delegate?.controller(controller: self, didCalculateMulchQuantity: volume, forBag: 100)
             }
         else{
             print("ERROR IN INPUT")
@@ -59,7 +118,7 @@ class RectangleViewController: BaseViewController {
             bedDepth.isHidden = true
             bedDepthLabel.isHidden = true
         } else if(calculatorType == pickOption[7]){
-            bedDepthLabel.text = "Plant Spacing(in inches)"
+            bedDepthLabel.text = "Plant Spacing (in inches)"
         }else if (calculatorType == pickOption[8]){
             bedDepthLabel.text = "Bed height (in feet)"
         }

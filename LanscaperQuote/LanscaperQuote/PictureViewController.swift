@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol PictureViewControllerDelegate {
+    func controller(controller: PictureViewController, didSavePicture picPath:String )
+}
+
 class PictureViewController: UIViewController,UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
+    var delegate: PictureViewControllerDelegate?
 @IBOutlet weak var imagePicked: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +52,8 @@ UINavigationControllerDelegate {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imagePicked.image = image
         }
+      
+        
         
        dismiss(animated: true, completion: nil)
 
@@ -59,8 +66,10 @@ UINavigationControllerDelegate {
     
     
     @IBAction func saveButt(sender: AnyObject) {
+        
         let imageData = UIImageJPEGRepresentation(imagePicked.image!, 0.6)
         let compressedJPGImage = UIImage(data: imageData!)
+        DataProvider.sharedInstance.saveImage(image:compressedJPGImage! )
         UIImageWriteToSavedPhotosAlbum(compressedJPGImage!, nil, nil, nil)
         
         let alert = UIAlertView(title: "Wow",

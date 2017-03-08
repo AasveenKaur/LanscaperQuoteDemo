@@ -52,9 +52,11 @@
 		5F54E6741E62247A009CEE75 /* InvoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6731E62247A009CEE75 /* InvoiceTableViewController.swift */; };
 		5F54E6761E622550009CEE75 /* InvoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6751E622550009CEE75 /* InvoiceTableViewCell.swift */; };
 		5F54E67A1E62CB54009CEE75 /* showLineItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F54E6791E62CB54009CEE75 /* showLineItemViewController.swift */; };
-		5F79507A1E66933D003B6ABB /* Quote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7950791E66933D003B6ABB /* Quote+CoreDataProperties.swift */; };
 		5F79507C1E66A23B003B6ABB /* tax_item.html in Resources */ = {isa = PBXBuildFile; fileRef = 5F79507B1E66A23B003B6ABB /* tax_item.html */; };
 		5F82AC9D1E6F6CFF001C736D /* PictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82AC9C1E6F6CFF001C736D /* PictureViewController.swift */; };
+		5F82ACA11E6FC94C001C736D /* Quote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82AC9E1E6FC94C001C736D /* Quote+CoreDataProperties.swift */; };
+		5F82ACA51E6FC97D001C736D /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82ACA41E6FC97D001C736D /* Photo+CoreDataProperties.swift */; };
+		5F82ACA71E6FC9A6001C736D /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82ACA61E6FC9A6001C736D /* Photo+CoreDataClass.swift */; };
 		5FA2A5811E591CCA00B1F60F /* QuoteComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A5801E591CCA00B1F60F /* QuoteComposer.swift */; };
 		5FA2A5831E593ABF00B1F60F /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA2A5821E593ABF00B1F60F /* PreviewViewController.swift */; };
 		5FA2A5861E5A4D8100B1F60F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FA2A5841E5A4D8100B1F60F /* Main.storyboard */; };
@@ -421,9 +423,11 @@
 		5F54E6731E62247A009CEE75 /* InvoiceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceTableViewController.swift; sourceTree = "<group>"; };
 		5F54E6751E622550009CEE75 /* InvoiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceTableViewCell.swift; sourceTree = "<group>"; };
 		5F54E6791E62CB54009CEE75 /* showLineItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = showLineItemViewController.swift; sourceTree = "<group>"; };
-		5F7950791E66933D003B6ABB /* Quote+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Quote+CoreDataProperties.swift"; path = "../Quote+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5F79507B1E66A23B003B6ABB /* tax_item.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = tax_item.html; sourceTree = "<group>"; };
 		5F82AC9C1E6F6CFF001C736D /* PictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureViewController.swift; sourceTree = "<group>"; };
+		5F82AC9E1E6FC94C001C736D /* Quote+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Quote+CoreDataProperties.swift"; path = "../Quote+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5F82ACA41E6FC97D001C736D /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Photo+CoreDataProperties.swift"; path = "../Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5F82ACA61E6FC9A6001C736D /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5FA2A5801E591CCA00B1F60F /* QuoteComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteComposer.swift; sourceTree = "<group>"; };
 		5FA2A5821E593ABF00B1F60F /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		5FA2A5851E5A4D8100B1F60F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -800,7 +804,6 @@
 				5F36BD9E1E46D60F00B2233B /* ContainerViewController.swift */,
 				5FA2A5821E593ABF00B1F60F /* PreviewViewController.swift */,
 				5F54E6791E62CB54009CEE75 /* showLineItemViewController.swift */,
-				5F82AC9C1E6F6CFF001C736D /* PictureViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -833,6 +836,7 @@
 			children = (
 				5F36BD981E445E9D00B2233B /* AddClientViewController.swift */,
 				5F36BD9A1E44653000B2233B /* AddNoteViewController.swift */,
+				5F82AC9C1E6F6CFF001C736D /* PictureViewController.swift */,
 				5F36BD9C1E4677C900B2233B /* AddLineItemViewController.swift */,
 				5F4F4FCE1E3FE19A00B1C6FD /* AddQuoteViewController.swift */,
 				5F36BDBC1E4BD40100B2233B /* ClientModalViewController.swift */,
@@ -879,7 +883,8 @@
 		5F54E66E1E60E9A2009CEE75 /* property classes */ = {
 			isa = PBXGroup;
 			children = (
-				5F7950791E66933D003B6ABB /* Quote+CoreDataProperties.swift */,
+				5F82ACA41E6FC97D001C736D /* Photo+CoreDataProperties.swift */,
+				5F82AC9E1E6FC94C001C736D /* Quote+CoreDataProperties.swift */,
 				5F54E6631E60E961009CEE75 /* User+CoreDataProperties.swift */,
 				5F54E6641E60E961009CEE75 /* Client+CoreDataProperties.swift */,
 				5F54E6651E60E961009CEE75 /* Company+CoreDataProperties.swift */,
@@ -1232,6 +1237,7 @@
 			children = (
 				5F54E66E1E60E9A2009CEE75 /* property classes */,
 				5FA2A8201E60057E00B1F60F /* LandscaperQuote.xcdatamodeld */,
+				5F82ACA61E6FC9A6001C736D /* Photo+CoreDataClass.swift */,
 				5F54E62C1E6028EA009CEE75 /* LineItem+CoreDataClass.swift */,
 				5F54E62E1E6028EA009CEE75 /* Quote+CoreDataClass.swift */,
 				5F54E6361E6028EA009CEE75 /* Client+CoreDataClass.swift */,
@@ -1641,6 +1647,7 @@
 				5F54E6761E622550009CEE75 /* InvoiceTableViewCell.swift in Sources */,
 				5FA8ECBB1E3DB2AA00A86BA6 /* BaseTableViewController.swift in Sources */,
 				5F82AC9D1E6F6CFF001C736D /* PictureViewController.swift in Sources */,
+				5F82ACA51E6FC97D001C736D /* Photo+CoreDataProperties.swift in Sources */,
 				5F30303D1E3869180018BE74 /* ViewController.swift in Sources */,
 				5F54E66A1E60E961009CEE75 /* Client+CoreDataProperties.swift in Sources */,
 				5FA2A8001E5E24CA00B1F60F /* GrassSeedViewController.swift in Sources */,
@@ -1657,7 +1664,7 @@
 				5F4F4FBC1E3F15B100B1C6FD /* QuotesModel.swift in Sources */,
 				5F4F4FD21E4004D300B1C6FD /* DataProvider.swift in Sources */,
 				5F36BD991E445E9D00B2233B /* AddClientViewController.swift in Sources */,
-				5F79507A1E66933D003B6ABB /* Quote+CoreDataProperties.swift in Sources */,
+				5F82ACA11E6FC94C001C736D /* Quote+CoreDataProperties.swift in Sources */,
 				5FA8ECBD1E3DB2DF00A86BA6 /* QuotesTableViewController.swift in Sources */,
 				5F36BDBF1E4BDC9F00B2233B /* QuoteTableViewCell.swift in Sources */,
 				5F36BDBD1E4BD40100B2233B /* ClientModalViewController.swift in Sources */,
@@ -1682,6 +1689,7 @@
 				5F4F4FD41E40B2D400B1C6FD /* DataManager.swift in Sources */,
 				5F36BDA41E46DC0700B2233B /* Util.swift in Sources */,
 				5F36BDA71E46FC7200B2233B /* RectangleViewController.swift in Sources */,
+				5F82ACA71E6FC9A6001C736D /* Photo+CoreDataClass.swift in Sources */,
 				5F36BD9D1E4677C900B2233B /* AddLineItemViewController.swift in Sources */,
 				5F54E6691E60E961009CEE75 /* User+CoreDataProperties.swift in Sources */,
 				5F36BD9F1E46D60F00B2233B /* ContainerViewController.swift in Sources */,

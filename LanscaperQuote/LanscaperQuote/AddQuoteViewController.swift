@@ -96,7 +96,7 @@ else{
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,11 +112,8 @@ else{
             return (LineItems.count)+2
             
         }
-        else  if(section == 2){
-            return (note.count)
-        }
         else {
-            return 1
+            return (note.count)
         }
         
     }
@@ -170,13 +167,9 @@ else{
             }
             
         }
-        else if(indexPath.section == 2){
+        else {
             
             let cell:NotesTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "NotesTableViewCellID")! as! NotesTableViewCell
-            return cell
-        }
-        else{
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: "PhotoCellID")!
             return cell
         }
         
@@ -258,13 +251,6 @@ else{
             vc.delegate = self
             
         }
-        if(segue.identifier == "segueToPictureView"){
-            let vc = segue.destination as! PictureViewController
-           // vc.delegate = self
-            
-        }
-
-        
         
     }
     

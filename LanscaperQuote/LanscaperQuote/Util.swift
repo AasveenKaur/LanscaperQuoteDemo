@@ -22,13 +22,14 @@ let EMPTY_SEGUE_TRIANGLE_IDENTIFIER = "emptySegueTriangle"
 let EMPTY_SEGUE_PAVER_IDENTIFIER = "emptySeguePaver"
 let EMPTY_SEGUE_GRASS_SEED_IDENTIFIER = "emptySegueGrassSeed"
 let ESTIMATE_NUMBER = "estimateNumber"
-let pickOption = ["Select calculator type","Paver Calculator", "Retaining Wall Calculator", "Soil Calculator", "Mulch Calculator", "Grass Seed Calculator", "Sod Calculator", "Plant and Flower Calculator" , " Landscape Material Yardage Calculator" , "Acreage Calculator", "Other" ]//"Fence Calculator", "Deck Calculator",
+let pickOption = ["Select calculator type","Paver Calculator", "Retaining Wall Calculator", "Soil Calculator", "Mulch Calculator", "Grass Seed Calculator", "Sod Calculator", "Plant and Flower Calculator" , "Landscape Material Yardage Calculator" , "Acreage Calculator", "Other" ]//"Fence Calculator", "Deck Calculator",
 //let pickOption = ["Select calculator type", "Soil Calculator", "Mulch Calculator"]
 
 let pie:Float = 3.14
 
  let currencyCode = "$"
 let CubicFeetToCubicYardConversionNumber = 27
+let SquareFeetToAcreConversionNumber = 43560
 
 
 
@@ -109,6 +110,12 @@ func calculateAreaForRectangularPatternWith(length:Float, withWidth width:Float)
 func convertCubicFeetToCubicYardWith(volume:Float) -> Float{
     return volume/Float(CubicFeetToCubicYardConversionNumber)
 }
+
+func convertSquareFeetToAcreWith(area:Float) -> Float{
+    return area/Float(SquareFeetToAcreConversionNumber)
+}
+
+
 
 func roundOffToTwoDecimalPlacesWith(quantity:Float) -> Float{
     return round(100*quantity)/100

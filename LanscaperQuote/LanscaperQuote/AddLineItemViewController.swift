@@ -41,8 +41,10 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     
     
     @IBAction func rateValueChanged(_ sender: UITextField) {
-        if let rateText = sender.text, let quantityText = quantityValue.text{
-            if let rate = Float(rateText), let quantity = Float(quantityText){
+        if let rate = sender.text?.floatValue, let quantity = quantityValue.text?.floatValue{
+            if let tax = sender.text?.floatValue{
+                totalValue.text = "$\(rate*quantity*((tax+100)/100))"
+            }else{
                 totalValue.text = "$\(rate*quantity)"
             }
         }
@@ -53,10 +55,10 @@ class AddLineItemViewController: BaseViewController, UIPickerViewDataSource, UIP
     }
     
     @IBAction func taxValueChanged(_ sender: UITextField) {
-        if let rateText = rateValue.text, let quantityText = quantityValue.text, let taxText = sender.text{
-            if let rate = Float(rateText), let quantity = Float(quantityText), let tax = Float(taxText){
+        if let rate = rateValue.text?.floatValue, let quantity = quantityValue.text?.floatValue, let tax = sender.text?.floatValue{
+            
                 totalValue.text = "$\(rate*quantity*((tax+100)/100))"
-            }
+            
         }else{
             totalValue.text = "$0.0"
         }

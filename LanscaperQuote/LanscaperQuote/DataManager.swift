@@ -39,6 +39,44 @@ class DataManager: NSObject {
         return nil
     }
     
+    func saveImageDocumentDirectory(image:UIImage){
+        
+        var imagesDirectoryPath = pathForItems(plist: "ImagePicker")
+        print(imagesDirectoryPath!)
+        var objcBool:ObjCBool = true
+        let isExist = FileManager.default.fileExists(atPath: imagesDirectoryPath!, isDirectory: &objcBool)
+        // If the folder with the given path doesn't exist already, create it
+        if isExist == false{
+            do{
+                try FileManager.default.createDirectory(atPath: imagesDirectoryPath!, withIntermediateDirectories: true, attributes: nil)
+            }catch{
+                print("Something went wrong while creating a new folder")
+            }
+            
+            
+        // Save image to Document directory
+        var imageName = NSDate().description
+        imageName = imageName.replacingOccurrences(of: " ", with: "")
+        
+        
+        var imagePath = imagesDirectoryPath?.appending("/\(imageName).png")
+        let data = UIImagePNGRepresentation(image)
+        let success = FileManager.default.createFile(atPath: imagePath!, contents: data, attributes: nil)
+    }
+    }
+   
+    func getImage(imagePath:String){
+        let fileManager = FileManager.default
+         let pAth = pathForItems(plist: "ImagePicker")
+        
+        if fileManager.fileExists(atPath: pAth!){
+            // self.imageView.image = UIImage(contentsOfFile: imagePAth)
+        }else{
+            print("No Image")
+        }
+    }
+
+    
     
     
 }
