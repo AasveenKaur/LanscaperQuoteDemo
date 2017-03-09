@@ -69,14 +69,17 @@ UINavigationControllerDelegate {
         
         let imageData = UIImageJPEGRepresentation(imagePicked.image!, 0.6)
         let compressedJPGImage = UIImage(data: imageData!)
-        DataProvider.sharedInstance.saveImage(image:compressedJPGImage! )
+        let imageSavedAt = DataProvider.sharedInstance.saveImage(image:compressedJPGImage!)
+        print(imageSavedAt)
+        DataProvider.sharedInstance.getImage(imagePath:imageSavedAt )
         UIImageWriteToSavedPhotosAlbum(compressedJPGImage!, nil, nil, nil)
-        
+        delegate?.controller(controller: self, didSavePicture: imageSavedAt)
         let alert = UIAlertView(title: "Wow",
                                 message: "Your image has been saved to Photo Library!",
                                 delegate: nil,
                                 cancelButtonTitle: "Ok")
         alert.show()
+         dismiss(animated: true, completion: nil)
     }
     
 

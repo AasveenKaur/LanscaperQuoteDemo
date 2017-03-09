@@ -17,6 +17,9 @@ class QuoteComposer: NSObject {
     let pathToLastItemHTMLTemplate = Bundle.main.path(forResource: "last_item", ofType: "html")
     let pathToTaxItemHTMLTemplate = Bundle.main.path(forResource: "tax_item", ofType: "html")
     
+    let pathToPhotoHTMLTemplate = Bundle.main.path(forResource: "photo_item", ofType: "html")
+    
+    
     
     let senderInfo = "Gabriel Theodoropoulos<br>123 Somewhere Str.<br>10000 - MyCity<br>MyCountry"
     
@@ -34,6 +37,7 @@ class QuoteComposer: NSObject {
     var totalAmount:String!
     var pdfFilename: String!
     var items:Set<LineItem>!
+    var photos:Set<Photo>!
     
     override init(){
         super.init()
@@ -62,6 +66,11 @@ class QuoteComposer: NSObject {
             }
             print("-------")
         }
+        if let allPhotos = selectedQuote.value(forKey: "photos") as? Set<Photo>{
+            self.photos = allPhotos
+        }
+        
+        
         self.totalAmount = "\(selectedQuote.totalAmount)"
         do {
             // Load the invoice HTML template code into a String variable.
@@ -95,20 +104,12 @@ class QuoteComposer: NSObject {
             var allItems = ""
             var alltax:Float = 0.0
             var allSubTotal:Float = 0.0
-            // For all the items except for the last one we'll use the "single_item.html" template.
-            // For the last one we'll use the "last_item.html" template.
             var i = 0
             for item in items {
                
                 var itemHTMLContent: String!
+                itemHTMLContent = try String(contentsOfFile: pathToSingleItemHTMLTemplate!)
                 
-                // Determine the proper template file.
-                //if i != items.count - 1 {
-                    itemHTMLContent = try String(contentsOfFile: pathToSingleItemHTMLTemplate!)
-                //}
-                //else {
-                  //  itemHTMLContent = try String(contentsOfFile: pathToLastItemHTMLTemplate!)
-                //}
                 
                 // Replace the description and price placeholders with the actual values.
                 itemHTMLContent = itemHTMLContent.replacingOccurrences(of:"#ITEM_DESC#", with: item.itemName!)
@@ -156,7 +157,34 @@ class QuoteComposer: NSObject {
             
             // Set the items.
             HTMLContent = HTMLContent.replacingOccurrences(of:"#ITEMS#", with: allItems)
+            // Set Notes
+            HTMLContent = HTMLContent.replacingOccurrences(of:"#NOTES#", with: selectedQuote.note!)
+            // Set photo_item
+            var allPhotos = ""
+            for photo in self.photos {
+           var  photoHTMLContent = try String(contentsOfFile: pathToPhotoHTMLTemplate!)
+              
+                
+                let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+                let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+                let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+                if let dirPath          = paths.first
+                {
+                    let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(photo.path!)
+                
+                if  (FileManager.default.fileExists(atPath: imageURL.path)){
+                    let im = UIImage(contentsOfFile: imageURL.path)
+                    print(im!)
+                }
+                    let murl = NSURL(fileURLWithPath: imageURL.path)
+                    
+                    photoHTMLContent = photoHTMLContent.replacingOccurrences(of:"#ATTACH_IMAGE#", with: imageURL.path)
+                    allPhotos += photoHTMLContent
+                    
+                }
             
+            }
+            HTMLContent = HTMLContent.replacingOccurrences(of:"#PHOTOS#", with: allPhotos)
             // The HTML code is ready.
             return HTMLContent
         }

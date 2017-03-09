@@ -57,6 +57,7 @@
     </entity>
     <fetchRequest name="clientWithName" entity="Client" predicateString="name == $clientName"/>
     <fetchRequest name="lineItemWithName" entity="LineItem" predicateString="itemName == $MyName AND price == $MyPrice AND quantity == $MyQuantity"/>
+    <fetchRequest name="photoWithPath" entity="Photo" predicateString="path == $photoPath"/>
     <fetchRequest name="quoteWithInvoiceStatusTrue" entity="Quote" predicateString="invoiceStatus == $status"/>
     <fetchRequest name="quoteWithQuoteID" entity="Quote" predicateString="quoteID == $whatever"/>
     <elements>
@@ -64,8 +65,8 @@
         <element name="Client" positionX="-54" positionY="63" width="128" height="150"/>
         <element name="Company" positionX="-117" positionY="171" width="128" height="90"/>
         <element name="LineItem" positionX="-144" positionY="108" width="128" height="135"/>
+        <element name="Photo" positionX="-162" positionY="117" width="128" height="60"/>
         <element name="Quote" positionX="-270" positionY="-9" width="128" height="240"/>
         <element name="User" positionX="-135" positionY="135" width="128" height="105"/>
-        <element name="Photo" positionX="-162" positionY="117" width="128" height="60"/>
     </elements>
 </model>

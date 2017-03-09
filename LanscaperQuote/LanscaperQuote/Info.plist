@@ -24,6 +24,8 @@
 	<string>Please allow access to camera to campure image!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow access to library to save image!</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -149,10 +149,10 @@ class ClientTableViewController: UITableViewController , NSFetchedResultsControl
         }
     }
 
-    func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName client: ClientModel, lineItemsList lineItems: [LineItemModel], totalCost total: Float, additonalInformation notes: String, discount: Float) {
+    func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName client: ClientModel, lineItemsList lineItems: [LineItemModel], totalCost total: Float, additonalInformation notes: String, discount: Float, attachments:[String]) {
         // self.tableView.beginUpdates()
         let newEstimateNUmber = estimateNumberGenerator
-        let quote =  QuotesModel( estimateNumber: "\(newEstimateNUmber)", client: client, LineItems: lineItems, totalAmount: total, notes: notes, discount: discount)
+        let quote =  QuotesModel( estimateNumber: "\(newEstimateNUmber)", client: client, LineItems: lineItems, totalAmount: total, notes: notes, attachments: attachments, discount: discount)
         estimateNumberGenerator += 1
         DataProvider.sharedInstance.saveAQuote(quote: quote)
         

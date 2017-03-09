@@ -39,41 +39,77 @@ class DataManager: NSObject {
         return nil
     }
     
-    func saveImageDocumentDirectory(image:UIImage){
+    func saveImageDocumentDirectory(image:UIImage) -> String{
         
-        var imagesDirectoryPath = pathForItems(plist: "ImagePicker")
-        print(imagesDirectoryPath!)
-        var objcBool:ObjCBool = true
-        let isExist = FileManager.default.fileExists(atPath: imagesDirectoryPath!, isDirectory: &objcBool)
-        // If the folder with the given path doesn't exist already, create it
-        if isExist == false{
-            do{
-                try FileManager.default.createDirectory(atPath: imagesDirectoryPath!, withIntermediateDirectories: true, attributes: nil)
-            }catch{
-                print("Something went wrong while creating a new folder")
-            }
-            
-            
-        // Save image to Document directory
+//        let imagesDirectoryPath = pathForItems(plist: "ImagePicker")
+//        print(imagesDirectoryPath!)
+//        var objcBool:ObjCBool = true
+//        let isExist = FileManager.default.fileExists(atPath: imagesDirectoryPath!, isDirectory: &objcBool)
+//        // If the folder with the given path doesn't exist already, create it
+//        if isExist == false{
+//            do{
+//                try FileManager.default.createDirectory(atPath: imagesDirectoryPath!, withIntermediateDirectories: true, attributes: nil)
+//            }catch{
+//                print("Something went wrong while creating a new folder")
+//            }
+//        }
+//        
+//        // Save image to Document directory
+//        var imageName = NSDate().description
+//        imageName = imageName.replacingOccurrences(of: " ", with: "")
+//        
+//        
+//        let imagePath = imagesDirectoryPath?.appending("/\(imageName).png")
+//        let data = UIImagePNGRepresentation(image)
+//        let success = FileManager.default.createFile(atPath: imagePath!, contents: data, attributes: nil)
+//        if(success){
+//            return imagePath!
+//        }
+//        return ""
+        
+        let documentsDirectoryURL = try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        
         var imageName = NSDate().description
         imageName = imageName.replacingOccurrences(of: " ", with: "")
+        // create a name for your image
+        let fileURL = documentsDirectoryURL.appendingPathComponent(imageName)
         
         
-        var imagePath = imagesDirectoryPath?.appending("/\(imageName).png")
-        let data = UIImagePNGRepresentation(image)
-        let success = FileManager.default.createFile(atPath: imagePath!, contents: data, attributes: nil)
-    }
+        if !FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                try UIImagePNGRepresentation(image)!.write(to: fileURL)
+                print("Image Added Successfully")
+            } catch {
+                print(error)
+            }
+        } else {
+            print("Image Not Added")
+        }
+    return imageName
     }
    
-    func getImage(imagePath:String){
-        let fileManager = FileManager.default
-         let pAth = pathForItems(plist: "ImagePicker")
+    func getImage(imagePath:String) -> UIImage{
+//        let fileManager = FileManager.default
+//        
+//        
+//        if fileManager.fileExists(atPath: imagePath){
+//            return UIImage(contentsOfFile: imagePath)!
+//        }else{
+//            print("No Image")
+//        }
+//        return UIImage()
         
-        if fileManager.fileExists(atPath: pAth!){
-            // self.imageView.image = UIImage(contentsOfFile: imagePAth)
-        }else{
-            print("No Image")
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if let dirPath          = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imagePath)
+            let image    = UIImage(contentsOfFile: imageURL.path)
+            // Do whatever you want with the image
+            return image!
         }
+        return UIImage()
     }
 
     

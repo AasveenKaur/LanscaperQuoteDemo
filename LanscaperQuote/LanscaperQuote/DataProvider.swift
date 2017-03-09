@@ -64,8 +64,13 @@ func deleteQuote(quote:Quote){
     coreDataManager.updateQuoteInvoiceStatus(quote: quote, status: status)
     }
     
-    func saveImage(image:UIImage)  {
-        dataManager.saveImageDocumentDirectory(image: image)
+    func saveImage(image:UIImage) -> String  {
+        let imageSavedAt = dataManager.saveImageDocumentDirectory(image: image)
+        return imageSavedAt
+    }
+    
+    func getImage(imagePath:String) -> UIImage {
+        return dataManager.getImage(imagePath: imagePath)
     }
     
 }

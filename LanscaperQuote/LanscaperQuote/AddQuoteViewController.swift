@@ -9,16 +9,17 @@
 import UIKit
 protocol AddQuoteViewControllerDelegate {
     
-    func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName client: ClientModel, lineItemsList lineItems: [LineItemModel], totalCost total:Float, additonalInformation notes:String, discount:Float)
+    func controller(controller: AddQuoteViewController, didSaveQuoteWithClientName client: ClientModel, lineItemsList lineItems: [LineItemModel], totalCost total:Float, additonalInformation notes:String, discount:Float, attachments:[String])
     
    
 }
-class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDelegate ,ClientModalViewControllerDelegate,showLineItemViewControllerDelegate,LineItemTableViewControllerDelegate,AddNoteViewControllerDelegate{
+class AddQuoteViewController: UITableViewController,AddLineItemViewControllerDelegate ,ClientModalViewControllerDelegate,showLineItemViewControllerDelegate,LineItemTableViewControllerDelegate,AddNoteViewControllerDelegate,PictureViewControllerDelegate{
     var selectedLineItem:LineItemModel!
     var delegate: AddQuoteViewControllerDelegate?
     var LineItems:Array = [LineItemModel]()
     var client:Array  = [ClientModel]()
     var note:Array = ["NOTES"]
+    var attachments : Array? = [String]()
     @IBAction func addDiscountMaskButton(_ sender: Any) {
         getDiscount()
     }
@@ -53,7 +54,7 @@ else{
 
 
 }
-        delegate?.controller(controller: self, didSaveQuoteWithClientName: client[0], lineItemsList: LineItems, totalCost: total, additonalInformation: note[0], discount: self.discountValue)
+        delegate?.controller(controller: self, didSaveQuoteWithClientName: client[0], lineItemsList: LineItems, totalCost: total, additonalInformation: note[0], discount: self.discountValue, attachments:self.attachments!)
      
         
         
@@ -96,7 +97,7 @@ else{
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,8 +113,11 @@ else{
             return (LineItems.count)+2
             
         }
-        else {
+        else if(section == 2){
             return (note.count)
+        }
+        else{
+            return 1
         }
         
     }
@@ -167,10 +171,14 @@ else{
             }
             
         }
-        else {
+        else if(indexPath.section == 2){
             
             let cell:NotesTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "NotesTableViewCellID")! as! NotesTableViewCell
             return cell
+        }
+        else{
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "PhotoCellID")
+            return cell!
         }
         
     }
@@ -249,7 +257,10 @@ else{
         if(segue.identifier == "segueToNoteView"){
             let vc = segue.destination as! AddNoteViewController
             vc.delegate = self
-            
+        }
+        if(segue.identifier == "segueToPictureView"){
+            let vc = segue.destination as! PictureViewController
+            vc.delegate = self
         }
         
     }
@@ -367,6 +378,17 @@ else{
         let indexPathForNoteTableViewCell = IndexPath(row: 0 , section: 2)
         let NoteCell = tableView.cellForRow(at: indexPathForNoteTableViewCell) as! NotesTableViewCell
         NoteCell.notes.text = note
+    }
+    
+    func controller(controller: PictureViewController, didSavePicture picPath: String) {
+        self.attachments?.append(picPath)
+        let indexPathForNoteTableViewCell = IndexPath(row: 0 , section: 3)
+        let pictureCell = tableView.cellForRow(at: indexPathForNoteTableViewCell)
+        if let count = self.attachments?.count{
+            pictureCell?.detailTextLabel?.text = "\(count)"
+        }
+        
+        
     }
     
     @IBAction func prepareForUnwind(segue:UIStoryboardSegue){

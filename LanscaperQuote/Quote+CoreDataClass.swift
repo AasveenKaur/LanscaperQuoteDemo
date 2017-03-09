@@ -38,6 +38,10 @@ public class Quote: NSManagedObject {
             newQuote.addToLineItems(LineItem.createLineItem(moc, lineItemModel: eachLineitem))
         }
         
+        for photoPath in quoteModel.attachments!{
+            newQuote.addToPhotos(Photo.createOrFindPhoto(moc, photoPath: photoPath))
+        }
+        
         return newQuote
     }
     
